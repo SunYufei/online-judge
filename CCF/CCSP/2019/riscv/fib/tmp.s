@@ -1,0 +1,94 @@
+	.file	"tmp.c"
+	.option nopic
+	.text
+	.globl	__moddi3
+	.align	2
+	.globl	fib
+	.type	fib, @function
+fib:
+	add	sp,sp,-64
+	sw	ra,60(sp)
+	sw	s0,56(sp)
+	add	s0,sp,64
+	sw	a0,-56(s0)
+	sw	a1,-52(s0)
+	sw	a2,-64(s0)
+	sw	a3,-60(s0)
+	li	a5,1
+	li	a6,0
+	sw	a5,-24(s0)
+	sw	a6,-20(s0)
+	li	a5,1
+	li	a6,0
+	sw	a5,-32(s0)
+	sw	a6,-28(s0)
+	li	a5,3
+	li	a6,0
+	sw	a5,-40(s0)
+	sw	a6,-36(s0)
+	j	.L2
+.L3:
+	lw	a3,-32(s0)
+	lw	a4,-28(s0)
+	lw	a1,-24(s0)
+	lw	a2,-20(s0)
+	add	a5,a3,a1
+	mv	a0,a5
+	sltu	a0,a0,a3
+	add	a6,a4,a2
+	add	a4,a0,a6
+	mv	a6,a4
+	sw	a5,-32(s0)
+	sw	a6,-28(s0)
+	lw	a3,-32(s0)
+	lw	a4,-28(s0)
+	lw	a1,-24(s0)
+	lw	a2,-20(s0)
+	sub	a5,a3,a1
+	mv	a0,a5
+	sgtu	a0,a0,a3
+	sub	a6,a4,a2
+	sub	a4,a6,a0
+	mv	a6,a4
+	sw	a5,-24(s0)
+	sw	a6,-20(s0)
+	lw	a3,-40(s0)
+	lw	a4,-36(s0)
+	li	a1,1
+	li	a2,0
+	add	a5,a3,a1
+	mv	a0,a5
+	sltu	a0,a0,a3
+	add	a6,a4,a2
+	add	a4,a0,a6
+	mv	a6,a4
+	sw	a5,-40(s0)
+	sw	a6,-36(s0)
+.L2:
+	lw	a4,-36(s0)
+	lw	a5,-52(s0)
+	bgt	a4,a5,.L6
+	lw	a4,-36(s0)
+	lw	a5,-52(s0)
+	bne	a4,a5,.L3
+	lw	a4,-40(s0)
+	lw	a5,-56(s0)
+	bleu	a4,a5,.L3
+.L6:
+	lw	a5,-32(s0)
+	lw	a6,-28(s0)
+	lw	a2,-64(s0)
+	lw	a3,-60(s0)
+	mv	a0,a5
+	mv	a1,a6
+	call	__moddi3
+	mv	a5,a0
+	mv	a6,a1
+	mv	a0,a5
+	mv	a1,a6
+	lw	ra,60(sp)
+	lw	s0,56(sp)
+	add	sp,sp,64
+	jr	ra
+	.size	fib, .-fib
+	.ident	"GCC: (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0"

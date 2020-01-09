@@ -1,0 +1,11 @@
+9988 5 1804
+wanchengyige
+9817 5 1804
+wanchengyige
+169 6 1804
+wanchengyige
+9973 5 1804
+wanchengyige
+7563 6 1804
+wanchengyige
+solve 3 ms

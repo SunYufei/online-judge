@@ -1,0 +1,330 @@
+\subsection{进制转换}
+
+对于一个$P$进制数$x$，将其转换为$Q$进制数$z$，需要分为两步：
+
+(1)将$x$转换为十进制数$y$，若$P$进制数$x=a_1a_2...a_n$，则$y=a_1*P^{n-1}+a_2*P^{n-2}+...+a_{n-1}*P+a_n$；
+
+\lstinputlisting[style=py]{src/pto10.py}
+
+\lstinputlisting[style=cpp]{src/pto10.cpp}
+
+(2)将$y$转换为$Q$进制数$z$，采用“除基取余法”，每次将待转换数除以$Q$，然后将得到的余数作为低位存储，而商则继续除以$Q$并进行上面的操作，最后当商为0时，将所有位从高到低输出就可以得到$z$。
+
+\lstinputlisting[style=py]{src/10toq.py}
+
+\lstinputlisting[style=cpp]{src/10toq.cpp}
+
+\subsection{递归}
+
+\subsubsection{分治}
+
+分治法将原问题划分成若干个\textbf{规模较小}而\textbf{结构与原问题相同}的子问题，然后分别解决，最后\textbf{合并子问题的解}，即可得到原问题的解。
+
+\subsubsection{递归}
+
+递归适合用来实现分治思想。递归函数中包含两个重要的概念：\textbf{递归边界}和\textbf{递归调用}。
+
+\paragraph{Fibonacci数列}
+
+可以使用递归式$F(n)=F(n-1)+F(n-2), F(0)=F(1)=1$编写程序，但会造成重复计算的问题；推荐写递推程序，不会产生爆栈问题。
+
+\begin{lstlisting}
+long long fib(int n) {
+	if (n <= 1)
+		return 1;
+	long long a = 1, b = 1;
+	for (int i = 2; i <= n; ++i) {
+		b = a + b;
+		a = b - a;
+	}
+	return b;
+}
+\end{lstlisting}
+
+\paragraph{全排列}
+
+对于全排列，可以使用深度优先搜索实现，也可使用STL next\_permutation函数，效率更高。
+
+\begin{lstlisting}[language=c++]
+// 函数原型
+bool next_permutation(begin, end[, cmp]]);
+// 示例程序
+int perm[6] = {1, 2, 3, 4, 5, 6}, count = 0;
+do {
+	++count;
+} while(next_permutation(perm, perm + 6));
+\end{lstlisting}
+
+也可使用递归程序实现
+
+\begin{lstlisting}[language=c++]
+int p[maxn];
+bool hashTable[maxn] = {false};
+void generateP(int index, int n) {
+	if (index == n + 1) {
+		// 递归边界
+		return;
+	}
+	for(int x = 1; x <= n; x++) {
+		if (hashTable[x] == false) {
+			p[index] = x;
+			hashTable[x] = true;
+			generateP(index + 1, n);
+			hashTable[x] = false;
+		}
+	}
+}
+\end{lstlisting}
+
+\subsubsection{回溯}
+
+在到达递归边界的某一层，由于一些事实导致已经不需要任何一个子问题的递归，就可以直接返回上一层。这种做法称为\textbf{回溯法}。
+
+\paragraph{$n$皇后问题}
+
+在$n*n$的国际象棋棋盘上放置$n$个皇后，两两不在同一行、同一列、同一条对角线上，求合法方案数。
+
+可以使用全排列来实现。当放置部分皇后时，可能剩余的皇后无论怎样放置都不可能合法，此时就没必要递归了，直接返回上一层即可，这样可以减少很多计算量。
+
+\begin{lstlisting}
+int n, count = 0, p[maxn];
+bool hashTable[maxn] = {false};
+void generateP(int index) {
+	if (index == n + 1) {
+		count++;
+		return;
+	}
+	for (int x = 1; x <= n; x++) {
+		if (hashTable[x] == false) {
+			bool flag = true;
+			for (int pre=1; pre  <index; pre++) {
+				if(abs(index-pre)==abs(x-p[pre])){
+					flag = false;
+					break;	// 与之前皇后同一对角线
+				}
+			}
+			if (flag) {
+				p[index] = x;
+				hashTable[x] = true;
+				generateP(index + 1);
+				hashTable[x] = false;
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\subsection{排序}
+
+\subsubsection{STL sort}
+
+STL中包含一些进行排序操作的函数，函数的操作区间为[begin, end)，使用cmpfunc指定二元比较函数，默认的比较函数是operator<。这里的begin、middle、end都是迭代器iterator。
+
+\begin{lstlisting}
+// 使用随机化快速排序对区间内所有元素排序，不稳定
+void sort(begin, end[, cmpfunc]);
+
+// 若 m 是排序后的第 middle-begin 个元素
+// 则将 m 放置在 middle 位置
+// 排在 m 前后的两个区间都是无序的
+void nth_element(begin, middle, end[, cmp]);
+
+// 判断一个区间是否有序
+bool is_sorted(begin, end[, cmp]);
+
+// 符合一元判断函数test条件的移到前面,不符的移到后面
+// 返回指向第一个不符合条件元素的迭代器 mid
+// 符合的在[begin,end)之间,不符合的在[mid,end)之间
+iterator partition(begin, end, func test);
+// 稳定的partition
+iterator stable_partition(begin, end,func test);
+\end{lstlisting}
+
+\subsubsection{快速排序}
+
+快速排序是冒泡排序的一种改进，使用分治思想，时间复杂度为$O(n\log n)\sim O(n^2)$，空间复杂度为$O(\log n)$。
+
+将第一个元素设为枢轴，从左边找一个大于枢轴的元素，从右边找一个小于枢轴的元素，进行交换；最终小于枢轴的元素在枢轴的左边，大于枢轴的元素在枢轴的右边；对分开的两部分再次使用快速排序进行排序。
+
+\textbf{示例程序：}排序范围为[start, end]
+
+\begin{lstlisting}
+void quicksort(int a[], int start, int end) {
+	if (start < end) {	// 递归终止条件
+		int i = start, j = end + 1;
+		int x = a[start];
+		while (true) {
+			// 从左侧找到一个大于枢轴的元素
+			while (a[++i] < x && i < end);
+			// 从右侧找到一个小于枢轴的元素
+			while (a[--j] > x && j > start);
+			// 迭代器相遇退出循环
+			if (i >= j)
+				break;
+			// 交换两个元素
+			swap(a[i], a[j]);
+		}
+		// 将枢轴归位
+		a[start] = a[j];
+		a[j] = x;
+		// 注：也可使用STL partition函数，注意范围
+		// 对左半边排序
+		quicksort(a, start, j - 1);
+		// 对右半边排序
+		quicksort(a, j + 1, end);
+	}
+}
+\end{lstlisting}
+
+\subsection{散列}
+
+\subsubsection{散列的定义与整数散列}
+
+散列（hash）即\textbf{将元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个元素}。这个转换函数称为\textbf{散列函数$H$}。对于\textbf{整数$k$}，常用的方法有把$k$作为数组下标；也可使用\textbf{除留余数法}，即把$k$除以一个数$m$得到的余数作为hash值的方法。这样就可以把很大的数转换为不超过$m$的整数。
+
+一般来说，可以使用STL map/unordered\_map来直接使用hash的功能，因此除非必须模拟这些方法或是对算法效率要求高，一般不需要自己实现。
+
+\subsubsection{字符串散列}
+
+若$P(x,y),0\leq x,y\leq m$表示二维平面上的一个点，将其映射为一个整数的散列函数可以写为$H(P)=x*m+y$。
+
+对于字符串，将其映射为一个整数，使该整数可以唯一地代表字符串。对于只有大写字母的字符串，可以将其当做26进制的数，然后将其转换为十进制，$H[i]=H[i-1]*26+\textrm{index}(\textrm{str}[i]))$。当字符串较长时，产生的整数会非常大。为了应对这种情况，可以将产生的结果对一个整数$m$取模，即$H[i]=(H[i-1]*26+\textrm{index}(\textrm{str}[i]))\%m$，此方法可能会导致冲突。
+
+在int数据范围内，如果把进制数设置为一个$10^7$级别的素数$p$（如$10^7+19$），同时把$m$设置为一个$10^9$级别的素数（如$10^9+7$），产生冲突的概率非常小$H[i]=(H[i-1]*p+\textrm{index}(\textrm{str}[i]))\%m$。
+
+例如：给出$n$个只有小写字母的字符串，求其中不同的字符串个数。
+
+对于这个问题，如果只用字符串hash来做，只需要将$n$个字符串的hash求出来，去重排序即可，当然也可以用set或者map直接做，速度比字符串hash慢一些。
+
+\begin{lstlisting}
+const int MOD = 1e9 + 7;
+const int P = 1e7 + 19;
+vector<int> ans;
+
+long long hash(string str) {
+	long long h = 0;
+	for (int i = 0; i < str.length(); ++i) 
+		h = (h * P + str[i] - 'a') % MOD;
+	return h;
+}
+
+int main() {
+	long long id;
+	string str;
+	while(getline(cin, str), str != '#') {
+		id = hash(str);
+		ans.push_back(id);
+	}
+	sort(ans.begin(), ans.end());	// 排序
+	int count = 0;
+	for (int i = 0; i < ans.size(); ++i)
+		if (i == 0 || ans[i] != ans[i - 1])
+			count++;	// 统计不同的数的个数
+	printf("%d", count);
+	return 0;
+}
+\end{lstlisting}
+
+\subsection{贪心}
+
+\subsubsection{简单贪心}
+
+\textbf{贪心算法：当前最好选择。}一般来说，\textbf{如果在想到某个似乎可行的策略，并且自己无法举出反例，那么就勇敢去实现它}。
+
+例题：给定数字0-9若干个，可以任意排列这些数字，全部使用。使得到的数字最小，0不能做首位。
+
+\begin{lstlisting}
+int count[10] = {0};
+string str;
+getline(cin, str);
+for (auto i = str.begin(); i < str.end(); ++i)
+	count[(*i) - '0']++;	// 统计数字个数
+for (int i = 1; i < 10; ++i)	// 输出第一个数字
+	if (count[i] > 0) {
+		printf("%d", i);
+		count[i]--;
+		break;
+	}
+for (int i = 0; i < 10; ++i)	// 依次输出剩余数字
+	for (int j = 0; j < count[i]; ++j)
+		printf("%d", i);
+\end{lstlisting}
+
+\subsubsection{区间贪心}
+
+给出一个\textbf{区间不相交问题}：\textbf{给出$n$个开区间$(x,y)$，从中选择尽可能多的开区间，使得这些开区间两两没有交集}。例如对于开区间$(1,3),(2,4),(3,5),(6,7)$来说，可以选出最多三个区间$(1,3),(3,5),(6,7)$，它们互相没有交集。
+
+首先考虑最简单的情况，若开区间$I_1$被开区间$I_2$包含，显然选择$I_1$是最好，如果选择$I_1$，则有更大的空间去容纳其他的开区间。
+
+接下来把所有区间按左端点$x$从大到小排序，如果去掉区间包含的情况，那么一定有$y_1>y_2>...>y_n$成立。此时最右边有一段是一定不会和其他区间重叠的，此时应该\textbf{总是先选择左端点最大的区间}。
+
+\begin{lstlisting}
+struct Interval {
+	int x, y;
+} I[1000];
+
+bool cmp(Interval a, Interval b) {
+	if (a.x != b.x)	// 先按左端点从大到小排序
+		return a.x > b.x;
+	else	// 左端点相同的按右端点从小到大排序
+		return a.y < b.y;
+}
+
+int n, i;
+scanf("%d", &n);
+for (i = 0; i < n; ++i)
+	scanf("%d%d", &I[i].x, &I[i].y);
+sort(I, I + n, cmp);	// 把区间排序
+// ans 记录不相交个数, tx记录上一个被选中区间左端点
+int ans = 1, tx = I[0].x;
+for (i = 1; i < n; ++i)
+	if (I[i].y <= tx) {	// 若该区间右端点在 tx 左边
+		tx = I[i].x;	// 以 I[i] 作为新选中区间
+		ans++;	// 不相交区间个数 +1
+	}
+printf("%d", ans);	// 输出结果
+\end{lstlisting}
+
+\subsection{二分法}
+
+\subsubsection{二分查找}
+
+对于\textbf{有序容器}，可以使用STL中的binary\_search函数进行二分法查找。
+
+\begin{lstlisting}
+// 函数原型，查找范围 [first, last)
+bool binary_search(it first, it last, T &val);
+// 例如
+int a[] = {1, 2, 3, 4, 5, 6};
+bool have5 = binary_search(a, a + 6, 5);
+\end{lstlisting}
+
+\subsubsection{快速幂}
+
+给定三个整数$a, b, m(a<10^9, b<10^6, 1<m<10^9)$，求$a^b\%m$。在快速幂的算法中，若$b$是奇数，$a^b=a*a^{b-1}$；若$b$是偶数，$\displaystyle{ a^b=a^{b/2}*a^{b/2}}$。
+
+针对不同的题目，需要注意的是：(1)若初始时$a\geq m$，需要在进入函数前让$a$对$m$取模；(2)若$m=1$，可以直接在函数外部判为0。
+
+快速幂的递归写法不做讨论。在迭代写法中，如果把$b$写成二进制，则$b$就可以写成若干二次幂的和，即$a^b=a^{2^k+...+4+2+1}=a^{2^k}*...*a^4*a^2*a$，若$b$的二进制的$i$号位为1，那么项$a^{2^i}$就被选中。
+
+\begin{lstlisting}
+typedef long long ll;
+ll bin_pow(ll a, ll b, ll m) {
+	if (m == 1)
+		return 0;
+	if (a >= m)
+		a %= m;
+	ll ans = 1;
+	while (b > 0) {
+		if (b % 2 == 1)		// 若 b 的二进制末尾为 1
+			ans = ans * a % m;	// 令 ans 累积上 a
+		a = a * a % m;	// 令 a 平方
+		b = b / 2;	// 将 b 的二进制右移一位
+	}
+	return ans;
+}
+\end{lstlisting}
+
+\subsubsection{lower\_bound, upper\_bound}
+
+在\textbf{有序容器}中，lower\_bound(first, last, val)函数用来寻找在容器[first, last)范围内\textbf{第一个值大于或等于val}的元素位置；upper\_bound(first, last, val)函数用来寻找在容器[first, last)范围内\textbf{第一个值大于val}的元素位置。两个函数的复杂度均为$O(\log(\textrm{last}-\textrm{first}))$。

@@ -1,0 +1,215 @@
+\subsection{C++头文件引入技巧}
+
+使用C++编写程序时只需引入如下头文件，包含STL、C/C++ I/O、math.h、string.h等。
+
+\begin{lstlisting}[language=c++]
+#include <bits/stdc++.h>
+using namespace std;
+\end{lstlisting}
+
+\subsection{C++格式化输入输出}
+
+对于C语言中的输入输出函数
+
+\begin{lstlisting}[language=c]
+scanf("格式化字符串", <参量表>);
+printf("格式化字符串", <参量表>);
+\end{lstlisting}
+
+格式化字符串中的符号规则如下表所示：
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{cc}
+		\hline
+		\textbf{符号} & \textbf{说~~明} \\
+		\hline
+		\hline
+		\% & 格式说明起始符号，不可缺少 \\
+		\hline
+		- & 有：左对齐输出；无：右对齐输出 \\
+		\hline
+		0 & 有：指定空位为0；无：指定空位为空格 \\
+		\hline
+		\multirow{2}{*}{$m.n$} & $m$：输出项在输出设备上所占字符数 \\
+		& $n$：精度，实数的小数位数，默认$n=6$ \\
+		\hline
+		l & int$\rightarrow$long；float$\rightarrow$double \\
+		\hline
+		h & int$\rightarrow$short \\
+		\hline
+		\hline
+		\%d & 十进制int \\
+		\hline
+		\%ld & 十进制long \\
+		\hline
+		\%lld & 十进制long long \\
+		\hline
+		\%u & 十进制unsigned int \\
+		\hline
+		\%o & 八进制unsigned int \\
+		\hline
+		\%x & 十六进制unsigned int (\%X 大写) \\
+		\hline
+		\%f & float\\
+		\hline
+		\%lf & double\\
+		\hline
+		\%e & 指数\\
+		\hline
+		\multirow{2}{*}{\%g} & 保证$n$（默认6）位有效数字的情况下 \\
+		&使用小数方式，否则使用科学计数法 \\
+		\hline
+		\hline
+		\%c & 一个字符char \\
+		\hline
+		\%s & 字符串char * \\
+		\hline
+	\end{tabular}
+\end{table}
+
+cin与cout是C++中的输入输出对象，性能相比scanf与printf非常差，推荐在输入输出时使用scanf与printf，只有在必要时才使用cin和cout。
+
+例如，STL string的读写只能用cin和cout：
+
+\begin{lstlisting}[language=c++]
+string str;	
+cin >> str;
+cout << str;
+getline(cin, str);	// 读一整行使用 getline 函数
+\end{lstlisting}
+
+\subsection{Python语言输入输出技巧}
+
+Python语言的输入技巧：
+
+\begin{lstlisting}[language=python]
+# 一个整数
+n = int(input())
+
+# 一个字符串
+s = input()
+
+# 两个整数，用空格分开
+n, m = map(int, input().split())
+
+# 一行整数，空格分开
+l = list(map(int, input().split()))
+l = [int(v) for v in input().split()]
+s = set(map(int, input().split()))
+s = {int(v) for v in input().split()}
+
+# 一些字符串，空格分开
+l = input().split()
+\end{lstlisting}
+
+Python的格式化输出语法与C语言中的printf语法相似。
+
+\begin{lstlisting}[language=python]
+print("格式化字符串" % (<参量表>))
+print("%d%02d" % (hour, minute))
+
+# 在不方便指定参量类型时，推荐使用 format
+print("格式化字符串".format(<参量表>))
+print("{0:d}{1:02d}".format(hour, minute))
+\end{lstlisting}
+
+Python输出时需要注意的一些问题：
+
+\begin{lstlisting}[language=python]
+# 按序输出 list 中的元素，空格分开结尾无空格
+l = [1, 2, 3, 4, 5]
+print(' '.join(map(str, l)))	# 注意此处的 str
+print(' '.join([str(v) for v in l]))
+
+# 整数输出时注意末尾的.0
+a = 5 / 5, b = 6 // 5
+print(a, int(a), b)	# 1.0 1 1
+\end{lstlisting}
+
+\subsection{算术运算符}
+
+C++与Python的$+$、$-$、$*$、$/$及$\%$运算符相同；对于int类型的除法，C++返回结果整数部分，Python得到含小数部分的结果，若想与C++一样只得到整数部分，需要使用“$//$”运算符。Python中没有自增自减运算符“$++$”和“$--$”。
+
+\subsection{常用数学函数}
+\label{mathfunc}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		& C++ & Python \\
+		& \#include<cmath> & import math \\
+		\hline
+		\multirow{2}{*}{$|x|$} & abs(int x) & abs(x) \\
+		& fabs(double x) & math.fabs(x) \\
+		\hline
+		$\lceil x \rceil$ & ceil(double x) & math.ceil(x) \\
+		$\lfloor x \rfloor$ & floor(double x) & math.floor(x) \\
+		\hline
+		$r^p$ & pow(double r, p) & math.pow(r, p) \\
+		$e^x$ & exp(double x) & math.exp(x) \\
+		\hline
+		$\sqrt{x}$ & sqrt(double x) & math.sqrt(x) \\
+		\hline
+		$x!$ & / & math.factorial(x) \\
+		\hline
+		% $\log_2 x$ & / & math.log2(x) \\
+		$\log_{e} x$ & log(double x) & math.log(x) \\
+		$\log_{10} x$ & log10(double x) & math.log10(x) \\
+		$\log_{a} x$ & / & math.log(x, a) \\
+		\hline
+		$\sin x$ & sin(double x) & math.sin(x) \\
+		$\cos x$ & cos(double x) & math.cos(x) \\
+		$\tan x$ & tan(double x) & math.tan(x) \\
+		\hline
+		$\arcsin x$ & asin(double x) & math.asin(x) \\
+		$\arccos x$ & acos(double x) & math.acos(x) \\
+		$\arctan x$ & atan(double x) & math.atan(x) \\
+		\hline
+		rad $\to\deg$ & / & math.degrees(x) \\
+		$\deg\to$ rad & / & math.radians(x) \\
+		\hline
+		round & round(double x) & round(x, n) \\
+		\hline
+		$\gcd (a, b)$ & 见\ref{gcd} & math.gcd(a, b) \\
+		\hline
+		$\pi$ & M\_PI& math.pi \\
+		$e$ & M\_E & math.e \\
+		\hline
+		\multirow{3}{*}{$\infty$} & \#include<limits> & \multirow{3}{*}{math.inf} \\
+		& INT\_MAX & \\
+		& UINT\_MAX 等 & \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\textbf{注意：}三角函数中的$x$为弧度制。
+
+\subsection{Python 表达式求值}
+
+Python的eval函数可以将str当成有效的表达式并求值返回结果，可以与math结合在表达式求值题目中发挥巨大的作用。例如：
+
+\begin{lstlisting}[language=python]
+expession = '2 + 3 * 5 - 6 // 4'
+print(eval(expression))	# 16
+\end{lstlisting}
+
+也可以进行其他表达式计算，如CSP 201709-3 JSON查询。
+
+\begin{lstlisting}[language=python]
+t = eval('obj' + ''.join(['[' + repr(x) + ']' for x in c]))
+\end{lstlisting}
+
+repr函数将对象转化为供解释器读取的形式。
+
+\subsection{浮点数比较}
+
+浮点数在计算机中的存储不总是精确地，在经过大量计算后，浮点数的存储会产生一定的误差，在使用“==”运算符进行比较时会出现差错。此时需要引入一个极小数eps来对误差进行修正。
+
+\begin{lstlisting}[language=c++]
+const double eps = 1e-8;
+fabs(a - b) < eps;	// 相等
+a - b > eps;	// a > b
+a - b < -eps;	// a < b
+\end{lstlisting}

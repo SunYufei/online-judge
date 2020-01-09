@@ -1,0 +1,11 @@
+493 3 242
+wanchengyige
+487 3 242
+wanchengyige
+487 4 242
+wanchengyige
+487 5 242
+wanchengyige
+170 0 494
+wanchengyige
+solve 0 ms

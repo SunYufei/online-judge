@@ -1,0 +1,248 @@
+\subsection{二叉树存储与基本操作}
+
+\subsubsection{存储}
+
+\begin{lstlisting}
+struct node {
+	int data;
+	node* lchild;
+	node* rchild;
+};
+
+node* root = NULL;
+
+node* newNode(int v) {
+	node* n = new node;
+	n->data = v;
+	n->lchild = n->rchild = NULL;
+	return n;
+}
+\end{lstlisting}
+
+\subsubsection{查找、修改}
+
+\begin{lstlisting}
+void search(node* root, int x, int newdata) {
+	if (root == NULL)
+		return ;
+	if (root->data == x)
+		root->data = newdata;
+	search(root->lchild, x, newdata);
+	search(root->rchild, x, newdata);
+}
+\end{lstlisting}
+
+\subsubsection{插入结点}
+
+\begin{lstlisting}
+void insert(node* &root, int x) {
+	if (root == NULL) {
+		root = newNode(x);
+		return ;
+	}
+	if ("可以在左子树插入")
+		insert(root->lchild, x);
+	else
+		insert(root->rchild, x);
+}
+\end{lstlisting}
+
+\subsubsection{由数组创建}
+
+\begin{lstlisting}
+node* Create(int data[], int n) {
+	node* root = NULL;
+	for (int i = 0; i < n; i++)
+		insert(root, data[i]);
+	return root;
+}
+\end{lstlisting}
+
+\subsubsection{完全二叉树存储}
+
+对于完全二叉树的任一结点（设编号$x$），\textbf{其左子结点编号一定是$2x$，而右子结点的编号一定是$2x+1$，且1号位存放的必须是根结点。}
+
+\textbf{该数组中元素存放的顺序恰好为该完全二叉树的层序遍历序列。}
+
+判断某个结点是否为叶结点的标志为：\textbf{该结点（下标为$x$）的左子结点的编号$2x$大于结点总数$n$。}
+
+判断某个结点是否为空的标志为：\textbf{该结点下标$x$大于结点总数$n$。}
+
+\subsection{二叉树的遍历}
+
+\subsubsection{先序、中序、后序遍历}
+
+先序遍历性质：\textbf{序列的第一个一定是根结点}。
+
+中序遍历性质：\textbf{只要知道根结点，就可以通过根结点在中序遍历序列中的位置区分出左子树和右子树}。
+
+后序遍历性质：\textbf{后序遍历序列最后一个一定是根结点}。
+
+\textbf{无论是先序遍历还是后序遍历序列，都必须知道中序遍历序列才能唯一地确定一棵树。}
+
+\subsubsection{层序遍历}
+
+对二叉树进行层序遍历就相当于是对二叉树从根结点开始的广度优先搜索。其基本思路如下：
+
+(1)将根结点root入队列q；
+
+(2)取出队首结点，访问它；
+
+(3)如果该结点有左孩子，将左孩子入队列
+
+(4)如果该结点有右孩子，将右孩子入队列
+
+(5)返回(2)，直到队列为空
+
+\begin{lstlisting}
+// 若要记录结点层次，添加 layer 变量
+struct node {
+	int data;
+	int layer;
+	node* lchild, rchild;
+};
+
+void LayerOrder(node* root) {
+	queue<node*> q;
+	root->layer = 1;	// 根结点层号为 1
+	q.push(root);
+	while (!q.empty()) {
+		node* top = q.front();
+		q.pop();
+		do_something(top);	// 对队首元素的操作
+		if (top->lchild != NULL) {
+			// 子结点层次号 + 1
+			top->lchild->layer = top->layer + 1;
+			q.push(top->lchild);
+		}
+		if (top->rchild != NULL) {
+			top->rchild->layer = top->layer + 1;
+			q.push(top->rchild);
+		}
+	}
+}
+\end{lstlisting}
+
+\subsubsection{根据遍历序列重建二叉树}
+
+给定一棵二叉树的先序序列和中序序列，重建这棵二叉树。假设已知先序序列$pre[1..n]$，中序序列$in[1..n]$。由先序序列性质可知，先序序列的第一个元素$pre_1$是当前二叉树的根结点；再由中序序列的性质可知，当前二叉树的根结点将中序序列划分为左子树和右子树。因此要在中序序列中找到一个结点$in_k$，使得$in_k=pre_1$，这样就在中序序列中确定根结点。易知左子树结点个数$numLeft=k-1$，左子树序列区间为$pre[2..k],in[1..k-1]$，右子树的序列区间为$pre[k+1..n],in[k+1..n]$，接着只需要网左子树和右子树进行递归构建二叉树即可。
+
+\begin{lstlisting}
+// 当前先序序列区间为 [preL, preR]
+// 中序序列区间为 [inL, inR]，返回根结点地址
+node* create(int preL, int preR, int inL, int inR) {
+	if (preL > preR)	// 先序序列长度 <= 0，返回
+		return NULL;
+	// 新建结点用于存放当前二叉树的根结点
+	node* root = new node;
+	root->data = pre[preL];
+	int k;
+	for (k = inL; k <= inR; k++)
+		// 在中序序列中找到 in[k] == pre[L] 的结点
+		if (in[k] == pre[preL])
+			break;
+	int numLeft = k - inL;	// 左子树结点个数
+	
+	root->lchild = create(preL + 1, preL + numLeft, inL, k - 1);
+	root->rchild = create(preL + numLeft + 1, preR, k + 1, inR);
+	
+	return root;
+}
+\end{lstlisting}
+
+中序序列可以与先序、后序、层序序列中的任意一个来构建唯一的二叉树，后三者两两搭配或者三个一起都无法构建唯一二叉树。
+
+
+\subsection{并查集UFS}
+
+\subsubsection{定义}
+
+并查集是一种维护集合的数据结构，支持合并（合并两个集合）、查找（判断两个元素是否在一个集合）两种操作。
+
+并查集使用数组$father[N]$实现，其中$father[i]$表示元素$i$的父亲节点，而父亲结点本身也是这个集合内的元素（$1\leq i\leq N$）。例如$father[1]=2$表示元素1的父亲结点是元素2，以这种父亲关系来表示元素所属的集合。若$father[i]=i$则说明元素$i$是该集合的根结点，但\textbf{对同一个集合来说只存在一个根结点，且将其作为所属集合的标识}。
+
+\subsubsection{基本操作}
+
+\paragraph{初始化}
+
+一开始，每个元素都是独立的一个集合，因此需要令所有的$father[i]=i$，也可令所有$father[i]=-1$。
+
+\begin{lstlisting}
+for (int i = 1; i <= N; i++)	father[i] = i;
+\end{lstlisting}
+
+\paragraph{查找}
+
+查找操作就是对给定的结点寻找其根结点的过程，即反复寻找父亲结点，直到找到根结点。
+
+\begin{lstlisting}
+int find(int x) {
+	while (x != father[x])
+		x = father[x];
+	return x;
+}
+\end{lstlisting}
+
+\paragraph{合并}
+
+题目中一般给出两个元素，要求把这两个元素所在的集合合并。具体实现上一般是先判断两个元素是否属于同一个集合，只有当两个元素属于不同集合时才合并，合并的过程一般是把其中一个集合的根结点的父亲指向另一个集合的根结点。
+
+\begin{lstlisting}
+void Union(int a, int b) {
+	int fa = findFather(a);
+	int fb = findFather(b);
+	if (fa != fb)
+		father[fa] = fb;
+}
+\end{lstlisting}
+
+\subsubsection{路径压缩}
+
+若题目给出的元素数量很多并且形成一条链，那么这个查找函数的效率非常低。压缩时\textbf{把当前查询结点的路径上的所有结点的父亲都指向根结点}，查找的时候就不需要一直回溯去找父亲了，复杂度可以降为$O(1)$。
+
+转换的过程可以概括为如下两个步骤：(1)按原先的写法获得$x$的根结点$r$；(2)重新从$x$开始走一遍寻找根结点的过程，把路径上经过的所有结点的父亲全部改为结点$r$。
+
+\begin{lstlisting}
+int findFather(int x) {
+	int t = x;	// 保存原来的 x
+	while (x != father[x])	// 寻找根结点
+		x = father[x];
+	// 将路径上所有结点 father 改为根结点
+	while (t != father[t]) {
+		int tt = a;
+		a = father[a];
+		father[tt] = x;
+	}
+	return x;
+}
+\end{lstlisting}
+
+\subsection{堆}
+
+堆是一棵\textbf{完全二叉树}，树中每个结点的值都不小于（或不大于）其左右孩子结点的值。若父亲结点的值大于或等于孩子结点的值，那么称这样的堆为\textbf{大顶堆}，这时\textbf{每个结点的值都是以它为根结点的子树的最大值}；反之，\textbf{小顶堆每个结点的值都是以它为根结点的子树的最小值}。
+
+STL中有在可以随机访问的容器上进行堆操作：
+
+\begin{lstlisting}
+// 判断是否为堆
+bool is_heap(begin, end[, fun cmp]);
+// 在 [begin, end) 的区间上建立堆
+void make_heap(begin, end[, fun cmp]);
+// 插入元素到堆
+// 前提 [begin, end) 是堆，将 end 指向元素插入堆中
+// 使用前需要把元素插入到 end 位置，如 push_back
+// 然后调用 push_heap
+void push_heap(begin, end[, fun cmp]);
+// 从堆中移除
+// 前提 [begin, end) 是堆，将 begin 指向元素移除
+// 被移除的元素实际上放置在 end - 1 位置，不会释放
+void pop_heap(begin, end[, fun cmp]);
+// 堆排序，前提：[begin, end) 是堆
+void sort_heap(begin, end[, fun cmp]);
+\end{lstlisting}
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+493077 13 28818
+wanchengyige
+663383 18 15204
+wanchengyige
+199531 17 291059
+wanchengyige
+2277341 21 137774
+wanchengyige
+3047862 46 3039920
+wanchengyige
+solve 3105 ms

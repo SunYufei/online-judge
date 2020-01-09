@@ -1,0 +1,325 @@
+\subsection{基本数学运算}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{cc}
+		\hline
+		& C++ STL \\
+		\hline
+		求和 & accumulate(start, end, init) \\
+		\hline
+		\multirow{2}{*}{最大值} & max(x, y)  \\
+		& max\_element(first, last[, cmp])  \\
+		\hline
+		\multirow{2}{*}{最小值} & min(x, y)  \\
+		& min\_element(first, last[, cmp])  \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsection{最大公约数与最小公倍数}
+
+\paragraph{欧几里得算法（辗转相除法）}
+
+求解最大公约数常用欧几里得算法，即若$a,b$均为整数$\gcd(a,b)=\gcd(b,a\%b)$。
+
+\begin{lstlisting}
+int gcd(int a, int b) {
+	if (b == 0)
+		return a;
+	else
+		return gcd(b, a % b);
+}
+\end{lstlisting}
+
+最小公倍数$\displaystyle{\textrm{lcm}(a,b)=\frac{ab}{\gcd(a,b)}}$，在实际计算中$ab$有可能溢出，因此更恰当的写法是$\displaystyle{\textrm{lcm}(a,b)=\frac{a}{\gcd(a,b)}*b}$。
+
+\subsection{素数}
+
+\subsubsection{素数的判断}
+
+判断整数$n$是否为素数只需要判定$n$能否被$2,3,...,\lfloor\sqrt{n}\rfloor$中的一个整除即可，复杂度为$O(\sqrt{n})$。
+
+\begin{lstlisting}[language=c++]
+bool isPrime(int n) {
+	if (n <= 1)
+		return false;
+	int sqr = (int)sqrt(n);
+	for (int i = 2; i <= sqr; ++i)
+		if (n % i == 0)
+			return false;
+	return true;
+}
+\end{lstlisting}
+
+\subsubsection{素数表的获取}
+
+使用Eratosthenes筛选法获取范围为$[1,n]$的素数表，首先需要枚举$[2,n]$的所有数，对每一个素数，筛去它的所有倍数，剩下的都是素数。
+
+\begin{lstlisting}
+vector<long> prime_array(long n) {
+	int i, j;
+	vector<bool> p(n + 1, false);
+	vector<long> ret;
+	for (i = 2; i <= n; ++i)
+		if (p[i] == false) {
+			ret.push_back(i);
+			for (j = i + i; j < n; j += i)
+				p[j] = true;
+		}
+	return ret;
+}
+\end{lstlisting}
+
+\subsection{质因子分解}
+
+\subsubsection{质因子分解}
+
+质因子分解是指将正整数$n$写成一个或多个质数的乘积的形式，如$180=2^2\times3^2\times5$。显然，质因子分解最后归结到若干不同质数的乘积，可以先把素数表打印出来。
+
+\textbf{注意：如果题目要求对1进行处理，视题目条件进行判定处理。}
+
+\begin{lstlisting}
+map<int, int> ans;	// 质因子映射
+vector<long> prime = prime_array(n);	// 素数表
+if (n == 1)	do_something();	// n = 1 情况
+else {
+	int sqr = (int)sqrt(n), i;
+	for (i = 0; i < n && prime[i] <= sqr; ++i) {
+		// 若 prime[i] 是 n 的因子
+		if (n % prime[i] == 0) {
+			ans[prime[i]] = 0;	// 计算质因子个数
+			while (n % prime[i] == 0) {
+				ans[prime[i]]++;
+				n /= prime[i];
+			}
+		}
+		if (n == 1)	// 及时退出
+			break;
+	}
+	if (n != 1) // 若无法被根号 n 以内的质因子除尽
+		ans[n] = 1;
+}
+\end{lstlisting}
+
+\subsubsection{$n!$中质因子$p$个数}
+
+例如：$6!=1\times2\times3\times4\times5\times6$，于是6!中有4个质因子2，2个质因子3。$n!$中有$\displaystyle{\left( \left\lfloor \frac{n}{p} \right\rfloor + \left\lfloor \frac{n}{p^2} \right\rfloor  + ...\right)}$个质因子$p$，时间复杂度为$O(\log n)$。
+
+\begin{lstlisting}
+int calc(int n, int p) {
+	int ans = 0;
+	while(n) {
+		ans += n / p;
+		n /= p;
+	}
+	return ans;
+}
+\end{lstlisting}
+
+利用这个算法可以计算出\textbf{$n!$的末尾有多少个0}。由于末尾0的个数等于$n!$中因子10的个数，也等于$n!$中质因子5的个数，因此只需计算calc(n, 5)就可得到结果。
+
+将此例推广到一般情况可得，$n!$中质因子$p$的个数等于$[1,n]$中$p$的倍数的个数$\displaystyle{\frac{n}{p}}$加上$\displaystyle{\frac{n}{p}!}$中质因子$p$的个数，因此可到递归版本的calc函数。
+
+\begin{lstlisting}
+int calc(int n, int p) {
+	if (n < p)
+		return 0;
+	return n / p + calc(n / p, p);
+}
+\end{lstlisting}
+
+\subsection{大整数运算}
+
+\subsubsection{高精度计算}
+
+浮点数高精度计算时使用double类型存储待计算数据进行计算，整数运算需要使用大整数。
+
+\subsubsection{大整数的存储、比较与输出}
+
+使用整数数组int d[1000]存储，\textbf{整数的高位存储在数组的高位，低位存储在数组的低位}。
+
+\begin{lstlisting}
+struct bign {
+	int d[1000];
+	int len;
+	bign() {
+		memset(d, 0, sizeof(d));
+		len = 0;
+	}
+};
+\end{lstlisting}
+
+把整数按字符串读入时，需要在读入之后存储到d[]时反转一下。
+
+\begin{lstlisting}
+bign change(char str[]) {
+	bign a;
+	a.len = strlen(str);
+	for (int i = 0; i < a.len; ++i)
+		a.d[i] = str[a.len - i - 1] - '0';
+	return a;
+}
+\end{lstlisting}
+
+比较两个大整数大小的规则简单：先判断两者len的大小，若不相等，则以长的为大；如果相等，则从高位到低位进行比较，直到出现某一位不等，就可以判断两个数的大小。
+
+\begin{lstlisting}
+// a = b，0；a > b，1；a < b，-1
+int compare(bign a, bign b) {
+	if (a.len > b.len)		return 1;
+	else if (a.len < b.len)		return -1;
+	else {
+		for (int i = a.len - 1; i >= 0; --i) {
+			if (a.d[i] > b.d[i])	return 1;
+			else if (a.d[i] < b.d[i]) return -1;
+		}
+		return 0;
+	}
+}
+\end{lstlisting}
+
+大整数输出时从最高位到最低位依次输出即可。
+
+\begin{lstlisting}
+void print(bign a) {
+	for (int i = len - 1; i >= 0; --i)
+		printf("%d", a.d[i]);
+}
+\end{lstlisting}
+
+\subsubsection{大整数的四则运算}
+\label{bignumber}
+
+\paragraph{高精度加法}
+
+对于其中的某一位，将该位上的两个数字和进位相加，得到的结果取个位数作为该位结果，取十位数作为新的进位。
+
+\begin{lstlisting}
+bign add(bign a, bign b) {
+	bign c;
+	int carry = 0, i, t;	// carry 为进位
+	// 以较长的为边界
+	for (i = 0; i < a.len || i < b.len; ++i) {
+		t = a.d[i] + b.d[i] + carry;
+		c.d[c.len++] = t % 10;	// 该位结果
+		carry = t / 10;	// 新的进位
+	}
+	if (carry != 0)	// 最后进位不为 0
+		c.d[c.len++] = carry;
+	return c;
+}
+\end{lstlisting}
+
+\paragraph{高精度减法}
+
+对于其中的某一位，比较被减位和减位，如果不够减，向高位借1，如果够减，直接减。注意减法后\textbf{高位多余的0要忽视}，但\textbf{保证结果至少一位数}。
+
+\begin{lstlisting}
+bign sub(bign a, bign b) {
+	bign c; int i;
+	// 以较长的为边界
+	for (i = 0; i < a.len || i < b.len; ++i) {
+		if (a.d[i] < b.d[i]) {	// 如果不够减
+			a.d[i + 1]--;
+			a.d[i] += 10;
+		}
+		c.d[c.len++] = a.d[i] - b.d[i];
+	}
+	// 去除高位的 0，同时至少保留一位最低位
+	while (c.len-1 >= 1 && c.d[c.len - 1] == 0)
+		--c.len;
+	return c;
+}
+\end{lstlisting}
+
+\paragraph{高精度与低精度乘法}
+
+低精度指的是基本数据类型，如int等。对于某一位来说，取bign的某一位与int型整体相乘，再与进位相加。
+
+\begin{lstlisting}
+bign multiply(bign a, int b) {
+	bign c;
+	int carry = 0, i, t;	// carry 进位
+	for (i = 0; i < a.len; ++i) {
+		t = a.d[i] * b + carry;
+		c.d[c.len++] = t % 10;
+		carry = t / 10;
+	}
+	// 乘法的进位可能不止一位
+	while (carry != 0) {
+		c.d[c.len++] = carry % 10;
+		carry /= 10;
+	}
+	return c;
+}
+\end{lstlisting}
+
+\paragraph{高精度与低精度除法}
+
+除法运算与小学所学相同。对于某一步操作：上一步的余数乘以10加上该步的位，得到该步临时的被除数，将其与除数比较。若不够除，则该位的商为0；若够除，则商为对应的商，余数为对应的余数。最后一步要减去高位多余的0，并保证结果至少一位。
+
+\begin{lstlisting}
+bign divide(bign a, int b, int &r) {
+	bign c;
+	// 被除数的每一位和商的每一位对应，先令长度相等
+	c.len = a.len;
+	for (int i = a.len - 1; i >= 0; --i) {
+		// 和上一位遗留的余数组合
+		r = r * 10 + a.d[i];	
+		if (r < b)	// 不够除，该位为 0
+			c.d[i] = 0;
+		else {	// 够除
+			c.d[i] = r / b;
+			r = r % b;
+		}
+	}
+	// 去除高位的 0，同时至少保留一位最低位
+	while (c.len-1 >= 1 && c.d[c.len - 1] == 0)
+		--c.len;
+	return c;
+}
+\end{lstlisting}
+
+\subsection{组合数计算}
+
+组合数计算主要讨论$\textrm{C}_n^m$和$\textrm{C}_n^m\%p$两个问题。
+
+对于$\textrm{C}_n^m$，可以使用定义式$\displaystyle {\textrm{C}_n^m=\frac{n!}{m!(n-m)!}}$直接计算，在$n=21$时超出long long范围；也可使用递推公式$\textrm{C}_n^m=\textrm{C}_{n-1}^{m}+\textrm{C}_{n-1}^{m-1},\textrm{C}_n^0=\textrm{C}_n^n=1$编写递归程序，注意重复计算问题，在$n=67,m=33$时溢出；推荐使用定义式变形$\displaystyle{\textrm{C}_n^m=\prod_{i=1}^{m}\frac{n-m+i}{i}}$来计算，复杂度为$O(m)$，在$n=62,m=31$时溢出：
+
+\begin{lstlisting}
+long long C(int n, int m) {
+	long long ans = 1;
+	for (int i = 1; i <= m; ++i)
+		// 注意一定要先乘后除
+		ans = ans * (n - m + i) / i;
+	return ans;
+}
+\end{lstlisting}
+
+一般来说，常见的情况是求$\textrm{C}_n^m\%p$，有四种方法，有各自的数据适合范围，一般第一种方法已经满足需求。
+
+\textbf{方法一}，$m\leq n\leq 1000$，$p$无限制，求解方法是求$\textrm{C}_n^m$的递推式变形
+
+\begin{lstlisting}
+int res[1010][1010] = {0};
+int C(int n, int m, int p) {
+	if (m == 0 || m == n)
+		return 1;
+	if (res[n][m] != 0)
+		return res[n][m];
+	res[n][m] = (C(n-1, m) + C(n-1, m-1)) % p;
+	return res[n][m];
+}
+\end{lstlisting}
+
+\textbf{方法二}，Lucas定理，$m\leq n\leq 10^{18}$，$p$是素数
+
+\begin{lstlisting}
+int p;	// 全局 p 
+int Lucas(int n, int m) {
+	if (m == 0)
+		return 1;
+	return C(n % p, m % p)*Lucas(n/p, m/p) % p;
+}
+\end{lstlisting}

@@ -1,0 +1,11 @@
+2363702 7 185
+wanchengyige
+3052103 6 185
+wanchengyige
+2363574 7 185
+wanchengyige
+2251795 7 185
+wanchengyige
+2926984 7 185
+wanchengyige
+solve 9634 ms

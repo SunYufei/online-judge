@@ -1,0 +1,178 @@
+\subsection{动态规划的定义及写法}
+
+\subsubsection{动态规划定义}
+
+\textbf{动态规划（DP）}是一种用来解决一类\textbf{最优化问题}的算法思想。简单来说，动态规划将一个复杂的问题分解成若干个子问题，通过\textbf{综合子问题的最优解来得到原问题的最优解}。动态规划会\textbf{将每个求解过的子问题解记录下来}，不会重复计算。
+
+\subsubsection{递归写法}
+
+以Fibonacci数列为例。根据斐波那契数列的定义$F_n=F_{n-1}+F_{n-2}$可以写出递归程序。
+
+\begin{lstlisting}
+int F(int n) {
+	if (n == 0 || n == 1)	return 1;
+	else	return F(n - 1) + F(n - 2);
+}
+\end{lstlisting}
+
+这样会造成很多重复计算。为避免重复计算，可以开一个一维数组dp保存已经计算过的结果，其中$\textrm{dp}[n]$记录$F_n$的结果，并用$\textrm{dp}[n]=-1$表示$F_n$当前还没有被计算过。
+
+\begin{lstlisting}
+vector<int> dp(MAXN, -1);
+int F(int n) {
+	if (n == 0 || n == 1)	return 1;
+	if (dp[n] != -1)	return dp[n];
+	else {
+		dp[n] = F(n - 1) + F(n - 2);
+		return dp[n];
+	}
+}
+\end{lstlisting}
+
+\subsubsection{递推写法}
+
+\paragraph{数塔问题}
+
+将一些数字排成数塔形状，第一层一个数字，……，第$n$层有$n$个数字。现在要从第一层走到第$n$层，每次只能走向下一层链接的两个数字中的一个，问最后将路径上所有数字相加后得到的和的最大值是多少。
+
+令$f[i][j]$存放第$i$层的第$j$个数字，$\textrm{dp}[i][j]$表示从第$i$层第$j$个数字出发的到达最低层的所有路径中能得到的最大和，$\textrm{dp}[1][1]$就是最终想要的答案。
+
+如果要求出从位置$(1,1)$到达最底层的最大和dp$[1][1]$，那么一定先求出它的两个子问题dp$[2][1]$和dp$[2][2]$，它们两个的最大值加上$(1,1)$位置的值即为最终结果。即dp$[1][1]=\max(\textrm{dp}[2][1],\textrm{dp}[2][2])+f[1][1]$，一般化得：$\textrm{dp}[i][j]=\max(\textrm{dp}[i+1][j],\textrm{dp}[i+1][j+1])+f[i][j]$，边界dp$[n][1..n]=f[n][1..n]$。
+
+将$\textrm{dp}[i][j]$称为问题的状态，把上面的式子成为\textbf{状态转移方程}。此时解题代码可以写为：
+
+\begin{lstlisting}
+int f[MAXN][MAXN], dp[MAXN][MAXN], i, j, n;
+for (i = 1; i <= n; ++i)
+	for (j = 1; j <= n; ++j)
+		scanf("%d", &f[i][j]);	// 输入数据
+for (j = 1; j <= n; ++j)
+	dp[n][j] = f[n][j];		// 处理边界
+// 从第 n - 1 层不断向上计算出 dp[i][j]
+for (i = n - 1; i >= 1; --i)
+	for (j = 1; j <= i; ++j)
+		dp[i][j] = max(dp[i+1][j], dp[i+1][j+1])
+				+ f[i][j];	// 状态转移方程
+// 输出结果
+printf("%d", dp[1][1]);
+\end{lstlisting}
+
+显然，这个题目也可使用递归完成。两者的区别在于：使用\textbf{递推写法}的计算方式是\textbf{自底向上}，即从边界开始，不断向上解决问题，直到问题解决；使用\textbf{递归写法}的计算方式是\textbf{自顶向下}，即从目标问题开始，将它分解成子问题的组合，直到分解至边界位置。
+
+如果一个问题的最优解可以由其子问题的最优解有效地构造出来，那么称这个问题拥有\textbf{最优子结构}。
+
+\textbf{一个问题必须拥有重叠子问题和最优子结构，才能使用动态规划去解决}。
+
+\subsection{最大连续子序列和}
+
+给定一个数字序列$A[1..n]$，求$i,j(1\leq i\leq j\leq n)$，使得$A_i+...+A_j$最大。
+
+令状态dp$[i]$表示以$A[i]$作为末尾的连续序列的最大和，最终结果就是dp$[0..n-1]$中的最大值。
+
+当最大和的连续序列只有一个元素$A[i]$时，最大和就是$A[i]$本身；当最大和的连续序列有多个元素，$A[p..i]$时，最大和是dp$[i-1]+A[i]$，即$A[p]+...+A[i-1]+A[i]=\textrm{dp}[i-1]+A[i]$。于是可以得到状态转移方程：dp$[i]=\max\{A[i],\textrm{dp}[i-1]+A[i]$，边界dp$[0]=A[0]$。
+
+\begin{lstlisting}
+int A[MAXN], dp[MAXN], i;
+for (i = 0; i < n; i++)	scanf("%d", &A[i]);
+dp[0] = A[0];	// 边界
+for (i = 1; i < n; i++)		// 状态转移方程
+	dp[i] = max(A[i], dp[i - 1] + A[i]);
+printf("%d", *max_element(dp + 1, dp + n));
+\end{lstlisting}
+
+\subsection{最长不下降子序列LIS}
+
+在一个数字序列中，找到一个最长的子序列（可以不连续），使得这个子序列是不下降（非递减）的。
+
+例如，现有序列$A=\{1,2,3,-1,-2,7,9\}$，它的最长不下降子序列是$\{1,2,3,7,9\}$，长度为5。
+
+令dp$[i]$表示以$A[i]$结尾的最长不下降子序列长度，这样对$A[i]$来说就会有两种可能：
+
+(1)如果存在$A[i]$之前的元素$A[j](j<i)$，使得$A[j]\leq A[i]$且dp$[j]+1>$dp$[i]$，即把$A[i]$跟在以$A[j]$结尾的LIS后面时能比当前以$A[i]$结尾的LIS长度更长，那么就把$A[i]$跟在$A[j]$结尾的LIS后面，形成一条更长的LIS，即dp$[i]=$dp$[j]+1$。
+
+(2)如果$A[i]$之前的元素都比$A[i]$大，那么$A[i]$就只好自己形成一条LIS，长度为1，即这个子序列里面只有一个$A[i]$。
+
+最后以$A[i]$结尾的LIS长度就是(1)(2)中能形成的最大长度。
+
+由此可以写出状态转移方程：dp$[i]=\max\{1,\textrm{dp}[j]+1\}(j\in[0,i-1],A[j]\leq A[i])$。转移方程隐含了边界dp$[i]=1(i\in[0,n])$。显然只要将$i$从小到大遍历即可求出整个dp数组，再从整个dp数组中找出最大的那个才是最终结果。
+
+\begin{lstlisting}
+int lengthOfLIS(vector<int> a) {
+	size_t len = a.size(), i, j;
+	if (len <= 0)	return 0;
+	vector<int> dp(len, 1);	// 初始边界条件
+	int ans = -1;
+	for (i = 0; i < len; i++) {
+		for (j = 0; j < i; j++)
+			if (a[j] < a[i] && dp[j] + 1 > dp[i])
+				dp[i] = dp[j] + 1;	// 状态转移方程
+		ans = max(ans, dp[i]);
+	}
+	return ans;
+}
+\end{lstlisting}
+
+\subsection{最长公共子序列LCS}
+
+问题描述：给定两个字符串（或数字序列）A和B，求一个字符串，使得这个字符串时A和B的最长公共部分（子序列可以不连续）。
+
+例如：“sadstory”与“adminsorry”的最长公共子序列为“adsory”，长度为6。
+
+令dp$[i][j]$表示字符串A的$i$号位和字符串B的$j$号位之前的LCS长度（下标从1开始），如dp$[4][5]$表示“sads”与“admin”的LCS长度。那么可以根据$A[i]$和$B[j]$的情况，分为两种决策：
+
+(1) 若$A[i]==B[j]$，则字符串A与字符串B的LCS增加了1位，即有dp$[i][j]=$dp$[i-1][j-1]+1$。例如，样例中dp$[4][6]$表示“sads”与“admins”的LCS长度，比较$A[4]$与$B[6]$，发现二者都是s，因此dp$[4][6]$就等于dp$[3][5]$加1，即为3。
+
+(2) 若$A[i]\neq B[j]$，则字符串A的$i$号位和字符串B的$j$号位之前的LCS无法延长，因此dp$[i][j]$将会继承dp$[i-1][j]$与dp$[i][j-1]$中的较大值，即有$\textrm{dp}[i][j]=\max\{\textrm{dp}[i-1][j],\textrm{dp}[i][j-1]\}$。
+
+因此可以得到状态转移方程：
+$$
+\textrm{dp}[i][j]=\left\{
+	\begin{aligned}
+		\textrm{dp}[i-1][j-1], & & A[i]=B[j] \\
+		\max\{\textrm{dp}[i-1][j], & & \textrm{dp}[i][j-1]\},A[i]\neq B[j]
+	\end{aligned}
+\right.
+$$
+
+边界：dp$[i][0]=$dp$[0][j]=0(0\leq i\leq n,0\leq j\leq m)$，由边界出发就可以得到整个dp数组，最终dp$[n][m]$就是需要的答案，时间复杂度为$O(nm)$。
+
+\begin{lstlisting}
+char A[100], B[100];
+int dp[100][100], i, j;
+gets(A + 1);	gets(B + 1);	// 从下标为 1 开始读入
+int lenA = strlen(A + 1), lenB = strlen(B + 1);
+// 边界
+for (i = 0; i <= lenA; i++)		dp[i][0] = 0;
+for (j = 0; j <= lenB; j++)		dp[0][j] = 0;
+// 状态转移方程
+for (i = 1; i <= lenA; i++)
+	for (j = 1; j <= lenB; j++) {
+		if (A[i] == B[j]) 
+			dp[i][j] = dp[i - 1][j - 1] + 1;
+		else
+			dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+	}
+printf("%d", dp[lenA][lenB]);	// 结果
+\end{lstlisting}
+
+\subsection{最长回文子串}
+
+给出一个字符串$S$，求$S$的最长回文子串。例如PATZJUJZTACCBCC的最长回文子串是ATZJUJZTA，长度为9。
+
+令dp$[i][j]$表示$S[i..j]$所表示的子串是否是回文子串，是为1，不是为0。
+
+若$S[i]=S[j]$，那么只要$S[i+1..j-1]$是回文子串，$S[i..j]$就是回文子串；如果$S[i+1..j-1]$不是回文子串，则$S[i..j]$也不是回文子串。
+
+若$S[i]\neq S[j]$，那么$S[i..j]$一定不是回文子串。
+
+由此可以写出状态转移方程：
+$$
+\textrm{dp}[i][j]=\left\{
+	\begin{aligned}
+	\textrm{dp}[i+1][j-1],& & S[i]=S[j] \\
+	0, & & S[i]\neq S[j]
+	\end{aligned}
+\right.
+$$
+
+边界为$\textrm{dp}[i][i]=1,\textrm{dp}[i][i+1]=(S[i]=S[i+1])?1:0$。

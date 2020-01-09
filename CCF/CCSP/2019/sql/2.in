@@ -1,0 +1,29 @@
+4
+2019000001 law 19
+2019000003 info 20
+2019000002 info 19
+2019010 math 28
+4
+2019010 math
+2019011 math
+2019012 Course
+2019013 SELECT
+4
+2019010 math 0
+2019000002 info 19
+2019000001 math 100
+2019000000 ABC 38
+2
+2019000001 2019010 90
+2019010 2019010 99
+1
+2019013 2019000000
+7
+SELECT * FROM Grade
+SELECT cid FROM Grade
+SELECT cid,cid,Grade.cid, sid FROM   Grade
+SELECT * FROM Grade, Student
+SELECT * FROM Grade, Student WHERE dept="info" AND Student.age < 100 AND score> 90
+SELECT Student.sid, dept, score FROM Grade,Student WHERE Student.sid = Grade.sid
+SELECT Student.sid, dept, score FROM Grade,Student WHERE Student.sid = Grade.sid AND cid = "2019"
+

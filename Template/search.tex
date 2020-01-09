@@ -1,0 +1,125 @@
+\subsection{深度优先搜索DFS}
+
+深度优先搜索的基本模型：
+
+\begin{lstlisting}
+void dfs(int step) {
+	if (step == n + 1)	// 判断边界
+		return;
+	// 尝试每一种可能
+	for (int i = 1; i <= n; i++) {
+		if (符合条件) {
+			dfs(step + 1);
+		}
+	}
+	return;	// 返回
+}
+\end{lstlisting}
+
+迷宫问题，迷宫由$n$行$m$列的单元格组成，每个单元格要么为空，要么有障碍，求最短路径长度。
+
+\begin{lstlisting}
+int n, m, p, q, ans = 1e9;
+int a[51][51], book[51][51];
+// 右下左上
+int next[4][2] = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+
+void dfs(int x, int y, int step) {
+	int tx, ty, k;
+	if (x == p && y == q) {
+		// 到达终点，更新最小值
+		if (step < ans)	ans = step;
+		return;
+	}
+	// 枚举四种走法
+	for (k = 0; k < 4; k++) {
+		tx = x + next[k][0];	// 计算下一点坐标
+		ty = y + next[k][1];
+		// 判断是否越界
+		if (tx < 1 || tx > n || ty < 1 || ty > m)
+			continue;
+		// 判断是否为障碍物或是否已在路径中
+		if (a[tx][ty] == 0 && book[tx][ty] == 0){
+			book[tx][ty] = 1;	// 标记此点已经过
+			dfs(tx, ty, step + 1);	// 尝试下一点
+			book[tx][ty] = 0;	// 尝试结束，取消标记
+		}
+	}
+	return;
+}
+// 从 (1, 1) 开始
+dfs(1, 1, 0);
+\end{lstlisting}
+
+\subsection{广度优先搜索BFS}
+
+BFS以广度为第一关键词，当碰到岔道口时，总是先\textbf{依次访问}从该岔道口能\textbf{直接到达的所有结点}，然后再按这些结点被访问的顺序去依次访问，直到所有结点被访问为止。广度优先搜索的基本模型：
+
+\begin{lstlisting}
+void bfs(int s) {
+	queue<int> q;
+	q.push(s);
+	while (!q.empty()) {
+		取出队首元素 top;
+		访问 top;
+		将队首元素出队;
+		将 top 的下一层结点中未曾入队的结点入队，并设置已入队;
+	}
+}
+\end{lstlisting}
+
+再以迷宫问题为例：
+
+\begin{lstlisting}
+int n, m, p, q, ans = 1e9;
+int a[51][51], book[51][51];
+int next[4][2] = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+
+struct node {
+	int x, y, father, step;
+};
+// 判断坐标 (x, y) 是否需要访问
+bool judge(int x, int y) {
+	if (x > n || x < 1 || y > m || y < 1)	// 越界
+		return false;
+	// 当前位置不可访问或 (x, y) 已入队
+	if (a[x][y] == 0 || book[x][y])
+		return false;
+	return true;
+}
+// bfs 函数
+int bfs(int x, int y) {
+	node t;
+	queue<node> q;
+	t.x = x, t.y = y;
+	q.push(t);
+	book[x][y] = 1;
+	while (!q.empty()) {
+		node top = q.front();
+		q.pop();
+		if (top.x == p && top.y == q)
+			return top.s;	// 到达终点，返回步数
+		for (int i = 0; i < 4; i++) {
+			int tx = top.x + next[i][0];
+			int ty = top.y + next[i][1];
+			// 若新位置需要访问
+			if (judge(tx, ty)) {
+				t.x = tx, t.y = ty;
+				// 新结点层数 +1
+				t.step = top.step + 1;
+				q.push(t);	// 新结点加入队列
+				book[tx][ty] = 1;	// 令新位置已访问
+			}
+		}
+	}
+	return -1;	// 无法到达终点
+}
+// 从 (1, 1) 开始
+cout << bfs(1, 1);
+\end{lstlisting}
+
+
+
+
+
+

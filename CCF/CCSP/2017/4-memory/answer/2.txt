@@ -1,0 +1,11 @@
+4049872 14 447224
+wanchengyige
+4835730 13 447224
+wanchengyige
+4846050 13 447224
+wanchengyige
+4835730 14 447224
+wanchengyige
+4835730 15 447224
+wanchengyige
+solve 3707 ms

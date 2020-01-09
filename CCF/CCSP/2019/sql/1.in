@@ -1,0 +1,21 @@
+3
+2019001 law 19
+2019002 info 20
+2019003 info 19
+2
+20190001 math
+20190002 English
+2
+2019101 info 49
+2019102 info 38
+2
+2019002 20190001 100
+2019003 20190002 0
+1
+20190001 2019102
+4
+SELECT * FROM Student
+SELECT Student . dept FROM Student
+SELECT Student.sid,Grade.sid,dept,score FROM Student,Grade
+SELECT * FROM Student, Grade WHERE Grade .sid=Student. sid
+

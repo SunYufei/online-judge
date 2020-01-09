@@ -1,0 +1,1 @@
+./my_run ../file/case1/info.txt ../file/case1/graph_binary_little_endian ../file/case1/graph_binary_big_endian

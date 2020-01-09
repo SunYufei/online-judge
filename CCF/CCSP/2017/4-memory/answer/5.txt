@@ -1,0 +1,11 @@
+3998953 6 1942665
+wanchengyige
+1906227 6 1942665
+wanchengyige
+3998953 6 1942665
+wanchengyige
+1906227 7 1942665
+wanchengyige
+2964712 7 1942665
+wanchengyige
+solve 8057 ms

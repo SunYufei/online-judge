@@ -1,0 +1,115 @@
+\subsection{定义}
+
+图由顶点和边组成，每条边的两端都必须是图的两个顶点，记号$G(V,E)$表示图$G$的顶点集为$V$、边集为$E$。
+
+一般来说，图可分为\textbf{有向图}和\textbf{无向图}，有向图的所有边都有方向；而无向图的所有边都是双向的。
+
+顶点的\textbf{度}是指和该顶点相连的边的条数，顶点的出边条数称为该点的\textbf{出度}，顶点的入边条数称为该顶点的\textbf{入度}。
+
+顶点和边都可以有一定属性，而量化的属性称为\textbf{权值}。
+
+\subsection{图的存储}
+
+\subsubsection{邻接矩阵}
+
+设图$G(V,E)$的顶点标号为$0,1,...,n-1$，那么可以令二维数组$G[n][n]$的二维分别表示图的顶点标号，若$G[i][j]=1$，则说明顶点$i$和顶点$j$之间有边；若$G[i][j]=0$，则说明顶点$i$和顶点$j$之间不存在边，这个二维数组$G$被称为\textbf{邻接矩阵}。另外，如果存在边权，则可以令$G[i][j]$存放边权，对不存在的边的边权设置为0、$-1$或是一个很大的数。
+
+\subsubsection{邻接表}
+
+把同一个顶点的所有出边放在一个列表中，那么$n$个顶点就有$n$个列表，没有出边对应空表，这$n$个列表被称为图$G$的\textbf{邻接表}，记为$adj[n]$，其中$adj[i]$存放顶点$i$的所有出边组成的列表。
+
+\subsection{图的遍历}
+
+\subsubsection{采用DFS遍历}
+
+采用DFS遍历即沿着一条路径遍历直到无法继续前进，才退回到路径上离当前顶点最近的还未访问分值顶点的岔道口。
+
+
+\subsubsection{采用BFS遍历}
+
+
+\subsection{最短路径}
+
+对任意给出的图$G(V,E)$和起点$S$、终点$T$，求一条从$S$到$T$的路径，使得这条路径上经过的所有边的边权之和最小。
+
+解决最短路径问题常用的算法有Dijkstra算法、Bellman-Ford算法、SPFA算法和Floyd算法。不同的算法应用于不同的题目。
+
+\subsubsection{Dijkstra算法}
+
+Dijkstra算法用于解决\textbf{单源最短路问题}，即给定图$G$和起点$s$，通过算法得到$s$到其他每个顶点的最短距离。
+
+\textbf{基本思想}是对图$G(V,E)$设置集合$S$，存放已被访问的顶点，然后每次从集合$V-S$中选择与起点$s$的最短距离最小的顶点$u$，访问并加入集合$S$。之后，令顶点$u$为中介点，优化起点$s$与所有从$u$能到达的顶点$v$之间的最短距离。这样的操作执行$n$次，直到集合$S$已包含所有顶点。
+
+集合$S$可以用一个bool数组$vis[]$来实现，当$vis[i]=$true时表示顶点$ V_i $已被访问。令int型数组$d[]$表示起点$s$到顶点$V_i$的最短距离，初始时除了起点$s$的$d[s]=0$，其余顶点都赋值为一个很大的数（$10^9$或者0x3fffffff，但不要使用0x7fffffff）来表示不可达。
+
+\begin{lstlisting}
+const int MAXV = 1000;	// 最大顶点数
+const int INF = 1e9;	// 最大数
+int n, G[MAXV][MAXV];	// n 为顶点数
+int d[MAXV];	// 起点到达各点的最短路径长度
+// pre[v] 表示从起点到 v 的最短路径上 v 的前个顶点
+int pre[MAXV];
+bool vis[MAXV] = {false};	// 标记数组true为已访问
+
+void Dijkstra(int s) {	// s 为起点
+	fill(d, d + MAXV, INF);
+	d[s] = 0;	// 数组 d 初始化
+	for (int i = 0; i < n; i++)	{	// 循环 n 次
+		// u 使 d[u] 最小，MIN 存放该最小的 d[u]
+		int u = -1, MIN = INF;
+		for (int j = 0; j < n; j++) {
+			// 找到未访问的顶点中 d[] 最小的
+			if (!vis[j] && d[j] < MIN) {
+				u = j;
+				MIN = d[j];
+			}
+		}
+		// 找不到小于 INF 的 d[u]
+		// 说明剩下的顶点和起点 s 不连通
+		if (u == -1)	return;
+		vis[u] = true;	// 标记 u 为已访问
+		for (int v = 0; v < n; v++) {
+			// 如果 v 未访问 && u 能到达 v
+			// 以 u 为中介点可以使 d[v] 更优
+			if (!vis[v] && G[u][v] != INF && d[u] + G[u][v] < d[v]) {
+				d[v] = d[u] + G[u][v];	// 优化 d[v]
+				pre[v] = u;	// 记录 v 的前驱顶点
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+Dijkstra算法只能应对所有边权都是非负数的情况，若边权出现负数，那么Dijkstra算法可能会出错，这时最好使用SPFA算法。
+
+若题目给出的是无向边，只需把无向边当成两条指向相反的有向边即可。
+
+\subsubsection{Bellman-Ford算法和SPFA算法}
+
+Bellman-Ford算法可以解决单源最短路径问题，也能处理有负权边的情况。
+
+
+\subsubsection{Floyd算法}
+
+Floyd算法用于解决\textbf{全源最短路问题}，即给定图$G(V,E)$，求任意两点$u$、$v$之间的最短路径长度，复杂度为$O(n^3)$，限制了顶点数在200以内，使用邻接矩阵来实现Floyd算法是非常合适方便的。
+
+Floyd算法流程：
+
+\begin{lstlisting}
+for (k = 1; k <= n; k++) 
+	for (i = 0; i < n; i++)
+		for (j = 0; j < n; j++)
+			if (dis[i][k] != INF && 
+				dis[k][j] != INF &&
+				dis[i][k] + dis[k][j] < dis[i][j])
+				dis[i][j] = dis[i][k] + dis[k][j];
+\end{lstlisting}
+
+\subsection{最小生成树}
+
+\subsubsection{prim算法}
+
+\subsubsection{kruskal算法}
+
+
+

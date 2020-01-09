@@ -1,0 +1,317 @@
+\subsection{数组}
+
+\subsubsection{普通数组}
+
+\begin{lstlisting}[language=python]
+l = ['a', 'b', 3]
+# 长 1000，初始值全为 0
+l = [0] * 1000
+# 100 * 100 大小初始值为 0 的二维数组
+l = [[0] * 100 for _ in range(100)]
+\end{lstlisting}
+
+\begin{lstlisting}[language=c++]
+// 全部赋值 0
+int a[10] = {0};
+// 部分指定初始值，其余为默认值
+int a[10] = {5, 3, 2, 4, 1};
+// 二维数组初始化
+int a[5][6] = {{3, 1, 2}, {8, 4}, {}};
+// 字符数组可以使用字符串初始化，仅限初始化
+char str[15] = "Hello, World!";
+\end{lstlisting}
+
+\subsubsection{赋值函数memset与fill}
+
+使用memset与fill函数可以对数组赋相同的值。memset对每个字节赋同样的值，\textbf{只建议赋值0和$-$1}，fill函数可以给数组赋任意值，memset执行速度快。
+
+\begin{lstlisting}[language=c++]
+int a[10];
+// memset(数组名, 值, sizeof(数组名));
+memset(a, 0, sizeof(a));
+// 将 [start, end) 之间的元素赋值为 value
+// fill(iterator start, it end, const T& val);
+// 将从 start 开始的 n 个元素赋值为 val
+// fill_n(iterator start, Size n, const T& val);
+fill(a, a + 10, 2);
+fill(a, 10, 3);
+\end{lstlisting}
+
+\subsubsection{变长数组}
+
+变长数组常用于解决普通数组超内存的情况，也可用于以邻接表方式储存图。
+
+Python提供了变长的连续存储数据结构list，可以进行索引、切片、加、乘、检查成员等操作：
+
+\begin{lstlisting}[language=python]
+a = ['a', 'b', 3]	# 初始化
+# 下标访问
+a[0], a[1], a[-1]	# 'a'，'b', 3
+# 切片，注意下标范围 [start, end)
+a[1 : 2]	# ['b']
+a.append(x)	# 将 x 插入到 a 尾部
+t = a.pop(0)	# 剔除 0 号元素并返回 0 号元素值
+a.reverse()	# 列表倒置
+# 合并（不去重）
+a = [1, 2, 3], b = [3, 4, 5]
+a + b	# [1, 2, 3, 3, 4, 5]
+\end{lstlisting}
+
+STL中提供了变长数组vector：
+
+\begin{lstlisting}[language=c++]
+vector<TYPE> v;	// 一维数组
+vector<vector<TYPE> > vv;	// 二维数组
+vector<TYPE> v[size];	// 一维定长，另一维边长数组
+v.push_back(x);	// 将 x 插到 vector 尾部，O(1)
+v.pop_back();	// 将 vector 尾部元素删除，O(1)
+size_type t = v.size();	// vector 长度，O(1)
+v.clear();	// 清空 vector，O(n)
+v.insert(it, x);	// 在迭代器 it 处插入 x，O(n)
+v.erase(it);	// 删除迭代器 it 处元素，O(1)
+v.erase(begin, end); // 删除 [begin, end) 内元素
+\end{lstlisting}
+
+\subsection{栈}
+
+栈是一种\textbf{后进先出}的数据结构，常用于模拟实现递归，防止程序对栈内存的限制导致程序出错。一般的递归层数达到几千或几万层就会崩溃，使用栈模拟递归算法可以避免此类问题出现。
+
+Python LifoQueue是一个后进先出的队列，可以当做栈来使用：\label{lifoqueue}
+
+\begin{lstlisting}[language=python]
+from queue import LifoQueue
+
+# maxsize 设置最大长度，0 为无限长
+q = LifoQueue(maxsize=0)
+q.put(x)	# 将 x 入队列
+item = q.get()	# 获取队首元素
+is_empty = q.empty()	# 判断队列是否为空
+is_full = q.full()	# 判断队列是否已满
+s = q.qsize()	# 返回队列大小（多线程不可靠）
+\end{lstlisting}
+
+STL stack初始化及常用函数：
+
+\begin{lstlisting}[language=c++]
+stack<TYPE> s;
+s.push(const TYPE &val);		// 将 val 入栈，O(1)
+s.pop();	// 弹出栈顶元素，O(1)
+s.clear();	// 清除所有元素，O(n)
+TYPE t = s.top();	// 获得栈顶元素，O(1)
+bool e = s.empty();	// 检测栈是否为空，O(1)
+size_type t = s.size();	// 栈内元素个数，O(1)
+\end{lstlisting}
+
+\subsection{队列}
+
+队列是一种\textbf{先进先出}的数据结构。当需要实现广度优先搜索时，可以使用queue代替手动实现的队列，提高程序准确性。
+
+Python  Queue是一个先进先出的队列，其常用函数与\ref{lifoqueue} LifoQueue相同。
+
+Python deque是双端队列，使用时注意插入删除操作的位置及相关函数。
+
+\begin{lstlisting}[language=python]
+from collections import deque
+
+# deque 可从 iterable 指定的数据创建
+# maxlen 指定最大长度
+d = deque([iterable[, maxlen]]])
+d.append(x)		# 添加 x 到右端
+d.appendleft(x)	# 添加 x 到左端
+d.clear()	# 移除所有元素
+c = d.count(x)	# 计算 deque 中 x 元素个数
+d.extend(iterable)	# 扩展 deque 的右侧
+d.extendleft(iterable) # 扩展 deque 的左侧
+item = d.pop()	# 移除并返回最右侧元素
+item = d.popleft()	# 移除并返回最左侧元素
+d.remove(x)	# 找到第一个 x 并移除，未找到抛出异常
+d.rotate(n = 1)	# 向右循环 n 步，若 n 为负向左循环
+\end{lstlisting}
+
+STL queue初始化及常用函数：
+
+\begin{lstlisting}[language=c++]
+queue<TYPE> q;
+q.push(const TYPE &val);	// 将 val 入队列，O(1)
+q.pop();	// 将队首元素出队，O(1)
+bool e = q.empty();	// 检测队列是否为空，O(1)
+size_type t = q.size();	// 队列元素个数，O(1)
+TYPE &back();	// 返回队尾元素的引用，O(1)
+TYPE &front();	// 返回队首元素的引用，O(1)
+\end{lstlisting}
+
+\textbf{注意：}在使用front和pop函数前，必须用empty判断队列是否为空。
+
+\subsection{优先队列}
+
+优先队列底层用堆来实现。在优先队列中，\textbf{队首元素}是队列中\textbf{优先级最高}的一个。优先队列可以解决一些贪心问题，也可用于对Dijkstra算法进行优化。
+
+Python PriorityQueue初始化及常用函数：
+
+\begin{lstlisting}[language=python]
+from queue import PriorityQueue
+
+q = PriorityQueue(maxsize=0)	# maxsize 最大长度
+q.put((priority_number, data))	# 插入元素
+data = q.get()	# 获取队首元素
+is_empty = q.empty()	# 队列是否为空
+# 当队列的元素是自定义时，需要在元素类中定义比较规则
+\end{lstlisting}
+
+STL priority\_queue初始化及常用函数：
+
+\begin{lstlisting}[language=c++]
+priority_queue<TYPE> q;
+// 只能通过 top 函数访问队首元素，使用前判断是否为空
+TYPE t = q.top();
+q.push(x);	// 将 x 入队列
+q.pop();	// 将队首元素出队列
+bool t = q.empty();	// 判断队列是否为空
+size_type s = q.size();	// 队列元素个数
+\end{lstlisting}
+
+定义优先队列内元素的优先级时，基本数据类型可以使用less或greater来指定优先级，其中less表示大的优先，greater表示小的优先；结构体元素需要重载小于号运算符。
+
+\begin{lstlisting}[language=c++]
+// 第二个参数指定存储容器
+priority_queue<int, vector<int>, less<int>> q;
+struct fruit {
+	string name;
+	int price;
+	friend bool operator< (fruit f1, fruit f2) {
+		return f1.price < f2.price;
+	}
+}
+priority_queue<fruit> q;	// 自定义元素类型
+\end{lstlisting}
+
+\subsection{字符串}
+
+\subsubsection{C string.h}
+
+string.h中包含许多用于字符数组的函数：
+
+\begin{lstlisting}[language=c++]
+int strlen(char* s);	// 字符串长度
+// 字符串比较，原则是字典序
+// 相等 0；s1 > s2，正数；s1 < s2，负数
+int strcmp(char* s1, char* s2);
+void strcpy(char* s1, char* s2);	// 将s2复制给s1
+void strcat(char* s1, char* s2);	// 将s2加到s1后
+\end{lstlisting}
+
+\subsubsection{STL string}
+
+STL string对字符串常用需求进行了封装：
+
+\begin{lstlisting}[language=c++]
+string str = "abcd";
+str += "ef";	// 将 "ef" 添加到 str 尾部
+// == != < <= > >= 字符串比较，规则是字典序
+int len = str.length();	// 字符串长度，O(1)
+/* insert 函数，O(n) */
+str.insert(pos, s);	// 在 pos 位置插入字符串 s
+// 在 it 插入串 [first, last)
+str.insert(it, first, last);
+/* erase 函数，O(n) */
+str.erase(it);	// 删除 it 指向元素
+str.erase(first, last);	// 删除区间[first, last)
+str.erase(pos, len); // 从pos开始删除 len 个字符
+str.clear();	// 清空字符串，O(1)
+str.substr(pos, len);	// 从 pos 开始长 len 的子串
+string::npos	// 常数，用于 find 函数匹配失败返回值
+/* find 函数 */
+int p = str.find(s);	// s 在 str 的位置
+int p = str.find(s, pos);	// 从str的pos位匹配s
+/* replace 函数 */
+// 把 str 从 pos 开始，长 len 的子串替换为 s
+string s2 = str.replace(pos, len, s);
+// 把 str 的 [first, last) 范围的子串替换为 s
+string s2 = str.replace(first, last, s);
+char* s = str.c_str();	// 转换为字符数组
+\end{lstlisting}
+
+
+\subsection{集合}
+
+Python的集合set是一个\textbf{无序的}、\textbf{不含重复元素}的容器，不记录元素插入点或位置，不可通过下标访问，查询性能相比list高很多。
+
+\begin{lstlisting}[language=python]
+s = set()
+s.add(x)	# 将 x 插入集合中，若 x 存在，不进行操作
+s.update(x)	# 更新 s，加上 x 中的元素
+s.remove(x)	# 将 x 从集合中移除，若 x 不存在报错
+s.discard(x)	# 将 x 从集合中移除，允许 x 不存在
+item = s.pop()	# 随机删除一个元素
+s.clear()	# 清空集合
+s.issubset(x)	# s 是否为 x 的子集
+x & y	# 交
+x | y	# 并
+x - y	# 差
+x ^ y	# 对称差，即 x 和 y 的交集减并集
+\end{lstlisting}
+
+STL集合set是一个\textbf{内部自动有序}且\textbf{不含重复元素}的容器，最重要的作用是自动去重并按升序排序。
+
+\begin{lstlisting}[language=c++]
+set<TYPE> s;
+set<TYPE>::iterator it;	// 迭代器
+// 遍历
+for(auto it = s.begin(); it != s.end(); ++it)
+do_something(*it);
+s.insert(x);	// 将 x 插入集合中，O(log n)
+it = s.find(x);	// 返回 x 的迭代器，O(log n)
+// 删除迭代器 it 指向元素，O(1)，可与 find 结合
+s.erase(it);
+s.erase(x);	// 删除值为 x 的元素，O(log n)
+s.erase(begin, end); // 删除 [begin, end) 内元素
+size_type t = s.size();	// set 内元素个数，O(1) 
+s.clear();	// 清空所有元素，O(n)
+\end{lstlisting}
+
+C++ 11中增加了unordered\_set，以散列代替set内部红黑树，去重但不排序，速度相比set快很多。
+
+\subsection{映射}
+
+通过名字来引用值的数据结构称为映射，名字成为键key，与值value成对。常用于：建立字符（串）与整数之间映射；判断大整数或者其他类型数据是否存在；建立字符串与字符串之间的映射。
+
+Python dict字典是键值对的无序可变集合，具有极快的查找速度。
+
+\begin{lstlisting}[language=python]
+d = dict()	# 空字典或 d = {}
+d = {key1: val1, key2: val2}	# 指定初值
+d = dict(key1=val1, key2=val2)
+len(d)	# 返回字典长度
+val = d[key]	# 下标访问
+d[key] = value	# 将 d[key] 设置为 value
+val = d.get(key)	# get 方法访问
+val = d.pop(key)	# 删除 key，返回对应 value
+(key, val) = d.popitem()	# 随机删除并返回一对 k-v
+d.update((key, val))	# 用指定的(key, val)更新字典
+d.items()	# 返回可遍历的 (key, val) 元组数组
+d.keys()	# 返回字典所有键
+key in d	# 判断 key 是否字典中
+d.values()	# 返回字典所有值
+del d[key]	# 删除 key 对应的键值对，不存在抛出异常
+d.clear()	# 清空字典
+\end{lstlisting}
+
+STL map可以将任何类型或容器映射到任何类型或容器。map中\textbf{键值唯一}，\textbf{插入时按键值排序}。map中存放的是pair结构体，有first和second两个不同类型的成员。
+
+
+
+\begin{lstlisting}[language=c++]
+map<key_type, value_type> mp;
+mp['a'] = 1;	// 下标访问
+// 迭代器访问
+for (auto i = mp.begin(); i != mp.end(); ++i)
+do_something(i->first, i->second);
+it = mp.find(key);	// 返回键为 key 的迭代器
+mp.erase(it);	// 删除 it 指向元素
+mp.erase(key);	// 删除键值为 key 的元素
+mp.erase(first, last);	// 删除[first, last)内元素
+size_type s = mp.size();	// 映射个数
+mp.clear();	// 清空所有元素
+\end{lstlisting}
+
+C++ 11提供unordered\_map，以散列代替红黑树实现map，只处理映射不排序，速度比map快得多。
