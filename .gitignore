@@ -1,12 +1,12 @@
 .vscode
 .ipynb_checkpoints
-.idea
-__pycache__
+.idea/
+__pycache__/
 data/
 *.exe
 *.class
 *.xlsx
-_minted-main
+_minted-main/
 *.aux
 *.log
 *.gz
