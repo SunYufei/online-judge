@@ -1,4 +1,3 @@
-from queue import Queue
 n, k = map(int, input().split())
 q = []
 for i in range(1, n + 1):

@@ -1,6 +1,6 @@
-import cv2
 from sys import argv
 
+import cv2
 
 if __name__ == "__main__":
     # 自定义摄像头

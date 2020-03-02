@@ -1,6 +1,7 @@
-from bs4 import BeautifulSoup
 import urllib.request
+
 import xlsxwriter
+from bs4 import BeautifulSoup
 
 
 def get_html(url):

@@ -1,4 +1,5 @@
 import os
+
 from aip import AipOcr
 
 APP_ID = ''
