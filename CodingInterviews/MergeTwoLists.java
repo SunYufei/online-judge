@@ -1,9 +1,14 @@
-public class MergeTwoLists {
-    public static void main(String[] args) {
+class ListNode {
+    int val;
+    ListNode next;
 
+    ListNode(int x) {
+        val = x;
     }
+}
 
-    private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode ans = new ListNode(0);
         ListNode cur = ans;
 
@@ -37,14 +42,5 @@ public class MergeTwoLists {
         }
 
         return ans.next;
-    }
-
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
     }
 }

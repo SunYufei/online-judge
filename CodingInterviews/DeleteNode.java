@@ -1,9 +1,14 @@
-public class DeleteNode {
-    public static void main(String[] args) {
+class ListNode {
+    int val;
+    ListNode next;
 
+    ListNode(int x) {
+        val = x;
     }
+}
 
-    private static ListNode deleteNode(ListNode head, int val) {
+class Solution {
+    public ListNode deleteNode(ListNode head, int val) {
         if (head == null)
             return head;
 
@@ -20,14 +25,5 @@ public class DeleteNode {
         }
 
         return head;
-    }
-
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
     }
 }

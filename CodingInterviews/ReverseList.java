@@ -1,9 +1,14 @@
-public class ReverseList {
-    public static void main(String[] args) {
+class ListNode {
+    int val;
+    ListNode next;
 
+    ListNode(int x) {
+        val = x;
     }
+}
 
-    private static ListNode reverseList(ListNode head) {
+class Solution {
+    public ListNode reverseList(ListNode head) {
         ListNode ans = null;
         ListNode t;
 
@@ -15,14 +20,5 @@ public class ReverseList {
         }
 
         return ans;
-    }
-
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
     }
 }

@@ -1,10 +1,5 @@
-public class Fibonacci {
-    public static void main(String[] args) {
-        int n = 100;
-        System.out.println(fib(n));
-    }
-
-    private static int fib(int n) {
+class Solution {
+    public int fib(int n) {
         if (n <= 1)
             return n;
         long a = 0, b = 1;
@@ -15,5 +10,12 @@ public class Fibonacci {
             b = ans;
         }
         return (int) ans;
+    }
+}
+
+public class Fibonacci {
+    public static void main(String[] args) {
+        var sol = new Solution();
+        System.out.println(sol.fib(100));
     }
 }

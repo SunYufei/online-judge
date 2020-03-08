@@ -1,10 +1,5 @@
-public class MissingNumber {
-    public static void main(String[] args) {
-        System.out.println(missingNumber(new int[] { 0, 1, 3 }));
-        System.out.println(missingNumber(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 }));
-    }
-
-    private static int missingNumber(int[] nums) {
+class Solution {
+    public int missingNumber(int[] nums) {
         int l = 0, r = nums.length;
 
         while (l < r) {
@@ -16,5 +11,13 @@ public class MissingNumber {
         }
 
         return l;
+    }
+}
+
+public class MissingNumber {
+    public static void main(String[] args) {
+        var sol = new Solution();
+        System.out.println(sol.missingNumber(new int[] { 0, 1, 3 }));
+        System.out.println(sol.missingNumber(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 }));
     }
 }

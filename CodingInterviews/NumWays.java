@@ -1,10 +1,5 @@
-public class NumWays {
-    public static void main(String[] args) {
-        System.out.println(numWays(2));
-        System.out.println(numWays(7));
-    }
-
-    private static int numWays(int n) {
+class Solution {
+    public int numWays(int n) {
         if (n == 0)
             return 1;
         if (n <= 2)
@@ -17,4 +12,13 @@ public class NumWays {
         }
         return (int) ans;
     }
+}
+
+public class NumWays {
+    public static void main(String[] args) {
+        var sol = new Solution();
+        System.out.println(sol.numWays(2));
+        System.out.println(sol.numWays(7));
+    }
+
 }

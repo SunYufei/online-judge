@@ -1,11 +1,16 @@
 import java.util.ArrayList;
 
-public class ReversePrint {
-    public static void main(String[] args) {
+class ListNode {
+    int val;
+    ListNode next;
 
+    ListNode(int x) {
+        val = x;
     }
+}
 
-    private int[] reversePrint(ListNode head) {
+class Solution {
+    public int[] reversePrint(ListNode head) {
         var list = new ArrayList<Integer>();
         int n = 0;
         while (head != null) {
@@ -18,13 +23,10 @@ public class ReversePrint {
             ans[n - 1 - i] = list.get(i);
         return ans;
     }
+}
 
-    private class ListNode {
-        int val;
-        ListNode next;
+public class ReversePrint {
+    public static void main(String[] args) {
 
-        ListNode(int x) {
-            val = x;
-        }
     }
 }

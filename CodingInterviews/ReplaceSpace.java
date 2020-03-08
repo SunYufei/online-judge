@@ -1,10 +1,5 @@
-public class ReplaceSpace {
-    public static void main(String[] args) {
-        String s = "We are happy.";
-        System.out.println(replaceSpace(s));
-    }
-
-    private static String replaceSpace(String s) {
+class Solution {
+    public String replaceSpace(String s) {
         StringBuilder ans = new StringBuilder();
         for (char c : s.toCharArray()) {
             if (c == ' ')
@@ -13,5 +8,13 @@ public class ReplaceSpace {
                 ans.append(c);
         }
         return ans.toString();
+    }
+}
+
+public class ReplaceSpace {
+    public static void main(String[] args) {
+        String s = "We are happy.";
+        var sol = new Solution();
+        System.out.println(sol.replaceSpace(s));
     }
 }
