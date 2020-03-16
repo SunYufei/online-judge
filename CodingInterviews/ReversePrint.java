@@ -1,14 +1,5 @@
 import java.util.ArrayList;
 
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-    }
-}
-
 class Solution {
     public int[] reversePrint(ListNode head) {
         var list = new ArrayList<Integer>();
