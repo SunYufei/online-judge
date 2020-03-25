@@ -1,7 +1,7 @@
 package Sort;
 
-class Exchange {
-    int[] exchange(int[] nums) {
+class Solution {
+    public int[] exchange(int[] nums) {
         int l = 0, r = nums.length - 1;
         while (l < r) {
             while (nums[l] % 2 == 1 && l < r)

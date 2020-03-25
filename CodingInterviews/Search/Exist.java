@@ -1,10 +1,10 @@
 package Search;
 
-class Exist {
+class Solution {
     char[][] board;
     char[] words;
 
-    boolean exist(char[][] board, String word) {
+    public boolean exist(char[][] board, String word) {
         this.board = board;
         this.words = word.toCharArray();
         for (int i = 0; i < board.length; i++)

@@ -1,7 +1,7 @@
 package Bit;
 
-class MyPow {
-    double myPow(double x, int n) {
+class Solution {
+    public double myPow(double x, int n) {
         if (x == 0)
             return 0;
         long b = n;

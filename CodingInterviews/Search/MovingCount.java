@@ -2,10 +2,10 @@ package Search;
 
 import java.util.*;
 
-class MovingCount {
+class Solution {
     boolean[][] vis;
 
-    int movingCount(int m, int n, int k) {
+    public int movingCount(int m, int n, int k) {
         vis = new boolean[m][n];
         return dfs(0, 0, m, n, k);
     }

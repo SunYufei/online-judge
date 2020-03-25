@@ -1,7 +1,7 @@
 package LinkList;
 
-class DeleteNode {
-    ListNode deleteNode(ListNode head, int val) {
+class Solution {
+    public ListNode deleteNode(ListNode head, int val) {
         if (head == null)
             return head;
         if (head.val == val)

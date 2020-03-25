@@ -1,6 +1,7 @@
 package BinarySearch;
 
-public class FindNumberIn2DArray {
+// leetcode 240
+class Solution {
     boolean findNumberIn2DArray(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0)
             return false;

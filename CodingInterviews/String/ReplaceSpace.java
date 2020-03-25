@@ -1,7 +1,7 @@
 package String;
 
-class ReplaceSpace {
-    String replaceSpace(String s) {
+class Solution {
+    public String replaceSpace(String s) {
         var builder = new StringBuilder();
         for (char c : s.toCharArray()) {
             if (c == ' ')

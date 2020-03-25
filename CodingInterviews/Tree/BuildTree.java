@@ -2,7 +2,8 @@ package Tree;
 
 import java.util.*;
 
-class BuildTree {
+// leetcode 105
+class Solution {
     int[] preOrder, inOrder;
     int preIndex = 0;
     Map<Integer, Integer> map = new HashMap<>();
@@ -18,7 +19,7 @@ class BuildTree {
         return root;
     }
 
-    TreeNode buildTree(int[] preorder, int[] inorder) {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
         this.preOrder = preorder;
         this.inOrder = inorder;
         for (int i = 0; i < inorder.length; i++)

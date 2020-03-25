@@ -2,8 +2,8 @@ package LinkList;
 
 import java.util.Stack;
 
-class ReversePrint {
-    int[] reversePrint(ListNode head) {
+class Solution {
+    public int[] reversePrint(ListNode head) {
         if (head == null)
             return new int[0];
         Stack<Integer> stack = new Stack<>();
