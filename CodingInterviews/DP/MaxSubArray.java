@@ -1,4 +1,4 @@
-package Array;
+package DP;
 
 class Solution {
     public int maxSubArray(int[] nums) {

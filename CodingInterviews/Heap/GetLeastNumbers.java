@@ -1,4 +1,4 @@
-package Sort;
+package Heap;
 
 import java.util.*;
 

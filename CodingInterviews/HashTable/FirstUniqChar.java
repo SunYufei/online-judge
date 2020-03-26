@@ -1,4 +1,4 @@
-package String;
+package HashTable;
 
 class Solution {
     public char firstUniqChar(String s) {

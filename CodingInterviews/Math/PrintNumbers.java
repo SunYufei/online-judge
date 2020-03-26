@@ -1,4 +1,4 @@
-package Array;
+package Math;
 
 class Solution {
     public int[] printNumbers(int n) {

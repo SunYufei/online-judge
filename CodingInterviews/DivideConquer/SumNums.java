@@ -1,4 +1,4 @@
-package Recursion;
+package DivideConquer;
 
 class Solution {
     public int sumNums(int n) {

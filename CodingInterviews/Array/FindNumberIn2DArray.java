@@ -1,4 +1,4 @@
-package BinarySearch;
+package Array;
 
 // leetcode 240
 class Solution {

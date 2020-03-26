@@ -1,5 +1,6 @@
 package DP;
 
+// leetcode 70
 class Solution {
     public int numWays(int n) {
         if (n <= 1)
