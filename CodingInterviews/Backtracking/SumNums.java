@@ -1,4 +1,4 @@
-package DivideConquer;
+package Backtracking;
 
 class Solution {
     public int sumNums(int n) {
