@@ -1,29 +1,19 @@
 package Tree;
 
-import java.util.*;
+import java.util.Arrays;
 
 // leetcode 105
 class Solution {
-    int[] preOrder, inOrder;
-    int preIndex = 0;
-    Map<Integer, Integer> map = new HashMap<>();
-
-    TreeNode build(int left, int right) {
-        if (left == right)
-            return null;
-        int val = preOrder[preIndex++];
-        TreeNode root = new TreeNode(val);
-        int index = map.get(val);
-        root.left = build(left, index);
-        root.right = build(index + 1, right);
-        return root;
-    }
-
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        this.preOrder = preorder;
-        this.inOrder = inorder;
+        if (preorder.length == 0 || inorder.length == 0)
+            return null;
+        TreeNode root = new TreeNode(preorder[0]);
         for (int i = 0; i < inorder.length; i++)
-            map.put(inorder[i], i);
-        return build(0, inorder.length);
+            if (inorder[i] == preorder[0]) {
+                root.left = buildTree(Arrays.copyOfRange(preorder, 1, i + 1), Arrays.copyOfRange(inorder, 0, i));
+                root.right = buildTree(Arrays.copyOfRange(preorder, i + 1, preorder.length),
+                        Arrays.copyOfRange(inorder, i + 1, inorder.length));
+            }
+        return root;
     }
 }

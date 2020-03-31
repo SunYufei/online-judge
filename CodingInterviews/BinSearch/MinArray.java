@@ -1,4 +1,4 @@
-package BinarySearch;
+package BinSearch;
 
 class Solution {
     public int minArray(int[] numbers) {
