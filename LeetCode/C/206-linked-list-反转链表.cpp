@@ -6,10 +6,6 @@
 
 // @lc code=start
 
-#include <bits/stdc++.h>
-using namespace std;
-
-// Definition for singly-linked list.
 // struct ListNode {
 //     int val;
 //     ListNode *next;
@@ -19,18 +15,16 @@ using namespace std;
 class Solution {
   public:
     ListNode *reverseList(ListNode *head) {
-        ListNode *p = new ListNode(-1);
-        ListNode *t;
-        while (head != nullptr) {
-            t = head;
-            head = head->next;
-            t->next = p->next;
-            p->next = t;
+        ListNode *pre = nullptr;
+        ListNode *cur = head;
+        ListNode *next = head;
+        while (cur != nullptr) {
+            next = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = next;
         }
-        t = p;
-        p = p->next;
-        delete t;
-        return p;
+        return pre;
     }
 };
 // @lc code=end

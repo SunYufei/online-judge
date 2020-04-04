@@ -3,17 +3,16 @@
  *
  * [283] 移动零
  */
+// #include <bits/stdc++.h>
+// using namespace std;
 
 // @lc code=start
 class Solution {
   public:
     void moveZeroes(vector<int> &nums) {
-        int p = 0;
-        for (int num : nums)
-            if (num != 0)
-                nums[p++] = num;
-        while (p < nums.size())
-            nums[p++] = 0;
+        for (int a = 0, b = 0; a < nums.size(); a++)
+            if (nums[a] != 0)
+                swap(nums[a], nums[b++]);
     }
 };
 // @lc code=end
