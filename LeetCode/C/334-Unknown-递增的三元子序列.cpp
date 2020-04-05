@@ -3,8 +3,7 @@
  *
  * [334] 递增的三元子序列
  */
-#include <bits/stdc++.h>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

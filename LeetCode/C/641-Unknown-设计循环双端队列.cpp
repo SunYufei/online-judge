@@ -3,8 +3,7 @@
  *
  * [641] 设计循环双端队列
  */
-#include <vector>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class MyCircularDeque {

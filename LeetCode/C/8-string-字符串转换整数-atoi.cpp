@@ -3,8 +3,7 @@
  *
  * [8] 字符串转换整数 (atoi)
  */
-#include <bits/stdc++.h>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

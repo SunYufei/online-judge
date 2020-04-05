@@ -3,8 +3,7 @@
  *
  * [239] 滑动窗口最大值
  */
-#include <bits/stdc++.h>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

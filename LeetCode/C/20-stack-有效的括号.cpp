@@ -3,8 +3,7 @@
  *
  * [20] 有效的括号
  */
-#include <bits/stdc++.h>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

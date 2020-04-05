@@ -3,8 +3,7 @@
  *
  * [912] 排序数组
  */
-#include <bits/stdc++.h>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

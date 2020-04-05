@@ -3,6 +3,7 @@
  *
  * [146] LRU缓存机制
  */
+#include "main.h"
 
 // @lc code=start
 class LRUCache {

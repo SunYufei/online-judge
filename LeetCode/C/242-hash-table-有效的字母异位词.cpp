@@ -3,8 +3,7 @@
  *
  * [242] 有效的字母异位词
  */
-#include <string>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

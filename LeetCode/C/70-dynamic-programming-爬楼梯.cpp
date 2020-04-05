@@ -3,6 +3,7 @@
  *
  * [70] 爬楼梯
  */
+#include "main.h"
 
 // @lc code=start
 class Solution {

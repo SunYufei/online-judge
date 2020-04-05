@@ -3,6 +3,7 @@
  *
  * [66] 加一
  */
+#include "main.h"
 
 // @lc code=start
 class Solution {

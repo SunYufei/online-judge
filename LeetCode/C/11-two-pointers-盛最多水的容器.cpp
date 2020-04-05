@@ -4,6 +4,8 @@
  * [11] 盛最多水的容器
  */
 
+#include "main.h"
+
 // @lc code=start
 class Solution {
   public:

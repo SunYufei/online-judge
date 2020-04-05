@@ -4,8 +4,7 @@
  * [191] 位1的个数
  */
 
-#include <bits/stdc++.h>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

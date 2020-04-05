@@ -3,19 +3,9 @@
  *
  * [23] 合并K个排序链表
  */
+#include "main.h"
 
 // @lc code=start
-//
-// Definition for singly-linked list.
-// #include <bits/stdc++.h>
-// using namespace std;
-
-// struct ListNode {
-//     int val;
-//     ListNode *next;
-//     ListNode(int x) : val(x), next(NULL) {}
-// };
-
 class Solution {
   public:
     ListNode *mergeKLists(vector<ListNode *> &lists) {

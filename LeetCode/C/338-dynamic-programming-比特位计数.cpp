@@ -3,8 +3,7 @@
  *
  * [338] 比特位计数
  */
-#include <vector>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

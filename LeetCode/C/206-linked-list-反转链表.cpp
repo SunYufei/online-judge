@@ -3,15 +3,9 @@
  *
  * [206] 反转链表
  */
+#include "main.h"
 
 // @lc code=start
-
-// struct ListNode {
-//     int val;
-//     ListNode *next;
-//     ListNode(int x) : val(x), next(NULL) {}
-// };
-
 class Solution {
   public:
     ListNode *reverseList(ListNode *head) {

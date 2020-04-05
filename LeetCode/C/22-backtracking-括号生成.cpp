@@ -3,9 +3,7 @@
  *
  * [22] 括号生成
  */
-// #include <string>
-// #include <vector>
-// using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

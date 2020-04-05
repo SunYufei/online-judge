@@ -3,8 +3,7 @@
  *
  * [190] 颠倒二进制位
  */
-#include <bits/stdc++.h>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

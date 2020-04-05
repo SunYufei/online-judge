@@ -3,9 +3,7 @@
  *
  * [1160] 拼写单词
  */
-#include <string>
-#include <vector>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

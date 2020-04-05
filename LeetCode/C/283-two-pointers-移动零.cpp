@@ -3,8 +3,7 @@
  *
  * [283] 移动零
  */
-// #include <bits/stdc++.h>
-// using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

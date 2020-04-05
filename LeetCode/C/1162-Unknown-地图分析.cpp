@@ -3,8 +3,7 @@
  *
  * [1162] 地图分析
  */
-#include <bits/stdc++.h>
-using namespace std;
+#include "main.h"
 
 // @lc code=start
 class Solution {

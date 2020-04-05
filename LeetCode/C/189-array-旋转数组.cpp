@@ -3,8 +3,8 @@
  *
  * [189] 旋转数组
  */
-#include <vector>
-using namespace std;
+#include "main.h"
+
 
 // @lc code=start
 class Solution {

@@ -3,6 +3,7 @@
  *
  * [231] 2的幂
  */
+#include "main.h"
 
 // @lc code=start
 class Solution {

@@ -3,19 +3,9 @@
  *
  * [142] 环形链表 II
  */
+#include "main.h"
 
 // @lc code=start
-/**
- * Definition for singly-linked list. */
-// #include <set>
-// using namespace std;
-
-// struct ListNode {
-//     int val;
-//     ListNode *next;
-//     ListNode(int x) : val(x), next(nullptr) {}
-// };
-
 class Solution {
   public:
     ListNode *detectCycle(ListNode *head) {

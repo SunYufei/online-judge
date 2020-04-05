@@ -3,8 +3,8 @@
  *
  * [155] 最小栈
  */
-#include <bits/stdc++.h>
-using namespace std;
+#include "main.h"
+
 
 // @lc code=start
 class MinStack {

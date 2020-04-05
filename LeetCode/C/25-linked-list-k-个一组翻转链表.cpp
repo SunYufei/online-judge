@@ -3,16 +3,9 @@
  *
  * [25] K 个一组翻转链表
  */
+#include "main.h"
 
 // @lc code=start
-//
-//  Definition for singly-linked list.
-// struct ListNode {
-//     int val;
-//     ListNode *next;
-//     ListNode(int x) : val(x), next(nullptr) {}
-// };
-
 class Solution {
   public:
     ListNode *reverseKGroup(ListNode *head, int k) {

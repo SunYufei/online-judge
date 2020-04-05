@@ -4,15 +4,9 @@
  * [21] 合并两个有序链表
  */
 
-// @lc code=start
-/**
- * Definition for singly-linked list. */
-// struct ListNode {
-//     int val;
-//     ListNode *next;
-//     ListNode(int x) : val(x), next(nullptr) {}
-// };
+#include "main.h"
 
+// @lc code=start
 class Solution {
   public:
     ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
