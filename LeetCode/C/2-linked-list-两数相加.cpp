@@ -21,27 +21,24 @@ class Solution {
         int carry = 0;
         while (l1 && l2) {
             carry += l1->val + l2->val;
-            t = new ListNode(carry % 10);
+            l1->val = carry % 10;
             carry /= 10;
-            t->next = p->next;
-            p->next = t;
-            p = p->next;
-            t = l1;
+            p->next = l1;
             l1 = l1->next;
-            delete t;
+            p = p->next;
             t = l2;
             l2 = l2->next;
             delete t;
         }
-        p->next = l1 ? l1 : l2;
+        p->next = l1 != nullptr ? l1 : l2;
         t = p;
         p = p->next;
         while (p) {
             carry += p->val;
             p->val = carry % 10;
             carry /= 10;
-            t = t->next;
             p = p->next;
+            t = t->next;
         }
         if (carry != 0)
             t->next = new ListNode(carry);

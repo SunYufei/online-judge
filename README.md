@@ -21,6 +21,7 @@
 - PTA
   - [基础编程题目集](PTA/Basic)
   - [数据结构与算法题目集（中文）](PTA/DataStructure)
+  - [Data Structures and Algorithms (English)](PTA/DataStructureEng)
   - [数据结构 - 起步能力自测题](PTA/DS-Self-Test)
   - [PAT](PTA/PAT) 计算机程序设计能力考试
   - [GPLT](PTA/GPLT) 团体程序设计天梯赛

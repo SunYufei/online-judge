@@ -4,35 +4,44 @@
  * [23] 合并K个排序链表
  */
 #include "main.h"
-
 // @lc code=start
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
   public:
     ListNode *mergeKLists(vector<ListNode *> &lists) {
-        priority_queue<ListNode *, vector<ListNode *>, cmp> pq;
-        for (auto head : lists)
-            while (head) {
-                pq.push(head);
-                head = head->next;
+        ListNode *head = nullptr;
+        for (auto l : lists)
+            head = merge(head, l);
+        return head;
+    }
+
+  private:
+    ListNode *merge(ListNode *l1, ListNode *l2) {
+        ListNode *head = new ListNode(-1), *p = head, *t;
+        while (l1 && l2) {
+            if (l1->val < l2->val) {
+                t = l1;
+                l1 = l1->next;
+            } else {
+                t = l2;
+                l2 = l2->next;
             }
-        ListNode *head = new ListNode(-1);
-        ListNode *p = head;
-        while (!pq.empty()) {
-            ListNode *t = pq.top();
-            pq.pop();
             t->next = p->next;
             p->next = t;
             p = t;
         }
+        p->next = l1 != nullptr ? l1 : l2;
         p = head;
         head = head->next;
         delete p;
         return head;
     }
-
-  private:
-    struct cmp {
-        bool operator()(ListNode *a, ListNode *b) { return a->val > b->val; }
-    };
 };
 // @lc code=end
