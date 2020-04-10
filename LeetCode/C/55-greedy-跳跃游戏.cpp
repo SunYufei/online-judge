@@ -9,11 +9,11 @@
 class Solution {
   public:
     bool canJump(vector<int> &nums) {
-        int m_pos = 0;
+        int max_pos = 0;
         for (int i = 0; i < nums.size(); i++) {
-            if (i > m_pos)
+            if (i > max_pos)
                 return false;
-            m_pos = max(m_pos, i + nums[i]);
+            max_pos = max(max_pos, i + nums[i]);
         }
         return true;
     }

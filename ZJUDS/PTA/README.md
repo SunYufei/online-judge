@@ -21,7 +21,7 @@
 
 ## 第四周
 
-1. [是否同一棵二叉搜索树](7-4.c)
+1. [是否同一棵二叉搜索树](https://pintia.cn/problem-sets/15/problems/712) / [Code](../../PTA/DataStructure/C/7-4.c)
 2. [Root of AVL Tree](https://pintia.cn/problem-sets/16/problems/668)
 3. [Complete Binary Search Tree](https://pintia.cn/problem-sets/16/problems/669)
 4. [二叉搜索树的操作集](https://pintia.cn/problem-sets/15/problems/927) / [Code](../../PTA/DataStructure/C/6-12.c)

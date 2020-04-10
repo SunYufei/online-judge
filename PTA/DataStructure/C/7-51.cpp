@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <stdio.h>
 using namespace std;
 
 int main() {
@@ -17,11 +16,11 @@ int main() {
                 flag = true;
         }
     if (v.size() == 0)
-        cout << "NULL";
+        printf("NULL");
     else {
         sort(v.begin(), v.end());
         for (it = v.begin(); it < v.end() - 1; it++)
-            cout << *it << " ";
-        cout << *it;
+            printf("%d ", *it);
+        printf("%d", *it);
     }
 }
