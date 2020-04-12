@@ -5,24 +5,20 @@
  */
 #include "main.h"
 
-
 // @lc code=start
 class Solution {
   public:
     void rotate(vector<int> &nums, int k) {
         int n = nums.size();
         k %= n;
-        int count = 0;
-        for (int start = 0; count < n; ++start) {
-            int current = start;
-            int prev = nums[start];
-            do {
-                int next = (current + k) % n;
-                swap(nums[next], prev);
-                current = next;
-                ++count;
-            } while (start != current);
-        }
+        reverse(nums, 0, n);
+        reverse(nums, 0, k);
+        reverse(nums, k, n);
+    }
+
+    void reverse(vector<int> &nums, int left, int right) {
+        while (left < right)
+            swap(nums[left++], nums[--right]);
     }
 };
 // @lc code=end

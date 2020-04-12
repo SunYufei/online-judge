@@ -1,14 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-struct TreeLinkNode {
-    int val;
-    struct TreeLinkNode *left;
-    struct TreeLinkNode *right;
-    struct TreeLinkNode *next;
-    TreeLinkNode(int x)
-        : val(x), left(nullptr), right(nullptr), next(nullptr) {}
-};
+#include "main.h"
 
 class Solution {
   public:
