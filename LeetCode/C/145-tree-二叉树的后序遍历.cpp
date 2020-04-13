@@ -17,19 +17,18 @@
 class Solution {
   public:
     vector<int> postorderTraversal(TreeNode *root) {
+        vector<int> res;
+        function<void(TreeNode *)> post = [&](TreeNode *node) {
+            if (node == nullptr)
+                return;
+            if (node->left)
+                post(node->left);
+            if (node->right)
+                post(node->right);
+            res.emplace_back(node->val);
+        };
         post(root);
         return res;
-    }
-
-  private:
-    vector<int> res;
-
-    void post(TreeNode *root) {
-        if (root == nullptr)
-            return;
-        post(root->left);
-        post(root->right);
-        res.push_back(root->val);
     }
 };
 // @lc code=end

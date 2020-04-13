@@ -5,7 +5,6 @@
  */
 #include "main.h"
 
-
 // @lc code=start
 class MinStack {
   private:
@@ -15,8 +14,8 @@ class MinStack {
     MinStack() { s2.push(INT_MAX); }
 
     void push(int x) {
-        s1.push(x);
-        s2.push(x < s2.top() ? x : s2.top());
+        s1.emplace(x);
+        s2.emplace(x < s2.top() ? x : s2.top());
     }
 
     void pop() {

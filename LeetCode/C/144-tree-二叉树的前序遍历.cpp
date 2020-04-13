@@ -9,19 +9,20 @@
 class Solution {
   public:
     vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> res;
+
+        function<void(TreeNode *)> pre = [&](TreeNode *node) {
+            if (node == nullptr)
+                return;
+            res.emplace_back(node->val);
+            if (node->left)
+                pre(node->left);
+            if (node->right)
+                pre(node->right);
+        };
+
         pre(root);
         return res;
-    }
-
-  private:
-    vector<int> res;
-
-    void pre(TreeNode *root) {
-        if (root == nullptr)
-            return;
-        res.push_back(root->val);
-        pre(root->left);
-        pre(root->right);
     }
 };
 // @lc code=end

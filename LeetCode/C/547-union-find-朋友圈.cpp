@@ -6,48 +6,33 @@
 #include "main.h"
 
 // @lc code=start
-class UnionFind {
-  private:
-    vector<int> parent;
-    int count;
-
-    int find(int p) {
-        if (parent[p] != p)
-            parent[p] = find(parent[p]);
-        return parent[p];
-    }
-
-  public:
-    UnionFind(int n) {
-        count = n;
-        for (int i = 0; i < n; i++)
-            parent.push_back(i);
-    }
-
-    void merge(int p, int q) {
-        int rp = find(p);
-        int rq = find(q);
-        if (rp != rq) {
-            parent[rp] = rq;
-            --count;
-        }
-    }
-
-    int get_count() { return count; }
-};
-
 class Solution {
   public:
     int findCircleNum(vector<vector<int>> &M) {
         int n = M.size();
         if (n == 0)
             return 0;
-        UnionFind uf(n);
-        for (int i = 0; i < n - 1; i++)
+        int count = n;
+        vector<int> parent(n);
+        for (int i = 0; i < n; i++)
+            parent[i] = i;
+        function<int(int)> find = [&](int p) {
+            if (parent[p] != p)
+                parent[p] = find(parent[p]);
+            return parent[p];
+        };
+        auto merge = [&](int p, int q) {
+            int rp = find(p), rq = find(q);
+            if (rp != rq) {
+                parent[rp] = rq;
+                --count;
+            }
+        };
+        for (int i = 0; i < n; i++)
             for (int j = i + 1; j < n; j++)
                 if (M[i][j] == 1)
-                    uf.merge(i, j);
-        return uf.get_count();
+                    merge(i, j);
+        return count;
     }
 };
 // @lc code=end

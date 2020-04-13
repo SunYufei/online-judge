@@ -10,24 +10,21 @@ class Solution {
   public:
     ListNode *mergeKLists(vector<ListNode *> &lists) {
         priority_queue<ListNode *, vector<ListNode *>, cmp> pq;
-        for (auto head : lists)
-            while (head) {
-                pq.push(head);
-                head = head->next;
+        for (auto list : lists)
+            while (list) {
+                pq.emplace(list);
+                list = list->next;
             }
-        ListNode *head = new ListNode(-1);
-        ListNode *p = head;
+        ListNode head(-1);
+        ListNode *p = &head, *t;
         while (!pq.empty()) {
-            ListNode *t = pq.top();
+            t = pq.top();
             pq.pop();
             t->next = p->next;
             p->next = t;
             p = t;
         }
-        p = head;
-        head = head->next;
-        delete p;
-        return head;
+        return head.next;
     }
 
   private:
