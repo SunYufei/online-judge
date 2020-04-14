@@ -3,10 +3,10 @@
 class Solution {
   public:
     TreeNode *reConstructBinaryTree(vector<int> pre, vector<int> vin) {
-        if (pre.size() == 0 || vin.size() == 0)
+        if (pre.empty() || vin.empty())
             return nullptr;
-        TreeNode *root = new TreeNode(pre[0]);
-        for (int i = 0; i < vin.size(); i++)
+        auto root = new TreeNode(pre[0]);
+        for (int i = 0; i < vin.size(); ++i)
             if (vin[i] == pre[0]) {
                 root->left = reConstructBinaryTree(
                     vector<int>(pre.begin() + 1, pre.begin() + i + 1),

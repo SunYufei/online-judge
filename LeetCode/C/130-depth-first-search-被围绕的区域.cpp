@@ -20,7 +20,7 @@ class Solution {
 
   public:
     void solve(vector<vector<char>> &board) {
-        if (board.size() == 0)
+        if (board.empty())
             return;
         int m = board.size(), n = board[0].size();
         for (int i = 0; i < m; i++) {

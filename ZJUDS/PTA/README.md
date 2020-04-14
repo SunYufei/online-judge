@@ -49,3 +49,9 @@
 1. [公路村村通](7-10.c)
 2. [How Long Does It Take](https://pintia.cn/problem-sets/16/problems/674)
 3. [关键活动](7-11.c)
+
+## 第九周
+
+1. [排序](https://pintia.cn/problem-sets/15/problems/720) / [Code](../../PTA/DataStructure/C/7-12.cpp)
+2. [Insert or Merge](https://pintia.cn/problem-sets/16/problems/675)
+3. [Insertion or Heap Sort](https://pintia.cn/problem-sets/16/problems/676)

@@ -25,14 +25,6 @@ class Solution {
             p = p->next;
         }
         p->next = l1 ? l1 : l2;
-        while (l1) {
-            l1 = l1->next;
-            p = p->next;
-        }
-        while (l2) {
-            l2 = l2->next;
-            p = p->next;
-        }
         return head.next;
     }
 };

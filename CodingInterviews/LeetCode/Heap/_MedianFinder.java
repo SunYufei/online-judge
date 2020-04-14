@@ -1,5 +1,0 @@
-package Heap;
-
-class MedianFinder {
-
-}

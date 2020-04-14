@@ -1,5 +1,4 @@
-#ifndef MAIN_H_
-#define MAIN_H_
+#pragma once
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -31,5 +30,3 @@ class Node {
         children = _children;
     }
 };
-
-#endif

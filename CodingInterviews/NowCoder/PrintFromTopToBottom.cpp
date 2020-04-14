@@ -3,9 +3,9 @@
 class Solution {
   public:
     vector<int> PrintFromTopToBottom(TreeNode *root) {
-        vector<int> res;
         if (root == nullptr)
-            return res;
+            return {};
+        vector<int> res;
         queue<TreeNode *> q;
         q.push(root);
         while (!q.empty()) {

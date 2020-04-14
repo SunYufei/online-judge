@@ -2,13 +2,14 @@
 using namespace std;
 
 int main() {
-    int i, n, a[100010];
+    int n;
     scanf("%d", &n);
-    for (i = 0; i < n; ++i)
-        scanf("%d", &a[i]);
-    sort(a, a + n);
-    for (i = 0; i < n - 1; ++i)
-        printf("%d ", a[i]);
-    printf("%d", a[i]);
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++)
+        scanf("%d", &nums[i]);
+    sort(nums.begin(), nums.end());
+    printf("%d", *nums.begin());
+    for (auto it = nums.begin() + 1; it < nums.end(); ++it)
+        printf(" %d", *it);
     return 0;
 }

@@ -3,17 +3,24 @@
 class Solution {
   public:
     ListNode *ReverseList(ListNode *pHead) {
-        ListNode *head = new ListNode(-1);
-        ListNode *p = pHead;
-        while (p != nullptr) {
-            ListNode *t = new ListNode(p->val);
-            t->next = head->next;
-            head->next = t;
-            p = p->next;
+        ListNode *p = nullptr, *c = pHead, *t;
+        while (c) {
+            t = c->next;
+            c->next = p;
+            p = c;
+            c = t;
         }
-        p = head;
-        head = head->next;
-        delete p;
-        return head;
+        return p;
+    }
+
+    ListNode *ReverseList(ListNode *pHead) {
+        if (pHead == nullptr)
+            return nullptr;
+        if (pHead->next == nullptr)
+            return pHead;
+        auto last = ReverseList(pHead->next);
+        pHead->next->next = pHead;
+        pHead->next = nullptr;
+        return last;
     }
 };
