@@ -13,6 +13,7 @@ class Solution {
                 root.left = buildTree(Arrays.copyOfRange(preorder, 1, i + 1), Arrays.copyOfRange(inorder, 0, i));
                 root.right = buildTree(Arrays.copyOfRange(preorder, i + 1, preorder.length),
                         Arrays.copyOfRange(inorder, i + 1, inorder.length));
+                break;
             }
         return root;
     }
