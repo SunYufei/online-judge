@@ -9,9 +9,7 @@
 class Solution {
   public:
     int myAtoi(string str) {
-        int total = 0;
-        int sign = 1;
-        int p = 0;
+        int total = 0, sign = 1, p = 0;
         while (p < str.length() && str[p] == ' ')
             ++p;
         if (p == str.length())
