@@ -58,7 +58,7 @@ class LFUCache {
                 s.erase(s.begin());
             }
             Node cache = Node(1, ++time, key, value);
-            key_table.insert(make_pair(key, cache));
+            key_table.insert({key, cache});
             s.insert(cache);
         } else {
             Node cache = it->second;

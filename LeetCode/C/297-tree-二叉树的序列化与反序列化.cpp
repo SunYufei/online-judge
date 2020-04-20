@@ -20,13 +20,13 @@ class Codec {
     string serialize(TreeNode *root) {
         string res;
         queue<TreeNode *> q;
-        q.emplace(root);
+        q.push(root);
         while (!q.empty()) {
             auto node = q.front();
             if (node != nullptr) {
                 res += (to_string(node->val) + ",");
-                q.emplace(node->left);
-                q.emplace(node->right);
+                q.push(node->left);
+                q.push(node->right);
             } else
                 res += "null,";
             q.pop();
@@ -45,9 +45,9 @@ class Codec {
                 break;
             string sub = data.substr(start, end - start);
             if (sub == "null")
-                nodes.emplace_back(nullptr);
+                nodes.push_back(nullptr);
             else
-                nodes.emplace_back(new TreeNode(stoi(sub)));
+                nodes.push_back(new TreeNode(stoi(sub)));
             start = end + 1;
         }
         // build

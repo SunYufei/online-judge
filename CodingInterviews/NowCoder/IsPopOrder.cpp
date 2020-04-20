@@ -7,7 +7,7 @@ class Solution {
             return false;
         stack<int> s;
         for (int i = 0, j = 0; i < pushV.size(); i++) {
-            s.emplace(pushV[i]);
+            s.push(pushV[i]);
             while (!s.empty() && s.top() == popV[j]) {
                 s.pop();
                 ++j;

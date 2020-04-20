@@ -16,10 +16,10 @@ class MinStack {
 
     void push(int x) {
         if (x <= m_min) {
-            m_stack.emplace(m_min);
+            m_stack.push(m_min);
             m_min = x;
         }
-        m_stack.emplace(x);
+        m_stack.push(x);
     }
 
     void pop() {

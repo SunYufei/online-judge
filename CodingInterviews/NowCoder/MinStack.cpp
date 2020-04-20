@@ -4,7 +4,7 @@ class Solution {
   public:
     void push(int value) {
         if (value <= m_min) {
-            m_stack.emplace(m_min);
+            m_stack.push(m_min);
             m_min = value;
         }
         m_stack.push(value);

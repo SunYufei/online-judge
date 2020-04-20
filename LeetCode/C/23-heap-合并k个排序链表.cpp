@@ -12,7 +12,7 @@ class Solution {
         priority_queue<ListNode *, vector<ListNode *>, cmp> pq;
         for (auto list : lists)
             while (list) {
-                pq.emplace(list);
+                pq.push(list);
                 list = list->next;
             }
         ListNode head(-1), *p = &head, *t;

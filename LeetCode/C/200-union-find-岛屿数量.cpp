@@ -19,10 +19,10 @@ class Solution {
         for (int i = 0; i < m; i++)
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
-                    parent.emplace_back(i * n + j);
+                    parent.push_back(i * n + j);
                     ++count;
                 } else
-                    parent.emplace_back(-1);
+                    parent.push_back(-1);
             }
 
         function<int(int)> find = [&](int p) {

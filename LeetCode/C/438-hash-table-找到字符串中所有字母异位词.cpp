@@ -23,7 +23,7 @@ class Solution {
             }
             while (match == needs.size()) {
                 if (r - l == p.size())
-                    res.emplace_back(l);
+                    res.push_back(l);
                 char c2 = s[l++];
                 if (needs.count(c2)) {
                     --window[c2];

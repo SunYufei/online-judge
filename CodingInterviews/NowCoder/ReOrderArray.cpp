@@ -6,9 +6,9 @@ class Solution {
         queue<int> a, b;
         for (int i : array) {
             if (i & 1 == 1)
-                a.emplace(i);
+                a.push(i);
             else
-                b.emplace(i);
+                b.push(i);
         }
         int p = 0;
         while (!a.empty()) {

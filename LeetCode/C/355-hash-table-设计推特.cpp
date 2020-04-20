@@ -45,7 +45,7 @@ class Twitter {
         vector<int> ans;
         ans.clear();
         for (auto it : user[userId].tweet)
-            ans.emplace_back(it);
+            ans.push_back(it);
         for (int followId : user[userId].followee) {
             if (followId == userId)
                 continue;
@@ -55,20 +55,20 @@ class Twitter {
             int i = 0;
             while (i < ans.size() && it != user[followId].tweet.end()) {
                 if (tweetTime[*it] > tweetTime[ans[i]]) {
-                    res.emplace_back(*it);
+                    res.push_back(*it);
                     ++it;
                 } else {
-                    res.emplace_back(ans[i]);
+                    res.push_back(ans[i]);
                     ++i;
                 }
                 if (res.size() == recentMax)
                     break;
             }
             for (; i < ans.size() && res.size() < recentMax; ++i)
-                res.emplace_back(ans[i]);
+                res.push_back(ans[i]);
             for (; it != user[followId].tweet.end() && res.size() < recentMax;
                  ++it)
-                res.emplace_back(*it);
+                res.push_back(*it);
             ans.assign(res.begin(), res.end());
         }
         return ans;

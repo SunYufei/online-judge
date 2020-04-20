@@ -14,7 +14,7 @@ class Solution {
         function<void(TreeNode *)> pre = [&](TreeNode *node) {
             if (node == nullptr)
                 return;
-            res.emplace_back(node->val);
+            res.push_back(node->val);
             if (node->left)
                 pre(node->left);
             if (node->right)

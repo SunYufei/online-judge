@@ -22,6 +22,6 @@ class Solution {
         if (node == nullptr)
             return;
         traverse(node->next, res);
-        res.emplace_back(node->val);
+        res.push_back(node->val);
     }
 };

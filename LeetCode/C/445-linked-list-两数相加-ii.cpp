@@ -20,11 +20,11 @@ class Solution {
         stack<int> s1, s2;
         auto p1 = l1, p2 = l2;
         while (p1) {
-            s1.emplace(p1->val);
+            s1.push(p1->val);
             p1 = p1->next;
         }
         while (p2) {
-            s2.emplace(p2->val);
+            s2.push(p2->val);
             p2 = p2->next;
         }
         int carry = 0;

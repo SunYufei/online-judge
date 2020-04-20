@@ -23,8 +23,8 @@ class Solution {
             if (node == nullptr)
                 return;
             if (level == res.size())
-                res.emplace_back(vector<int>{});
-            res[level].emplace_back(node->val);
+                res.push_back(vector<int>{});
+            res[level].push_back(node->val);
             dfs(node->left, level + 1);
             dfs(node->right, level + 1);
         };

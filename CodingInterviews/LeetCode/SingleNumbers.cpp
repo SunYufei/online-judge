@@ -11,7 +11,7 @@ class Solution {
                 st.erase(num);
         vector<int> res;
         for (auto it : st)
-            res.emplace_back(it);
+            res.push_back(it);
         return res;
     }
 };

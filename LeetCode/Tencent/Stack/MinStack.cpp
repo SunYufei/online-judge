@@ -7,7 +7,7 @@ class MinStack {
 
     void push(int x) {
         _min = min(_min, x);
-        _stack.push(make_pair(_min, x));
+        _stack.push({_min, x});
     }
 
     void pop() {

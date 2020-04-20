@@ -25,7 +25,7 @@ class Solution {
                 post(node->left);
             if (node->right)
                 post(node->right);
-            res.emplace_back(node->val);
+            res.push_back(node->val);
         };
         post(root);
         return res;

@@ -19,7 +19,7 @@ class Solution {
         for (int i = 0; i < m; i++)
             for (int j = 0; j < n; j++)
                 if (matrix[i][j] == 0) {
-                    q.emplace(i, j);
+                    q.push(i, j);
                     seen[i][j] = true;
                 }
         while (!q.empty()) {
@@ -30,7 +30,7 @@ class Solution {
                 int nj = j + dirs[d][1];
                 if (ni >= 0 && ni < m && nj >= 0 && nj < n && !seen[ni][nj]) {
                     dist[ni][nj] = dist[i][j] + 1;
-                    q.emplace(ni, nj);
+                    q.push(ni, nj);
                     seen[ni][nj] = true;
                 }
             }

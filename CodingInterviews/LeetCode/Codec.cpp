@@ -7,14 +7,14 @@ class Codec {
             return "";
         string res;
         queue<TreeNode *> q;
-        q.emplace(root);
+        q.push(root);
         while (!q.empty()) {
             auto t = q.front();
             q.pop();
             if (t) {
                 res += to_string(t->val) + ",";
-                q.emplace(t->left);
-                q.emplace(t->right);
+                q.push(t->left);
+                q.push(t->right);
             } else
                 res += "null,";
         }
@@ -33,9 +33,9 @@ class Codec {
                 break;
             string sub = data.substr(start, end - start);
             if (sub == "null")
-                nodes.emplace_back(nullptr);
+                nodes.push_back(nullptr);
             else
-                nodes.emplace_back(new TreeNode(stoi(sub)));
+                nodes.push_back(new TreeNode(stoi(sub)));
             start = end + 1;
         }
         // build

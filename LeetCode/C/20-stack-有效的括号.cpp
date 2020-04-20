@@ -12,11 +12,11 @@ class Solution {
         stack<char> st;
         for (char c : s) {
             if (c == '(')
-                st.emplace(')');
+                st.push(')');
             else if (c == '[')
-                st.emplace(']');
+                st.push(']');
             else if (c == '{')
-                st.emplace('}');
+                st.push('}');
             else if (c == ')' || c == ']' || c == '}') {
                 if (!st.empty() && c == st.top())
                     st.pop();
