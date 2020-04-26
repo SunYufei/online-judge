@@ -2,56 +2,88 @@
 
 ## 第一周
 
-1. [最大子列和问题](https://pintia.cn/problem-sets/15/problems/709) / [Code](../../PTA/DataStructure/C/7-1.c)
-2. [Maximum Subsequence Sum](https://pintia.cn/problem-sets/16/problems/663)
-3. [二分查找](https://pintia.cn/problem-sets/15/problems/923) / [Code](../../PTA/DataStructure/C/6-10.c)
+|题目|代码|
+|:--|:--:|
+|[最大子列和问题](https://pintia.cn/problem-sets/15/problems/709)|[C](../../PTA/DataStructure/7-1.c) / [Python](../../PTA/DataStructure/7-1.py)|
+|[Maximum Subsequence Sum](https://pintia.cn/problem-sets/16/problems/663)||
+|[二分查找](https://pintia.cn/problem-sets/15/problems/923)|[C](../../PTA/DataStructure/6-10.c)|
 
-## 第二周
+## 第二周 - 线性表、栈和队列
 
-1. [两个有序链表序列的合并](https://pintia.cn/problem-sets/15/problems/2992) / [Code](../../PTA/DataStructure/C/7-51.c)
-2. [一元多项式乘法与加法运算](https://pintia.cn/problem-sets/15/problems/710) / [Code](../../PTA/DataStructure/C/7-2.c)
-3. [Reversing Linked List](https://pintia.cn/problem-sets/16/problems/664)
-4. [Pop Sequence](https://pintia.cn/problem-sets/16/problems/665)
+|题目|代码|
+|:--|:--:|
+|[两个有序链表序列的合并](https://pintia.cn/problem-sets/15/problems/2992)|[C](../../PTA/DataStructure/7-51.c) / [Python](../../PTA/DataStructure/7-51.py)|
+|[一元多项式乘法与加法运算](https://pintia.cn/problem-sets/15/problems/710)|[C (array)](../../PTA/DataStructure/7-2-array.c)|
+|[Reversing Linked List](https://pintia.cn/problem-sets/16/problems/664)||
+|[Pop Sequence](https://pintia.cn/problem-sets/16/problems/665)||
 
-## 第三周
+## 第三周 - 树：存储与遍历
 
-1. [树的同构](7-3.c)
-2. [List Leaves](https://pintia.cn/problem-sets/16/problems/666)
-3. [Tree Traversals Again](https://pintia.cn/problem-sets/16/problems/667)
+|题目|代码|
+|:--|:--:|
+|[树的同构](https://pintia.cn/problem-sets/15/problems/711)||
+|[List Leaves](https://pintia.cn/problem-sets/16/problems/666)||
+|[Tree Traversals Again](https://pintia.cn/problem-sets/16/problems/667)||
 
-## 第四周
+## 第四周 - 树：二叉搜索树、平衡二叉树
 
-1. [是否同一棵二叉搜索树](https://pintia.cn/problem-sets/15/problems/712) / [Code](../../PTA/DataStructure/C/7-4.c)
-2. [Root of AVL Tree](https://pintia.cn/problem-sets/16/problems/668)
-3. [Complete Binary Search Tree](https://pintia.cn/problem-sets/16/problems/669)
-4. [二叉搜索树的操作集](https://pintia.cn/problem-sets/15/problems/927) / [Code](../../PTA/DataStructure/C/6-12.c)
+|题目|代码|
+|:--|:--:|
+|[是否同一棵二叉搜索树](https://pintia.cn/problem-sets/15/problems/712)|[C (array)](../../PTA/DataStructure/7-4.c)|
+|[Root of AVL Tree](https://pintia.cn/problem-sets/16/problems/668)||
+|[Complete Binary Search Tree](https://pintia.cn/problem-sets/16/problems/669)||
+|[二叉搜索树的操作集](https://pintia.cn/problem-sets/15/problems/927)||
 
-## 第五周
+## 第五周 - 树：堆、哈夫曼树、并查集
 
-1. [堆中的路径](4.3.c)
-2. [File Transfer](https://pintia.cn/problem-sets/16/problems/670)
-3. [Huffman Codes](https://pintia.cn/problem-sets/16/problems/671)
+|题目|代码|
+|:--|:--:|
+|[堆中的路径](https://pintia.cn/problem-sets/15/problems/713)||
+|[File Transfer](https://pintia.cn/problem-sets/16/problems/670)||
+|[Huffman Codes](https://pintia.cn/problem-sets/16/problems/671)||
 
-## 第六周
+## 第六周 - 图：存储与遍历
 
-1. [列出连通集](https://pintia.cn/problem-sets/15/problems/714) / [Code](../../PTA/DataStructure/C/7-6.cpp)
-2. [Saving James Bond - Easy Version](https://pintia.cn/problem-sets/16/problems/672)
-3. [六度空间](6.1.c)
+|题目|代码|
+|:--|:--:|
+|[列出连通集](https://pintia.cn/problem-sets/15/problems/714)|[C++](../../PTA/DataStructure/7-6.cpp)|
+|[Saving James Bond - Easy Version](https://pintia.cn/problem-sets/16/problems/672)||
+|[六度空间](https://pintia.cn/problem-sets/15/problems/715)||
+|[Forwards on Weibo](https://pintia.cn/problem-sets/994805342720868352/problems/994805392092020736)||
 
-## 第七周
+## 第七周 - 图：最短路径问题
 
-1. [哈利·波特的考试](7-8.c)
-2. [Saving James Bond - Hard Version](https://pintia.cn/problem-sets/16/problems/673)
-3. [旅游规划](7-9.c)
+|题目|代码|
+|:--|:--:|
+|[哈利·波特的考试](https://pintia.cn/problem-sets/15/problems/716)||
+|[Saving James Bond - Hard Version](https://pintia.cn/problem-sets/16/problems/673)||
+|[旅游规划](https://pintia.cn/problem-sets/15/problems/717)||
+|[Emergency](https://pintia.cn/problem-sets/994805342720868352/problems/994805523835109376)||
+|[Gas Station](https://pintia.cn/problem-sets/994805342720868352/problems/994805396953219072)||
+|[All Roads Lead to Rome](https://pintia.cn/problem-sets/994805342720868352/problems/994805379664297984)||
+|[Subway Map](https://pintia.cn/problem-sets/994805342720868352/problems/994805347523346432)||
+|[Public Bike Management](https://pintia.cn/problem-sets/994805342720868352/problems/994805489282433024)||
 
-## 第八周
+## 第八周 - 图：最小生成树、拓扑排序
 
-1. [公路村村通](7-10.c)
-2. [How Long Does It Take](https://pintia.cn/problem-sets/16/problems/674)
-3. [关键活动](7-11.c)
+|题目|代码|
+|:--|:--:|
+|[公路村村通](https://pintia.cn/problem-sets/15/problems/718)||
+|[How Long Does It Take](https://pintia.cn/problem-sets/16/problems/674)||
+|[关键活动](https://pintia.cn/problem-sets/15/problems/719)||
 
-## 第九周
+## 第九周 - 排序 01
 
-1. [排序](https://pintia.cn/problem-sets/15/problems/720) / [Code](../../PTA/DataStructure/C/7-12.cpp)
-2. [Insert or Merge](https://pintia.cn/problem-sets/16/problems/675)
-3. [Insertion or Heap Sort](https://pintia.cn/problem-sets/16/problems/676)
+|题目|代码|
+|:--|:--:|
+|[排序](https://pintia.cn/problem-sets/15/problems/720)|[C bubble sort](../../PTA/DataStructure/7-12-c-bubble-sort.c) TLE <br> [C quick sort](../../PTA/DataStructure/7-12-c-quick-sort.c) 7188ms(?) <br>[C merge sort](../../PTA/DataStructure/7-12-c-merge-sort.c) 58ms <br> [C qsort()](../../PTA/DataStructure/7-12-c-qsort.c) 53ms <br> [C++ sort()](../../PTA/DataStructure/7-12-cpp-sort.cpp) 53ms <br> [Python sort()](../../PTA/DataStructure/7-12.py) 153ms|
+|[Insert or Merge](https://pintia.cn/problem-sets/16/problems/675)||
+|[Insertion or Heap Sort](https://pintia.cn/problem-sets/16/problems/676)||
+
+## 第十周 - 排序 02
+
+|题目|代码|
+|:--|:--:|
+|[统计工龄](https://pintia.cn/problem-sets/15/problems/721)|[C](../../PTA/DataStructure/7-13.c) / [C++ map](../../PTA/DataStructure/7-13.cpp)|
+|[PAT Judge](https://pintia.cn/problem-sets/16/problems/677)||
+|[Sort with Swap(0,i)](https://pintia.cn/problem-sets/16/problems/678)||

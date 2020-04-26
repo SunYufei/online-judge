@@ -15,13 +15,13 @@ class Solution {
                 pq.push(list);
                 list = list->next;
             }
-        ListNode head(-1), *p = &head, *t;
+        ListNode head(-1), *p = &head;
         while (!pq.empty()) {
-            t = pq.top();
-            pq.pop();
+            auto t = pq.top();
             t->next = p->next;
             p->next = t;
             p = p->next;
+            pq.pop();
         }
         return head.next;
     }
