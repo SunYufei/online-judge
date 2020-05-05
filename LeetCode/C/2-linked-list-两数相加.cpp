@@ -26,7 +26,7 @@ class Solution {
                 p1 = p1->next;
             if (p2)
                 p2 = p2->next;
-            carry = a + b + carry;
+            carry += a + b;
             p->next = new ListNode(carry % 10);
             carry /= 10;
             p = p->next;
