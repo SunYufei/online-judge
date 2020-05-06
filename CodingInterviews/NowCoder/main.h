@@ -5,8 +5,14 @@ using namespace std;
 
 struct ListNode {
     int val;
-    struct ListNode *next;
+    ListNode *next;
     ListNode(int x) : val(x), next(nullptr) {}
+};
+
+struct RandomListNode {
+    int label;
+    RandomListNode *next, *random;
+    RandomListNode(int x) : label(x), next(nullptr), random(nullptr) {}
 };
 
 struct TreeNode {

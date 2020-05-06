@@ -5,8 +5,14 @@ using namespace std;
 
 struct ListNode {
     int val;
-    struct ListNode *next;
+    ListNode *next;
     ListNode(int x) : val(x), next(nullptr) {}
+};
+
+struct Node {
+    int val;
+    Node *next, *random;
+    Node(int _val) : val(_val), next(nullptr), random(nullptr) {}
 };
 
 struct TreeNode {
@@ -17,9 +23,7 @@ struct TreeNode {
 
 struct TreeLinkNode {
     int val;
-    struct TreeLinkNode *left;
-    struct TreeLinkNode *right;
-    struct TreeLinkNode *next;
+    TreeLinkNode *left, *right, *next;
     TreeLinkNode(int x)
         : val(x), left(nullptr), right(nullptr), next(nullptr) {}
 };
