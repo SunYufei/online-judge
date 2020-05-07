@@ -1,4 +1,4 @@
-# Online-Judge
+# OI
 
 - CCF 中国计算机学会
   - [CSP](CCF/CSP) 计算机软件能力认证

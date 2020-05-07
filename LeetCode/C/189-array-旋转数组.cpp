@@ -16,6 +16,7 @@ class Solution {
         reverse(nums, k, n);
     }
 
+  private:
     void reverse(vector<int> &nums, int left, int right) {
         while (left < right)
             swap(nums[left++], nums[--right]);
