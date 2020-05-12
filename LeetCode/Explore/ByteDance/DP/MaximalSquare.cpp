@@ -1,15 +1,13 @@
-#include <bits/stdc++.h>
+#include <vector>
 using namespace std;
 
 class Solution {
-  public:
-    int maximalSquare(vector<vector<char>> &matrix) {
-        int m = matrix.size();
-        if (m == 0)
+public:
+    int maximalSquare(vector <vector<char>> &matrix) {
+        if (matrix.empty())
             return 0;
-        int n = matrix[0].size();
-        int dp[m + 1][n + 1];
-        memset(dp, 0, sizeof(dp));
+        int m = matrix.size(), n = matrix[0].size();
+        vector <vector<int>> dp(m + 1, vector<int>(n + 1, 0));
         int res = 0;
         for (int i = 1; i <= m; i++)
             for (int j = 1; j <= n; j++)
