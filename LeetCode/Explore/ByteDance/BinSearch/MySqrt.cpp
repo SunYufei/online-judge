@@ -17,5 +17,3 @@ class Solution {
         return r;
     }
 };
-
-int main() {}
