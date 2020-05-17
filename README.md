@@ -11,7 +11,7 @@
   - [China Unicom](Interviews/China%20Unicom) 中国联通
   - [HUAWEI](Interviews/HUAWEI) 华为
   - [Inspur](Interviews/Inspur) 浪潮
-- [LanQiao](LanQiao) 蓝桥杯（账号忘记，不再更新）
+- [LanQiao](LanQiao) 蓝桥杯
 - LeetCode 力扣中国
   - 算法 [C++](LeetCode/C) / [Java](LeetCode/Java) / [Python](LeetCode/Python)
   - [竞赛](LeetCode/Contest)
