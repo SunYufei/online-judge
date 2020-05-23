@@ -1,17 +1,15 @@
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <iostream>
 using namespace std;
 
 int main() {
-    int c;
-    cin >> c;
-
-    int n, m, ans, a[20];
-    int i, j;
+    int c, n, m, ans, a[20], i, j;
+    scanf("%d", &c);
 
     while (c--) {
-        cin >> n >> m;
-        for (i = 0; i < n; i++)
-            cin >> a[i];
+        scanf("%d%d", &n, &m);
+        for (i = 0; i < n; ++i)
+            scanf("%d", &a[i]);
         sort(a, a + n);
         ans = 1;
         int p = 0, q = n - 1;
@@ -22,11 +20,11 @@ int main() {
                 m -= 2;
             } else {
                 ans *= a[q];
-                q--;
-                m--;
+                --q;
+                --m;
             }
         }
-        cout << ans << endl;
+        printf("%d\n", ans);
     }
     return 0;
 }
