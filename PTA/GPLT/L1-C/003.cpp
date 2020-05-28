@@ -8,7 +8,7 @@ int main() {
 
     cin >> n;
     for (i = 0; i < n.length(); i++)
-        a[n[i] - '0']++;
+        ++a[n[i] - '0'];
 
     for (i = 0; i < 10; i++)
         if (a[i] != 0)
