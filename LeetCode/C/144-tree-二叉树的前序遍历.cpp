@@ -6,6 +6,15 @@
 #include "main.h"
 
 // @lc code=start
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
 class Solution {
   public:
     vector<int> preorderTraversal(TreeNode *root) {
@@ -15,10 +24,8 @@ class Solution {
             if (node == nullptr)
                 return;
             res.push_back(node->val);
-            if (node->left)
-                pre(node->left);
-            if (node->right)
-                pre(node->right);
+            pre(node->left);
+            pre(node->right);
         };
 
         pre(root);

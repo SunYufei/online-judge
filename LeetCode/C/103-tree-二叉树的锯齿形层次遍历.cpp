@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=102 lang=cpp
+ * @lc app=leetcode.cn id=103 lang=cpp
  *
- * [102] 二叉树的层序遍历
+ * [103] 二叉树的锯齿形层次遍历
  */
 #include "main.h"
 // @lc code=start
@@ -16,11 +16,14 @@
  */
 class Solution {
   public:
-    vector<vector<int>> levelOrder(TreeNode *root) {
+    vector<vector<int>> zigzagLevelOrder(TreeNode *root) {
         if (root == nullptr)
             return {};
         vector<vector<int>> res;
         dfs(root, 0, res);
+        for (int i = 0; i < res.size(); i++)
+            if (i % 2 == 1)
+                reverse(res[i].begin(), res[i].end());
         return res;
     }
 

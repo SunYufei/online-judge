@@ -1,10 +1,9 @@
 /*
- * @lc app=leetcode.cn id=199 lang=cpp
+ * @lc app=leetcode.cn id=107 lang=cpp
  *
- * [199] 二叉树的右视图
+ * [107] 二叉树的层次遍历 II
  */
 #include "main.h"
-
 // @lc code=start
 /**
  * Definition for a binary tree node.
@@ -17,25 +16,27 @@
  */
 class Solution {
   public:
-    vector<int> rightSideView(TreeNode *root) {
+    vector<vector<int>> levelOrderBottom(TreeNode *root) {
         if (root == nullptr)
             return {};
-        vector<int> res;
+        vector<vector<int>> res;
         queue<TreeNode *> q;
         q.push(root);
         while (!q.empty()) {
+            vector<int> level;
             int size = q.size();
             while (size--) {
                 auto t = q.front();
                 q.pop();
-                if (size == 0)
-                    res.push_back(t->val);
+                level.push_back(t->val);
                 if (t->left)
                     q.push(t->left);
                 if (t->right)
                     q.push(t->right);
             }
+            res.push_back(level);
         }
+        reverse(res.begin(), res.end());
         return res;
     }
 };

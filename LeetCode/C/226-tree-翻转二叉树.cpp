@@ -4,6 +4,7 @@
  * [226] 翻转二叉树
  */
 #include "main.h"
+
 // @lc code=start
 /**
  * Definition for a binary tree node.
@@ -17,13 +18,16 @@
 class Solution {
   public:
     TreeNode *invertTree(TreeNode *root) {
-        if (root == nullptr)
-            return nullptr;
-        TreeNode *left = invertTree(root->left);
-        TreeNode *right = invertTree(root->right);
-        root->left = right;
-        root->right = left;
+        invert(root);
         return root;
+    }
+
+    void invert(TreeNode *root) {
+        if (root == nullptr)
+            return;
+        swap(root->left, root->right);
+        invert(root->left);
+        invert(root->right);
     }
 };
 // @lc code=end

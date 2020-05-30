@@ -4,6 +4,7 @@
  * [145] 二叉树的后序遍历
  */
 #include "main.h"
+
 // @lc code=start
 /**
  * Definition for a binary tree node.
@@ -18,15 +19,15 @@ class Solution {
   public:
     vector<int> postorderTraversal(TreeNode *root) {
         vector<int> res;
+
         function<void(TreeNode *)> post = [&](TreeNode *node) {
             if (node == nullptr)
                 return;
-            if (node->left)
-                post(node->left);
-            if (node->right)
-                post(node->right);
+            post(node->left);
+            post(node->right);
             res.push_back(node->val);
         };
+
         post(root);
         return res;
     }

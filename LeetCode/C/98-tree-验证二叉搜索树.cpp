@@ -16,19 +16,15 @@
  */
 class Solution {
   public:
-    bool isValidBST(TreeNode *root) {
-        return recursion(root, LONG_MIN, LONG_MAX);
-    }
+    bool isValidBST(TreeNode *root) { return check(root, LONG_MIN, LONG_MAX); }
 
-  private:
-    bool recursion(TreeNode *root, long low, long high) {
+    bool check(TreeNode *root, long low, long high) {
         if (root == nullptr)
             return true;
-        long val = root->val;
-        if (val <= low || val >= high)
+        if (root->val <= low || root->val >= high)
             return false;
-        return recursion(root->left, low, val) &&
-               recursion(root->right, val, high);
+        return check(root->left, low, root->val) &&
+               check(root->right, root->val, high);
     }
 };
 // @lc code=end
