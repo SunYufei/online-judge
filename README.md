@@ -3,10 +3,7 @@
 - CCF 中国计算机学会
   - [CSP](CCF/CSP) 计算机软件能力认证
   - [CCSP](CCF/CCSP) 计算机系统与程序设计竞赛
-- Coding Interviews 剑指 Offer
-  - [NowCoder](CodingInterviews/NowCoder) 牛客网
-  - [LeetCode](CodingInterviews/LeetCode) 力扣
-- [ECMU](ECMU) 华东师范大学 OJ
+- [ECNU](ECNU) 华东师范大学 OJ
 - [HDOJ](HDOJ) 杭电 OJ
 - Interviews 面试题
   - [China Unicom](Interviews/China%20Unicom) 中国联通
@@ -14,15 +11,26 @@
   - [Inspur](Interviews/Inspur) 浪潮
 - [LanQiao](LanQiao) 蓝桥杯
 - LeetCode 力扣中国
-  - 算法 [C++](LeetCode/C) / [Java](LeetCode/Java) / [Python](LeetCode/Python)
-  - [竞赛](LeetCode/Contest)
+  - 基础题库 
+    - [C++](LeetCode/C)  
+    - [Java](LeetCode/Java)
+    - [JavaScript](LeetCode/JavaScript) 
+    - [Python](LeetCode/Python)
+  - [剑指 Offer](LeetCode/CodingInterviews)
+  - 竞赛
+    - 周赛
+    - [2020 力扣杯 春季全国编程大赛-个人赛](LeetCode/Contest/2020Spring/Single)
   - 探索
     - [ByteDance](LeetCode/Explore/ByteDance)
-    - [LinkedList](LeetCode/Explore/LinkedList)
+    - [LinkedList](LeetCode/Explore/LinkedList) 链表
     - [Resursion](LeetCode/Explore/Recursion) 递归 I
     - [Tencent](LeetCode/Explore/Tencent)
     - [TopInterview](LeetCode/Explore/TopInterview)
 - [MIOJ](MIOJ) 小米 OJ
+- NowCoder 牛客网
+  - [CodingInterviews](NowCoder/CodingInterviews) 剑指 Offer
+  - 竞赛
+    - [“科林明伦杯”哈尔滨理工大学第十届程序设计竞赛](NowCoder/Contest/5758)
 - PTA
   - [基础编程题目集](PTA/Basic)
   - [数据结构与算法题目集（中文）](PTA/DataStructure)
