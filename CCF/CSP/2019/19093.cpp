@@ -7,7 +7,6 @@ struct RGB {
     int r;
     int g;
     int b;
-    RGB(){};
     RGB(int _r, int _g, int _b) { r = _r, g = _g, b = _b; }
 } xs[1080][1920];
 

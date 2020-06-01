@@ -3,12 +3,12 @@
 using namespace std;
 
 int main() {
-    int c, n, m, ans, a[20], i, j;
+    int c, n, m, ans, a[20];
     scanf("%d", &c);
 
     while (c--) {
         scanf("%d%d", &n, &m);
-        for (i = 0; i < n; ++i)
+        for (int i = 0; i < n; ++i)
             scanf("%d", &a[i]);
         sort(a, a + n);
         ans = 1;

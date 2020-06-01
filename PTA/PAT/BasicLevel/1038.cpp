@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    int N, K, i, t;
+    int N, K, t;
     int a[101] = {0};
     vector<int> v;
     vector<int>::iterator it;

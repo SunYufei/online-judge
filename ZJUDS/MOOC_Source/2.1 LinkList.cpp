@@ -51,7 +51,7 @@ bool Insert(List L, ElementType X, Position P) {
  */
 bool Delete(List L, Position P) {
     /* 这里默认L有头结点 */
-    Position tmp, pre;
+    Position pre;
 
     /* 查找P的前一个结点 */
     for (pre = L; pre && pre->Next != P; pre = pre->Next)

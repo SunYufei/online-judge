@@ -21,7 +21,7 @@ class Solution {
                     q.push(t->right);
                 q.pop();
             }
-            if (level & 1 == 1)
+            if ((level & 1) == 1)
                 reverse(l.begin(), l.end());
             res.push_back(l);
             ++level;
