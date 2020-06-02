@@ -21,11 +21,12 @@
     - 周赛
     - [2020 力扣杯 春季全国编程大赛-个人赛](LeetCode/Contest/2020Spring/Single)
   - 探索
-    - [ByteDance](LeetCode/Explore/ByteDance)
+    - [ByteDance](LeetCode/Explore/ByteDance) 字节跳动
     - [LinkedList](LeetCode/Explore/LinkedList) 链表
+    - [Microsoft](LeetCode/Explore/Microsoft) 微软
     - [Resursion](LeetCode/Explore/Recursion) 递归 I
-    - [Tencent](LeetCode/Explore/Tencent)
-    - [TopInterview](LeetCode/Explore/TopInterview)
+    - [Tencent](LeetCode/Explore/Tencent) 腾讯
+    - [TopInterview](LeetCode/Explore/TopInterview) 算法面试题汇总
 - [MIOJ](MIOJ) 小米 OJ
 - NowCoder 牛客网
   - [CodingInterviews](NowCoder/CodingInterviews) 剑指 Offer

@@ -61,7 +61,7 @@ int main() {
 }
 
 void getTimeRange(int type, char *str) {
-    int start, finish;
+    int start = 0, finish = 0;
     //处理星号表示的时间值范围
     if (str[0] == '*') {
         if (type == 0)
