@@ -1,18 +1,17 @@
-from collections import defaultdict
-
 n = int(input())
+
 s = list(map(int, input().split()))
 
-ans = defaultdict(int)
+c = [0] * 10010
+
+res, count = 0, 0
 
 for i in s:
-    ans[i] += 1
+    c[i] += 1
+    if c[i] > count:
+        res = i
+        count = c[i]
+    elif c[i] == count:
+        res = min(res, i)
 
-k = 0
-v = 0
-keys = sorted(ans.keys())
-for key in keys:
-    if ans[key] > v:
-        v = ans[key]
-        k = key
-print(k)
+print(res)
