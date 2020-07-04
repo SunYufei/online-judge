@@ -1,7 +1,7 @@
 package coding
 
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	var res = &ListNode{}
+func mergeTwoListsRecurrence(l1 *ListNode, l2 *ListNode) *ListNode {
+	var res = new(ListNode)
 	var p = res
 	for l1 != nil && l2 != nil {
 		if l1.Val < l2.Val {
@@ -21,7 +21,7 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	return res.Next
 }
 
-func mergeTwoListsRecursion(l1, l2 *ListNode) *ListNode {
+func mergeTwoLists(l1, l2 *ListNode) *ListNode {
 	if l1 == nil {
 		return l2
 	}
@@ -36,6 +36,6 @@ func mergeTwoListsRecursion(l1, l2 *ListNode) *ListNode {
 		res = l2
 		l2 = l2.Next
 	}
-	res.Next = mergeTwoListsRecursion(l1, l2)
+	res.Next = mergeTwoLists(l1, l2)
 	return res
 }

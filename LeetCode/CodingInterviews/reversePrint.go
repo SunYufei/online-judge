@@ -1,6 +1,6 @@
 package coding
 
-func reversePrintRecursion(head *ListNode) []int {
+func reversePrint(head *ListNode) []int {
 	if head == nil {
 		return make([]int, 0)
 	}
@@ -9,7 +9,7 @@ func reversePrintRecursion(head *ListNode) []int {
 	return res
 }
 
-func reversePrint(head *ListNode) []int {
+func reversePrintRecurrence(head *ListNode) []int {
 	var res = make([]int, 0)
 	var p = head
 	for p != nil {

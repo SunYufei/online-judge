@@ -11,12 +11,10 @@
   - [Inspur](Interviews/Inspur) 浪潮
 - [LanQiao](LanQiao) 蓝桥杯
 - LeetCode 力扣中国
-  - 基础题库 
-    - [C++](LeetCode/C)  
-    - [Java](LeetCode/Java)
-    - [JavaScript](LeetCode/JavaScript) 
-    - [Python](LeetCode/Python)
-  - [剑指 Offer](LeetCode/CodingInterviews)
+  - 基础题库
+    - [C++](LeetCode/C) /  [Go](LeetCode/Go) / [Java](LeetCode/Java) / [JavaScript](LeetCode/JavaScript)
+  - [Coding Interviews](LeetCode/CodingInterviews) 剑指 Offer
+    - C++ / Go / Java
   - 竞赛
     - 周赛
     - [2020 力扣杯 春季全国编程大赛-个人赛](LeetCode/Contest/2020Spring/Single)
@@ -29,9 +27,8 @@
     - [TopInterview](LeetCode/Explore/TopInterview) 算法面试题汇总
 - [MIOJ](MIOJ) 小米 OJ
 - NowCoder 牛客网
-  - [CodingInterviews](NowCoder/CodingInterviews) 剑指 Offer
-  - 竞赛
-    - [“科林明伦杯”哈尔滨理工大学第十届程序设计竞赛](NowCoder/Contest/5758)
+  - [Coding Interviews](NowCoder/CodingInterviews) 剑指 Offer
+  - [“科林明伦杯”哈尔滨理工大学第十届程序设计竞赛](NowCoder/Contest/5758)
 - PTA
   - [基础编程题目集](PTA/Basic)
   - [数据结构与算法题目集（中文）](PTA/DataStructure)
