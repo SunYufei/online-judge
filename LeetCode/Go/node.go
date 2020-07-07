@@ -6,3 +6,9 @@ type TreeNode struct {
 	Left  *TreeNode
 	Right *TreeNode
 }
+
+// Node definition for a Node
+type Node struct {
+	Val      int
+	Children []*Node
+}

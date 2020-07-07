@@ -16,17 +16,18 @@ package leetcode
  */
 func postorderTraversal(root *TreeNode) []int {
 	var res = make([]int, 0)
-	postorder(root, &res)
-	return res
-}
 
-func postorder(root *TreeNode, res *[]int) {
-	if root == nil {
-		return
+	var post func(*TreeNode)
+	post = func(root *TreeNode) {
+		if root == nil {
+			return
+		}
+		post(root.Left)
+		post(root.Right)
+		res = append(res, root.Val)
 	}
-	postorder(root.Left, res)
-	postorder(root.Right, res)
-	*res = append(*res, root.Val)
+
+	return res
 }
 
 // @lc code=end

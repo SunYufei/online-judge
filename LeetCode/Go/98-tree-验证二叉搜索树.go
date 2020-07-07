@@ -19,17 +19,18 @@ package leetcode
 import "math"
 
 func isValidBST(root *TreeNode) bool {
-	return check(root, math.MinInt64, math.MaxInt64)
-}
+	var check func(*TreeNode, int, int) bool
+	check = func(node *TreeNode, low int, high int) bool {
+		if root == nil {
+			return true
+		}
+		if root.Val <= low || root.Val >= high {
+			return false
+		}
+		return check(root.Left, low, root.Val) && check(root.Right, root.Val, high)
+	}
 
-func check(root *TreeNode, low, high int) bool {
-	if root == nil {
-		return true
-	}
-	if root.Val <= low || root.Val >= high {
-		return false
-	}
-	return check(root.Left, low, root.Val) && check(root.Right, root.Val, high)
+	return check(root, math.MinInt64, math.MaxInt64)
 }
 
 // @lc code=end
