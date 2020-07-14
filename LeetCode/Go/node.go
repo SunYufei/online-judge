@@ -1,5 +1,11 @@
 package leetcode
 
+// ListNode defination for singly-linked list
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
 // TreeNode tree node of bin tree
 type TreeNode struct {
 	Val   int
