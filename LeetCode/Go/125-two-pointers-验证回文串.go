@@ -3,7 +3,7 @@
  *
  * [125] 验证回文串
  */
-package leetcode
+// package leetcode
 
 // @lc code=start
 func isPalindrome(s string) bool {
