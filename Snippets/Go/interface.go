@@ -1,5 +1,3 @@
-package main
-
 type Phone interface {
 	call()
 }
@@ -18,7 +16,7 @@ func (ip iPhone) call() {
 	println("iPhone call()")
 }
 
-func main() {
+func test() {
 	var phone Phone
 	phone = new(NokiaPhone)
 	phone.call()

@@ -1,4 +1,4 @@
-package main
+// package main
 
 const URL = "http://m.5ikfc.com/"
 
