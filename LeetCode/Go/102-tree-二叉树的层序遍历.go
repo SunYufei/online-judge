@@ -3,17 +3,9 @@
  *
  * [102] 二叉树的层序遍历
  */
-package leetcode
+// package leetcode
 
 // @lc code=start
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
 func levelOrder(root *TreeNode) [][]int {
 	var res = make([][]int, 0)
 

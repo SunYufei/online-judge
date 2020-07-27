@@ -4,18 +4,9 @@
  * [98] 验证二叉搜索树
  */
 
-package leetcode
+// package leetcode
 
 // @lc code=start
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- **/
-
 import "math"
 
 func isValidBST(root *TreeNode) bool {

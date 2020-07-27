@@ -4,17 +4,10 @@
  * [590] N叉树的后序遍历
  */
 package leetcode
-// @lc code=start
-/**
- * Definition for a Node.
- * type Node struct {
- *     Val int
- *     Children []*Node
- * }
- */
 
+// @lc code=start
 func postorder(root *Node) []int {
-	var res = []int{}
+	res := []int{}
 	
 	var post func(*Node)
 	post = func(root *Node){

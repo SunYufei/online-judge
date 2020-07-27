@@ -3,18 +3,10 @@
  *
  * [589] N叉树的前序遍历
  */
-package leetcode
-// @lc code=start
-/**
- * Definition for a Node.
- * type Node struct {
- *     Val int
- *     Children []*Node
- * }
- */
 
+// @lc code=start
 func preorder(root *Node) []int {
-	var res = []int{}
+	res := []int{}
 
 	var pre func(*Node)
 	pre = func (root *Node)  {
@@ -28,7 +20,7 @@ func preorder(root *Node) []int {
 	}
 
 	pre(root)
-	return res	
+	return res
 }
 // @lc code=end
 

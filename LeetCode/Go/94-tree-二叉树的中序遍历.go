@@ -3,19 +3,11 @@
  *
  * [94] 二叉树的中序遍历
  */
-package leetcode
+// package leetcode
 
 // @lc code=start
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
 func inorderTraversal(root *TreeNode) []int {
-	var res = []int{}
+	res := []int{}
 
 	var inorder func(*TreeNode)
 	inorder = func(root *TreeNode) {
