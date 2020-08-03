@@ -7,19 +7,19 @@
 
 // @lc code=start
 type MyCircularDeque struct {
-	Q        []int
-	Front    int
-	Rear     int
-	Size     int
-	Capacity int
+	queue    []int
+	front    int
+	rear     int
+	size     int
+	capacity int
 }
 
 /** Initialize your data structure here. Set the size of the deque to be k. */
 func Constructor(k int) MyCircularDeque {
-	deque := MyCircularDeque{}
-	deque.Q = make([]int, k)
-	deque.Capacity = k
-	return deque
+	return MyCircularDeque{
+		queue:    make([]int, k),
+		capacity: k,
+	}
 }
 
 /** Adds an item at the front of Deque. Return true if the operation is successful. */
@@ -27,9 +27,9 @@ func (this *MyCircularDeque) InsertFront(value int) bool {
 	if this.IsFull() {
 		return false
 	} else {
-		this.Front = (this.Front - 1 + this.Capacity) % this.Capacity
-		this.Q[this.Front] = value
-		this.Size++
+		this.front = (this.front - 1 + this.capacity) % this.capacity
+		this.queue[this.front] = value
+		this.size++
 		return true
 	}
 }
@@ -39,9 +39,9 @@ func (this *MyCircularDeque) InsertLast(value int) bool {
 	if this.IsFull() {
 		return false
 	} else {
-		this.Q[this.Rear] = value
-		this.Rear = (this.Rear + 1) % this.Capacity
-		this.Size++
+		this.queue[this.rear] = value
+		this.rear = (this.rear + 1) % this.capacity
+		this.size++
 		return true
 	}
 }
@@ -51,8 +51,8 @@ func (this *MyCircularDeque) DeleteFront() bool {
 	if this.IsEmpty() {
 		return false
 	} else {
-		this.Front = (this.Front + 1) % this.Capacity
-		this.Size--
+		this.front = (this.front + 1) % this.capacity
+		this.size--
 		return true
 	}
 }
@@ -62,8 +62,8 @@ func (this *MyCircularDeque) DeleteLast() bool {
 	if this.IsEmpty() {
 		return false
 	} else {
-		this.Rear = (this.Rear - 1 + this.Capacity) % this.Capacity
-		this.Size--
+		this.rear = (this.rear - 1 + this.capacity) % this.capacity
+		this.size--
 		return true
 	}
 }
@@ -73,7 +73,7 @@ func (this *MyCircularDeque) GetFront() int {
 	if this.IsEmpty() {
 		return -1
 	} else {
-		return this.Q[this.Front]
+		return this.queue[this.front]
 	}
 }
 
@@ -82,18 +82,18 @@ func (this *MyCircularDeque) GetRear() int {
 	if this.IsEmpty() {
 		return -1
 	} else {
-		return this.Q[(this.Rear-1+this.Capacity)%this.Capacity]
+		return this.queue[(this.rear-1+this.capacity)%this.capacity]
 	}
 }
 
 /** Checks whether the circular deque is empty or not. */
 func (this *MyCircularDeque) IsEmpty() bool {
-	return this.Front == this.Rear && this.Size == 0
+	return this.front == this.rear && this.size == 0
 }
 
 /** Checks whether the circular deque is full or not. */
 func (this *MyCircularDeque) IsFull() bool {
-	return this.Front == this.Rear && this.Size == this.Capacity
+	return this.front == this.rear && this.size == this.capacity
 }
 
 /**
