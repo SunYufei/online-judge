@@ -3,7 +3,7 @@
  *
  * [200] 岛屿数量
  */
-package leetcode
+// package leetcode
 
 // @lc code=start
 func numIslands(grid [][]byte) int {

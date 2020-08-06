@@ -14,7 +14,7 @@ type MinStack struct {
 }
 
 /** initialize your data structure here. */
-func Constructor() MinStack {
+func ConstructorMinStack() MinStack {
 	stack := MinStack{}
 	stack.Min = math.MaxInt64
 	return stack
