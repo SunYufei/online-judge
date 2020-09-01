@@ -9,6 +9,7 @@
   - [China Unicom](Interviews/China%20Unicom) 中国联通
   - [HUAWEI](Interviews/HUAWEI) 华为
   - [Inspur](Interviews/Inspur) 浪潮
+  - [拼多多](Interviews/Pinduoduo)
 - [LanQiao](LanQiao) 蓝桥杯
 - LeetCode 力扣中国
   - 基础题库
