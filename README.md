@@ -10,6 +10,7 @@
   - [HUAWEI](Interviews/HUAWEI) 华为
   - [Inspur](Interviews/Inspur) 浪潮
   - [拼多多](Interviews/Pinduoduo)
+  - [ByteDance](Interviews/ByteDance) 字节跳动
 - [LanQiao](LanQiao) 蓝桥杯
 - LeetCode 力扣中国
   - 基础题库
