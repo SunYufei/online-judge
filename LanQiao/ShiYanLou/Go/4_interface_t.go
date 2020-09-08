@@ -8,12 +8,12 @@ type Human struct { // 结构体
 	phone string
 }
 
-//Human实现SayHi方法
+// Human实现SayHi方法
 func (h Human) SayHi() {
 	fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone)
 }
 
-//Human实现Sing方法
+// Human实现Sing方法
 func (h Human) Sing(lyrics string) {
 	fmt.Println("La la la la...", lyrics)
 }
@@ -30,13 +30,13 @@ type Employee struct {
 	money   float32
 }
 
-// Employee重载Human的SayHi方法
+// Employee 重载 Human 的 SayHi 方法
 func (e Employee) SayHi() {
 	fmt.Printf("Hi, I am %s, I work at %s. Call me on %s\n", e.name,
 		e.company, e.phone)
 }
 
-// Interface Men被Human,Student和Employee实现
+// Interface Men 被 Human, Student 和 Employee 实现
 // 因为这三个类型都实现了这两个方法
 type Men interface {
 	SayHi()

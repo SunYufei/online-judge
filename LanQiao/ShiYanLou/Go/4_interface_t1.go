@@ -13,7 +13,7 @@ type Person struct {
 	age  int
 }
 
-// 实现了fmt.Stringer接口
+// 实现了 fmt.Stringer 接口
 func (p Person) String() string {
 	return "(name: " + p.name + " - age: " + strconv.Itoa(p.age) + " years)"
 }
