@@ -5,12 +5,20 @@
   - [CCSP](CCF/CCSP) 计算机系统与程序设计竞赛
 - [ECNU](ECNU) 华东师范大学 OJ
 - [HDOJ](HDOJ) 杭电 OJ
-- Interviews 面试题
-  - [China Unicom](Interviews/China%20Unicom) 中国联通
-  - [HUAWEI](Interviews/HUAWEI) 华为
-  - [Inspur](Interviews/Inspur) 浪潮
+- Interviews 笔试题
+  - [58](Interviews/58)
+  - [字节跳动](Interviews/ByteDance)
+  - [中国联通](Interviews/China%20Unicom)
+  - [携程](Interviews/CTrip)
+  - [电信云](Interviews/CTYun)
+  - [HUAWEI](Interviews/HUAWEI)
+  - [浪潮](Interviews/Inspur)
+  - [京东](Interviews/JD)
+  - [美团](Interviews/Meituan)
   - [拼多多](Interviews/Pinduoduo)
-  - [ByteDance](Interviews/ByteDance) 字节跳动
+  - [小米](Interviews/Xiaomi)
+  - [猿辅导](Interviews/Yuanfudao)
+  - [中兴](Interviews/ZTE)
 - [LanQiao](LanQiao) 蓝桥杯
 - LeetCode 力扣中国
   - 基础题库
@@ -21,6 +29,7 @@
   - 竞赛
     - 周赛
     - [2020 力扣杯 春季全国编程大赛-个人赛](LeetCode/Contest/2020Spring/Single)
+    - [2020 力扣杯 秋季全国编程大赛-个人赛](LeetCode/Contest/2020Autumn)
   - 探索
     - [ByteDance](LeetCode/Explore/ByteDance) 字节跳动
     - [LinkedList](LeetCode/Explore/LinkedList) 链表
