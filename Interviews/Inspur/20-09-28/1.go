@@ -1,33 +1,30 @@
-package inspur
+package main
 
 import "fmt"
 
 func main() {
-	num, maxR := 1, 1
 	var n int
-	fmt.Scanf("%d", &n)
+	fmt.Scan(&n)
 
-	r := make([]int, n)
-	t := make([]int, n)
-
+	nums := make([]int, n)
 	for i := 0; i < n; i++ {
-		fmt.Scanf("%d", &r[i])
+		fmt.Scan(&nums[i])
 	}
 
+	maxCount := 1
 	for i := 0; i < n; i++ {
-		t[i] = r[i]
+		k := nums[i]
+		t := 1
 		for j := i + 1; j < n; j++ {
-			t[j] = r[j]
-			if t[i]+1 == t[j] {
-				num++
-				t[i] = t[j]
+			if k+1 == nums[j] {
+				t++
+				k = nums[j]
 			}
 		}
-		if num > maxR {
-			maxR = num
+		if t > maxCount {
+			maxCount = t
 		}
-		num = 1
 	}
 
-	fmt.Print(n - maxR)
+	fmt.Print(n - maxCount)
 }

@@ -1,8 +1,8 @@
-package inspur
+package main
 
 import "fmt"
 
-func main() {
+func main2() {
 	count := 1
 	var n int
 	fmt.Scan(&n)
