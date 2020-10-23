@@ -1,11 +1,11 @@
-package main
+package shiyanlou
 
 import (
 	"fmt"
 	"time"
 )
 
-func main() {
+func main5_1() {
 	c1 := make(chan string)
 	c2 := make(chan string)
 	go func() {

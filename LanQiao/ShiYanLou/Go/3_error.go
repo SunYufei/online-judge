@@ -1,4 +1,4 @@
-package main
+package shiyanlou
 
 import (
 	"errors"
@@ -27,7 +27,7 @@ func errorTest(arg int) (int, error) {
 }
 
 //相关的测试
-func main() {
+func main3_2() {
 	for _, i := range []int{-1, 4, 1000} {
 		if r, e := errorTest(i); e != nil {
 			fmt.Println("failed:", e)

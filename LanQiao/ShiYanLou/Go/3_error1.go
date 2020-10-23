@@ -1,4 +1,4 @@
-package main
+package shiyanlou
 
 import (
 	"errors"
@@ -21,6 +21,6 @@ func test1() (result int) {
 	return 10
 }
 
-func main() {
+func main3_3() {
 	fmt.Println(test1()) // 0
 }

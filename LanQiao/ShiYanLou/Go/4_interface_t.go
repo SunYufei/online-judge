@@ -1,4 +1,4 @@
-package main
+package shiyanlou
 
 import "fmt"
 
@@ -43,7 +43,7 @@ type Men interface {
 	Sing(lyrics string)
 }
 
-func main() {
+func main4_1() {
 	mike := Student{Human{"Mike", 25, "222-222-XXX"}, "MIT", 0.00}
 	paul := Student{Human{"Paul", 26, "111-222-XXX"}, "Harvard", 100}
 	sam := Employee{Human{"Sam", 36, "444-222-XXX"}, "Golang Inc.", 1000}

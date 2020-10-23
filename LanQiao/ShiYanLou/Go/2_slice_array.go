@@ -1,8 +1,8 @@
-package main
+package shiyanlou
 
 import "fmt"
 
-func main() {
+func main2_2() {
 	a := [...]int{1, 2, 3, 4, 5, 6, 7}
 	fmt.Printf("len and cap of array %v is: %d and %d\n", a, len(a), cap(a))
 	fmt.Printf("item in array: %v is:", a)

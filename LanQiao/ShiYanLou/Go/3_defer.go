@@ -1,4 +1,4 @@
-package main
+package shiyanlou
 
 import "fmt"
 
@@ -9,6 +9,6 @@ func test() (result int) {
     return 10
 }
 
-func main() {
+func main3_1() {
     fmt.Println(test())     // 12
 }

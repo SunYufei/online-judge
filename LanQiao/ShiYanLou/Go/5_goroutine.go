@@ -1,4 +1,4 @@
-package main
+package shiyanlou
 
 import "fmt"
 
@@ -7,7 +7,7 @@ func Add(a, b int) {
 	fmt.Println(c)
 }
 
-func main() {
+func main5_2() {
 	for i := 0; i < 10; i++ {
 		go Add(i, i)
 	}

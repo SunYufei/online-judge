@@ -1,10 +1,10 @@
-package main
+package shiyanlou
 
 import (
 	"fmt"
 )
 
-func main() {
+func main3_5() {
 	x := uint16(65000)
 	y := int16(x) // 将 x转换为int16类型
 	fmt.Printf("type and value of x is: %T and %d\n", x, x)

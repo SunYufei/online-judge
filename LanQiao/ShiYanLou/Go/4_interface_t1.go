@@ -1,4 +1,4 @@
-package main
+package shiyanlou
 
 import (
 	"fmt"
@@ -18,7 +18,7 @@ func (p Person) String() string {
 	return "(name: " + p.name + " - age: " + strconv.Itoa(p.age) + " years)"
 }
 
-func main() {
+func main4_2() {
 	list := make(List, 3)
 	list[0] = 1       //an int
 	list[1] = "Hello" //a string

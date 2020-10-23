@@ -1,8 +1,8 @@
-package main
+package shiyanlou
 
 import "fmt"
 
-func main() {
+func main2_1() {
 	text := "\u5B9E\u9A8C\u697C"
 	fmt.Printf("bool output:\n%t\n%t\n\n", true, false)
 	fmt.Println("number output, origin value: 64")

@@ -1,4 +1,4 @@
-package main
+package shiyanlou
 
 import "fmt"
 
@@ -21,7 +21,7 @@ func (part Part) String() string { // 定义String()方法，自定义了格式�
 	return fmt.Sprintf("<<%s, %d>>", part.stat, part.Count)
 }
 
-func main() {
+func main4_3() {
 	var i Count = -1
 	fmt.Printf("Start \"Count\" test:\nOrigin value of count: %d\n", i)
 	i.Increment()

@@ -1,8 +1,8 @@
-package main
+package shiyanlou
 
 import "fmt"
 
-func main() {
+func main2_3() {
 	t0 := "\u6B22\u8FCE\u6765\u5230" // t0内容：欢迎来到
 	t1 := "\u5B9E\u9A8C\u697C"       // t1内容：实验楼
 	t2 := t0 + t1

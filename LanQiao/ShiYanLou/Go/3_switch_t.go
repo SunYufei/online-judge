@@ -1,4 +1,4 @@
-package main
+package shiyanlou
 
 import (
 	"fmt"
@@ -25,7 +25,7 @@ func classchecker(items ...interface{}) {
 	}
 }
 
-func main() {
+func main3_4() {
 	classchecker(5, -17.98, "AIDEN", nil, true, complex(1, 1))
 
 }
