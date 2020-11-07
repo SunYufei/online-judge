@@ -1,10 +1,10 @@
-package main
+package wordcount
 
 import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"wordcount"
+	// "wordcount"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	wordcounter := make(wordcount.WordCount)
+	wordcounter := make(WordCount)
 	// for _, filename := range os.Args[1:] {
 	// 	wordcount.UpdateFreq(filename)
 	// }
