@@ -9,7 +9,7 @@ class Solution {
     private List<String> res;
 
     public List<String> generateParenthesis(int n) {
-        res = new ArrayList();
+        res = new ArrayList<>();
         generate(0, 0, n, "");
         return res;
     }

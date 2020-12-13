@@ -4,8 +4,6 @@
  * [146] LRU缓存机制
  */
 
-import java.util.*;
-
 // @lc code=start
 class LRUCache {
 

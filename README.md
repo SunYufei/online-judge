@@ -6,26 +6,25 @@
 - [ECNU](ECNU) 华东师范大学 OJ
 - [HDOJ](HDOJ) 杭电 OJ
 - Interviews 笔试题
-  - [58](Interviews/58)
+  - [58同城](Interviews/58)
   - [字节跳动](Interviews/ByteDance)
-  - [中国联通](Interviews/China%20Unicom)
+  - [中国联通](Interviews/ChinaUnicom)
   - [携程](Interviews/CTrip)
   - [电信云](Interviews/CTYun)
-  - [HUAWEI](Interviews/HUAWEI)
+  - [华为](Interviews/HUAWEI)
   - [浪潮](Interviews/Inspur)
   - [京东](Interviews/JD)
   - [美团](Interviews/Meituan)
   - [拼多多](Interviews/Pinduoduo)
+  - [深信服](Interviews/Sangfor)
   - [小米](Interviews/Xiaomi)
   - [猿辅导](Interviews/Yuanfudao)
   - [中兴](Interviews/ZTE)
 - [LanQiao](LanQiao) 蓝桥杯
 - LeetCode 力扣中国
   - 基础题库
-    - [C++](LeetCode/C) /  [Go](LeetCode/Go) / [Java](LeetCode/Java) / [JavaScript](LeetCode/JavaScript)
   - [Coding Interviews](LeetCode/CodingInterviews) 剑指 Offer
-    - C++ / Go / Java
-  - [程序员面试金典](LeetCode/LCCI) Go
+  - [程序员面试金典](LeetCode/LCCI)
   - 竞赛
     - 周赛
     - [2020 力扣杯 春季全国编程大赛-个人赛](LeetCode/Contest/2020Spring/Single)
