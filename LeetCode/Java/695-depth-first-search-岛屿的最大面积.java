@@ -1,6 +1,3 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
 /*
  * @lc app=leetcode.cn id=695 lang=java
  *

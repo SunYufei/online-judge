@@ -1,3 +1,4 @@
+import java.util.*;
 /*
  * @lc app=leetcode.cn id=515 lang=java
  *
@@ -5,10 +6,6 @@
  */
 
 // @lc code=start
-/**
- * Definition for a binary tree node. public class TreeNode { int val; TreeNode
- * left; TreeNode right; TreeNode(int x) { val = x; } }
- */
 class Solution {
     public List<Integer> largestValues(TreeNode root) {
         var res = new ArrayList<Integer>();

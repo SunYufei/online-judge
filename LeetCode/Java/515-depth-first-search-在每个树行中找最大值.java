@@ -1,4 +1,4 @@
-import java.awt.List;
+import java.util.*;
 
 /*
  * @lc app=leetcode.cn id=515 lang=java
@@ -12,7 +12,7 @@ import java.awt.List;
  * left; TreeNode right; TreeNode(int x) { val = x; } }
  */
 class Solution {
-    private List<Integer> res = new ArrayList();
+    private List<Integer> res = new ArrayList<>();
 
     public List<Integer> largestValues(TreeNode root) {
         if (root != null)

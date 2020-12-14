@@ -1,4 +1,3 @@
-
 /*
  * @lc app=leetcode.cn id=820 lang=java
  *

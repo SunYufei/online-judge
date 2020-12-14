@@ -1,3 +1,3 @@
-module github.com/SunYufei/OI
+module OI
 
-go 1.14
+go 1.15

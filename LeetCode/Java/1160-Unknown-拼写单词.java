@@ -4,7 +4,6 @@
  *
  * [1160] 拼写单词
  */
-import java.util.*;
 
 // @lc code=start
 class Solution {
