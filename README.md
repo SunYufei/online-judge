@@ -19,7 +19,7 @@
 
 ### LeetCode 力扣中国
 
-- 基础题库 [C++](LeetCode/C) / [Go](LeetCode/Go) / [Java](LeetCode/Java) / [JavaScript](LeetCode/JavaScript) / [Python](LeetCode/Python)
+- 基础题库 [C++](LeetCode/C) / [Java](LeetCode/Java) / [JavaScript](LeetCode/JavaScript) / [Python](LeetCode/Python)
 - 剑指 Offer [C++](LeetCode/CodingInterviews/C) / [Go](LeetCode/CodingInterviews/Go) / [Java](LeetCode/CodingInterviews/Java)
 - [程序员面试金典](LeetCode/LCCI)
 - 竞赛
