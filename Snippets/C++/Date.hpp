@@ -5,7 +5,7 @@
 using namespace std;
 
 class Date {
-  private:
+   private:
     int _year;
     int _month;
     int _day;
@@ -13,7 +13,7 @@ class Date {
         // TODO
     }
 
-  public:
+   public:
     Date(const int year = 1970, const int month = 1, const int day = 1) {
         _year = year;
         _month = month;
@@ -21,11 +21,11 @@ class Date {
         standardize();
     }
 
-    Date(const string &s) {
+    Date(const string& s) {
         // TODO
     }
 
-    Date(const Date &d) {
+    Date(const Date& d) {
         _year = d._year;
         _month = d._month;
         _day = d._day;
@@ -56,19 +56,19 @@ class Date {
 
     Date operator+(const int day) { return Date(_year, _month, _day + day); }
 
-    Date &operator+=(const int day) {
+    Date& operator+=(const int day) {
         *this = *this + day;
         return *this;
     }
 
     Date operator-(const int day) { return Date(_year, _month, _day - day); }
 
-    Date &operator-=(const int day) {
+    Date& operator-=(const int day) {
         *this = *this - day;
         return *this;
     }
 
-    Date &operator++() {
+    Date& operator++() {
         *this = *this + 1;
         return *this;
     }
@@ -79,7 +79,7 @@ class Date {
         return t;
     }
 
-    Date &operator--() {
+    Date& operator--() {
         *this = *this - 1;
         return *this;
     }

@@ -124,7 +124,6 @@ int main() {
     scanf("%d%d", &T, &n);
     getchar();
     for (int i = 0; i < T; i++) {
-
         memset(wait, 0, sizeof(wait));
 
         for (int j = 0; j < n; j++) {

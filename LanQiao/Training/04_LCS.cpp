@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int max(int a, int b) { return a > b ? a : b; }
+int max(int a, int b) {
+    return a > b ? a : b;
+}
 
 int LCS(string s1, string s2) {
     if (s1.length() == 0 || s2.length() == 0)

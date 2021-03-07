@@ -1,8 +1,8 @@
 #include "main.h"
 
 class Solution {
-  public:
-    vector<int> singleNumbers(vector<int> &nums) {
+   public:
+    vector<int> singleNumbers(vector<int>& nums) {
         if (nums.empty())
             return {};
         unordered_set<int> st;

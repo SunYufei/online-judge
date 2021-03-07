@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> threeSum(vector<int> &arr, int d) {
+vector<int> threeSum(vector<int>& arr, int d) {
     if (arr.size() < 3)
         return {};
     sort(arr.begin(), arr.end());

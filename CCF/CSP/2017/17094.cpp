@@ -8,7 +8,7 @@ int reach[MAXN][MAXN];
 int vis[MAXN];
 int N, M;
 int cnt;
-void dfs(int cur, int sta) { // sta：起点
+void dfs(int cur, int sta) {  // sta：起点
     vis[cur] = 1;
     reach[sta][cur] = reach[cur][sta] = 1;
     for (vector<int>::iterator i = G[cur].begin(); i != G[cur].end(); i++) {

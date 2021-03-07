@@ -26,7 +26,7 @@ struct bs_var_type {
     string name;
     int len;
     unsigned long long value;
-    vector<bs_var_type *> ch;
+    vector<bs_var_type*> ch;
 };
 
 struct expr_type {
@@ -40,8 +40,8 @@ struct expr_type {
 struct gra_type {
     int type, var, value, jmp;
     vector<int> bs_varp;
-    expr_type *expr;
-    int st, ed; // lex[st] .. lex[ed]
+    expr_type* expr;
+    int st, ed;  // lex[st] .. lex[ed]
 };
 
 int n, m;
@@ -49,21 +49,21 @@ ptable_type ptable[MAXN];
 sbox_type sbox[MAXN];
 
 string task_id;
-string code; // store all characters of the code
+string code;  // store all characters of the code
 int loop_var[26];
 vector<bs_var_type> bs_var;
 vector<lex_type> lex;
 vector<gra_type> gra;
 stack<int> loop_pos;
-vector<expr_type *> expr_ptr;
+vector<expr_type*> expr_ptr;
 
-void bs_to_num(const string &str, unsigned long long &num) {
+void bs_to_num(const string& str, unsigned long long& num) {
     num = 0;
     for (int i = 0; i < str.length(); i++)
         num = (num << 1) + str[i] - '0';
 }
 
-void num_to_bs(const unsigned long long &num, string &str, int size = PLEN) {
+void num_to_bs(const unsigned long long& num, string& str, int size = PLEN) {
     str.clear();
     unsigned long long tmp = 1ull << (size - 1);
     while (tmp) {
@@ -142,19 +142,20 @@ void read_code() {
     }
 }
 
-void get_bs_var(int l, int r, unsigned long long &value, vector<int> &bs_varp) {
+void get_bs_var(int l, int r, unsigned long long& value, vector<int>& bs_varp) {
     value = lex[l].value;
     int i = l + 1;
     while (i < r) {
         if (lex[i + 1].type == 1)
-            bs_varp.push_back((int)(lex[i + 1].value) - 26); // 0..25 -> -26..-1
+            bs_varp.push_back((int)(lex[i + 1].value) -
+                              26);  // 0..25 -> -26..-1
         else
-            bs_varp.push_back(lex[i + 1].value); // 0..63
+            bs_varp.push_back(lex[i + 1].value);  // 0..63
         i += 3;
     }
 }
 
-int find_bs(string &name) {
+int find_bs(string& name) {
     for (int i = 0; i < bs_var.size(); i++)
         if (bs_var[i].name == name)
             return i;
@@ -173,7 +174,7 @@ void lex_ana() {
             ++i;
         str.push_back(code[i]);
         ++i;
-        if (str[0] >= 'A' && str[0] <= 'Z') { // type 0
+        if (str[0] >= 'A' && str[0] <= 'Z') {  // type 0
             while (i < code.length() && code[i] >= 'A' && code[i] <= 'Z') {
                 str.push_back(code[i]);
                 ++i;
@@ -185,17 +186,17 @@ void lex_ana() {
             tmp.type = 0;
             tmp.value = j;
             lex.push_back(tmp);
-        } else if (str[0] >= 'a' && str[0] <= 'z') { // type 1 or 2
+        } else if (str[0] >= 'a' && str[0] <= 'z') {  // type 1 or 2
             while (i < code.length() && code[i] >= 'a' && code[i] <= 'z') {
                 str.push_back(code[i]);
                 i++;
             }
-            if (str.length() == 1) { // type 1
+            if (str.length() == 1) {  // type 1
                 tmp.name = str;
                 tmp.type = 1;
                 tmp.value = str[0] - 'a';
                 lex.push_back(tmp);
-            } else { // type 2
+            } else {  // type 2
                 j = find_bs(str);
                 if (j == -1) {
                     j = bs_var.size();
@@ -210,7 +211,7 @@ void lex_ana() {
                 tmp.value = j;
                 lex.push_back(tmp);
             }
-        } else if (str[0] >= '0' && str[0] <= '9') { // type 3
+        } else if (str[0] >= '0' && str[0] <= '9') {  // type 3
             while (i < code.length() && code[i] >= '0' && code[i] <= '9') {
                 str.push_back(code[i]);
                 ++i;
@@ -221,7 +222,7 @@ void lex_ana() {
             for (j = 1; j < str.length(); j++)
                 tmp.value = tmp.value * 10 + str[j] - '0';
             lex.push_back(tmp);
-        } else if (str[0] == '\"') { // type 4
+        } else if (str[0] == '\"') {  // type 4
             while (code[i] >= '0' && code[i] <= '1') {
                 str.push_back(code[i]);
                 ++i;
@@ -235,7 +236,7 @@ void lex_ana() {
             for (j = 1; j < k - 1; ++j)
                 tmp.value = (tmp.value << 1) + str[j] - '0';
             lex.push_back(tmp);
-        } else { // type 5
+        } else {  // type 5
             for (j = 0; j < 7; j++)
                 if (str[0] == type5[j])
                     break;
@@ -259,8 +260,8 @@ void init_bs_var() {
     }
 }
 
-expr_type *generate_expr(int l, int r) {
-    expr_type *ptr = new expr_type;
+expr_type* generate_expr(int l, int r) {
+    expr_type* ptr = new expr_type;
     ptr->id = expr_ptr.size();
     expr_ptr.push_back(ptr);
     ptr->expr1 = NULL;
@@ -344,7 +345,7 @@ void generate_gra(int l, int r) {
         unsigned long long beta;
         get_bs_var(l + 2, r - 2, beta, tmp.bs_varp);
         tmp.var = beta;
-    } else if (lex[l].type == 2) { // assignment statement
+    } else if (lex[l].type == 2) {  // assignment statement
         int i = l;
         while (i <= r && lex[i].name != "=")
             ++i;
@@ -369,8 +370,8 @@ void gra_ana() {
     }
 }
 
-bs_var_type *find_bs_varp(long long pos, const vector<int> &bs_varp) {
-    bs_var_type *ptr = &bs_var[pos];
+bs_var_type* find_bs_varp(long long pos, const vector<int>& bs_varp) {
+    bs_var_type* ptr = &bs_var[pos];
     for (int i = 0; i < bs_varp.size(); i++) {
         int j = bs_varp[i];
         if (j < 0)
@@ -380,7 +381,7 @@ bs_var_type *find_bs_varp(long long pos, const vector<int> &bs_varp) {
     return ptr;
 }
 
-unsigned long long cal_expr(expr_type *ptr) {
+unsigned long long cal_expr(expr_type* ptr) {
     if (ptr->type == 0)
         return find_bs_varp(ptr->value, ptr->bs_varp)->value;
     else if (ptr->type == 1)
@@ -411,16 +412,16 @@ unsigned long long encrypt(unsigned long long state, unsigned long long key) {
     int now = 0;
     while (true) {
         if (gra[now].type == 0) {
-            if (gra[now].value == 0) { // BEGIN
+            if (gra[now].value == 0) {  // BEGIN
                 bs_var[0].value = state;
                 bs_var[1].value = key;
                 for (int i = 2; i < bs_var.size(); i++)
                     bs_var[i].value = 0;
                 now++;
             } else
-                return bs_var[0].value; // END
+                return bs_var[0].value;  // END
         } else if (gra[now].type == 1) {
-            bs_var_type *ptr = find_bs_varp(gra[now].var, gra[now].bs_varp);
+            bs_var_type* ptr = find_bs_varp(gra[now].var, gra[now].bs_varp);
             ptr->value = cal_expr(gra[now].expr);
             now++;
         } else if (gra[now].type == 2) {
@@ -433,11 +434,11 @@ unsigned long long encrypt(unsigned long long state, unsigned long long key) {
             else
                 now = gra[now].jmp;
         } else if (gra[now].type == 4) {
-            bs_var_type *ptr = find_bs_varp(gra[now].var, gra[now].bs_varp);
+            bs_var_type* ptr = find_bs_varp(gra[now].var, gra[now].bs_varp);
             int tmp = gra[now].value;
             int chlen = ptr->len / tmp;
             for (int i = 0; i < tmp; i++) {
-                bs_var_type *chptr = new bs_var_type;
+                bs_var_type* chptr = new bs_var_type;
                 chptr->len = chlen;
                 chptr->name = ptr->name + "[" + int_to_str(i) + "]";
                 chptr->value = 0;
@@ -450,12 +451,12 @@ unsigned long long encrypt(unsigned long long state, unsigned long long key) {
             }
             ++now;
         } else if (gra[now].type == 5) {
-            bs_var_type *ptr = find_bs_varp(gra[now].var, gra[now].bs_varp);
+            bs_var_type* ptr = find_bs_varp(gra[now].var, gra[now].bs_varp);
             int tmp = ptr->ch.size();
             int chlen = ptr->len / tmp;
             ptr->value = 0;
             for (int i = 0; i < tmp; i++) {
-                bs_var_type *chptr = ptr->ch[i];
+                bs_var_type* chptr = ptr->ch[i];
                 ptr->value = (ptr->value << chlen) | chptr->value;
                 delete chptr;
             }

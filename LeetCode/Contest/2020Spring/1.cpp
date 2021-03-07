@@ -1,7 +1,7 @@
-#include "main.h"
+#include "../main.h"
 
 class Solution {
-  public:
+   public:
     int minCount(vector<int> coins) {
         int res = 0;
         for (auto c : coins)

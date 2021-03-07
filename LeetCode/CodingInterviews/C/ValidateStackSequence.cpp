@@ -1,8 +1,8 @@
 #include "main.h"
 
 class Solution {
-  public:
-    bool validateStackSequences(vector<int> &pushed, vector<int> &popped) {
+   public:
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
         if (pushed.empty() && popped.empty())
             return true;
         if (pushed.empty() || popped.empty() || pushed.size() != popped.size())

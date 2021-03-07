@@ -1,8 +1,8 @@
-#include "main.h"
+#include "../main.h"
 
 class Solution {
-  public:
-    int numWays(int n, vector<vector<int>> &relation, int k) {
+   public:
+    int numWays(int n, vector<vector<int>>& relation, int k) {
         vector<vector<bool>> path(n, vector<bool>(n, false));
         for (auto r : relation)
             path[r[0]][r[1]] = true;

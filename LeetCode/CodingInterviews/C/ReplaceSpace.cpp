@@ -1,7 +1,7 @@
 #include "main.h"
 
 class Solution {
-  public:
+   public:
     string replaceSpace(string s) {
         string res;
         for (char c : s)

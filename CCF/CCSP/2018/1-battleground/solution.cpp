@@ -19,16 +19,16 @@ struct Point {
 
     int square() { return x * x + y * y; }
 
-    Point operator+(const Point &a) const { return Point(x + a.x, y + a.y); }
+    Point operator+(const Point& a) const { return Point(x + a.x, y + a.y); }
 
-    Point operator-(const Point &a) const { return Point(x - a.x, y - a.y); }
+    Point operator-(const Point& a) const { return Point(x - a.x, y - a.y); }
 } safe, pos[M], que[N * N];
 
 const Point dir[] = {Point(0, 1),  Point(1, 1),  Point(1, 0),
                      Point(1, -1), Point(0, -1), Point(-1, -1),
                      Point(-1, 0), Point(-1, 1), Point(0, 1)};
 
-inline bool dat(const Point &a) {
+inline bool dat(const Point& a) {
     if (a.x <= 0 || a.y <= 0 || a.x > n || a.y > n)
         return false;
     return data[a.x][a.y] || (a - safe).square() <= r * r;
@@ -50,7 +50,7 @@ void init() {
         hp[i] = h;
 }
 
-int bfs(const Point &a) {
+int bfs(const Point& a) {
     if ((a - safe).square() <= r * r)
         return 0;
     int op = 0;

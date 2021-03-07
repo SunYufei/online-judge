@@ -50,7 +50,7 @@
 #include <iostream>
 using namespace std;
 
-void getxy(int w, int n, int &x, int &y) {
+void getxy(int w, int n, int& x, int& y) {
     x = (n - 1) / w + 1;
     y = n % w;
     if (y == 0)

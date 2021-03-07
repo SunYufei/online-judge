@@ -1,7 +1,7 @@
 #include "../main.h"
 
 class Solution {
-  public:
+   public:
     string entityParser(string text) {
         string res, sig;
         int n = text.size();

@@ -4,15 +4,15 @@
 #include <vector>
 using namespace std;
 
-vector<string> cur_path;  //顺序当前路径的每一级
-vector<string> norm_path; //顺序存储目录的每一级
+vector<string> cur_path;   //顺序当前路径的每一级
+vector<string> norm_path;  //顺序存储目录的每一级
 int p;
 
-void split(vector<string> &vec, string path) {
+void split(vector<string>& vec, string path) {
     stringstream ss(path);
     string child;
-    vec = cur_path;    //默认从当前路径开始
-    bool start = true; //初始标志
+    vec = cur_path;     //默认从当前路径开始
+    bool start = true;  //初始标志
     while (getline(ss, child, '/')) {
         if (child.empty()) {
             if (start)
@@ -28,7 +28,7 @@ void split(vector<string> &vec, string path) {
     }
 }
 
-void output(vector<string> &vec) {
+void output(vector<string>& vec) {
     vector<string>::iterator it;
     if (vec.empty()) {
         printf("/");

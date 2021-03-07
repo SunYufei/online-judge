@@ -1,5 +1,5 @@
 class Solution {
-  public:
+   public:
     int countDigitOne(int n) {
         int res = 0;
         long i = 1;

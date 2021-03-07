@@ -1,8 +1,8 @@
 #include "main.h"
 
 class Solution {
-  public:
-    Node *copyRandomList(Node *head) {
+   public:
+    Node* copyRandomList(Node* head) {
         if (head == nullptr)
             return nullptr;
         Node *p = head, *q;
@@ -23,7 +23,7 @@ class Solution {
         }
         p = head;
         q = head->next;
-        Node *res = head->next;
+        Node* res = head->next;
         while (p && q) {
             p->next = q->next;
             p = p->next;

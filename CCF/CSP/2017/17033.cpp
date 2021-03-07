@@ -12,11 +12,11 @@ string html;
 int deal_h(int pos);
 int deal_p(int pos);
 int deal_list(int pos);
-int deal_empha(int pos, string &text = html);
+int deal_empha(int pos, string& text = html);
 int deal_link(int pos);
 
 int deal_h(int p) {
-    int sc = 0; //对#计数
+    int sc = 0;  //对#计数
     while (md[p + sc] == '#')
         sc++;
     html += "<h" + string(1, '0' + sc) + ">";
@@ -78,7 +78,7 @@ int deal_list(int p) {
     return i;
 }
 
-int deal_empha(int p, string &text) {
+int deal_empha(int p, string& text) {
     int i = p + 1;
     text += "<em>";
     while (md[i] != '_') {

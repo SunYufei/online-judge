@@ -27,11 +27,11 @@ int main() {
     }
 
     for (int i = 0; i < m; i++) {
-        char *p1 = tpl[i];
-        char *p2;
+        char* p1 = tpl[i];
+        char* p2;
         p2 = strstr(p1, "{{");
         while (p2 != NULL) {
-            *p2 = '\0'; //做特殊处理，方便输出
+            *p2 = '\0';  //做特殊处理，方便输出
             cout << p1;
             stringstream ss(p2 + 2);
             string key;

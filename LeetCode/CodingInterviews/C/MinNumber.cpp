@@ -1,8 +1,8 @@
 #include "main.h"
 
 class Solution {
-  public:
-    string minNumber(vector<int> &nums) {
+   public:
+    string minNumber(vector<int>& nums) {
         vector<string> t;
         for (int num : nums)
             t.push_back(to_string(num));

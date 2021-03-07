@@ -18,59 +18,59 @@
 
 #define PACK(size, alloc) ((size) | (alloc))
 
-#define GET(p) (*(unsigned int *)(p))
-#define PUT(p, val) (*(unsigned int *)(p) = (val))
+#define GET(p) (*(unsigned int*)(p))
+#define PUT(p, val) (*(unsigned int*)(p) = (val))
 
 #define GET_SIZE(p) (GET(p) & ~0x7)
 #define GET_ALLOC(p) (GET(p) & 0x1)
 #define GET_PREV_ALLOC(p) (GET(p) & 0x2)
 #define GET_NEXT_ALLOC(p) (GET(p) & 0x4)
-#define HDRP(bp) ((char *)(bp)-WSIZE)
-#define FTRP(bp) ((char *)(bp) + GET_SIZE(HDRP(bp)) - DSIZE)
+#define HDRP(bp) ((char*)(bp)-WSIZE)
+#define FTRP(bp) ((char*)(bp) + GET_SIZE(HDRP(bp)) - DSIZE)
 
-#define NEXT_BLKP(bp) ((char *)(bp) + GET_SIZE(((char *)(bp)-WSIZE)))
-#define PREV_BLKP(bp) ((char *)(bp)-GET_SIZE(((char *)(bp)-DSIZE)))
+#define NEXT_BLKP(bp) ((char*)(bp) + GET_SIZE(((char*)(bp)-WSIZE)))
+#define PREV_BLKP(bp) ((char*)(bp)-GET_SIZE(((char*)(bp)-DSIZE)))
 
-#define GET_NEXTP(bp) (*(void **)(bp + DSIZE))
-#define GET_PREVP(bp) (*(void **)bp)
+#define GET_NEXTP(bp) (*(void**)(bp + DSIZE))
+#define GET_PREVP(bp) (*(void**)bp)
 #define SET_NEXTP(bp, ptr) (GET_NEXTP(bp) = ptr)
 #define SET_PREVP(bp, ptr) (GET_PREVP(bp) = ptr)
-#define GET_SEGI(seg_list, i) (*(void **)(seg_list + (i * DSIZE)))
+#define GET_SEGI(seg_list, i) (*(void**)(seg_list + (i * DSIZE)))
 #define SET_SEGI(seglist, i, ptr) ((GET_SEGI(seg_list, i)) = ptr)
 
 #define MIN_BLOCK_SIZE (3 * DSIZE)
 #define SEG_LIST_SIZE_DIFF 32
 #define NO_OF_LISTS 15
 
-static char *heap_listp = 0;
-static char *free_listp = 0;
-static char *seg_list = 0;
+static char* heap_listp = 0;
+static char* free_listp = 0;
+static char* seg_list = 0;
 static int temp;
 
 #define SIZE_T_SIZE (ALIGN(sizeof(size_t)))
-#define SIZE_PTR(p) ((size_t *)(((char *)(p)) - SIZE_T_SIZE))
+#define SIZE_PTR(p) ((size_t*)(((char*)(p)) - SIZE_T_SIZE))
 
-static void *extend_heap(size_t words);
-static void place(void *bp, size_t asize);
-static void *add_free_list_lifo(void *bp);
-static void delete_free_list(void *bp);
-static void *coalesce_block(void *bp);
+static void* extend_heap(size_t words);
+static void place(void* bp, size_t asize);
+static void* add_free_list_lifo(void* bp);
+static void delete_free_list(void* bp);
+static void* coalesce_block(void* bp);
 static unsigned int get_list_no(size_t asize);
-static void *find_fit_segregated(size_t asize);
+static void* find_fit_segregated(size_t asize);
 
 int my_init() {
     heap_listp = NULL;
     free_listp = NULL;
     seg_list = NULL;
 
-    if ((seg_list = (char *)mem_sbrk(NO_OF_LISTS * DSIZE)) == (void *)-1)
+    if ((seg_list = (char*)mem_sbrk(NO_OF_LISTS * DSIZE)) == (void*)-1)
         return -1;
 
     for (int i = 0; i < NO_OF_LISTS; ++i) {
         SET_SEGI(seg_list, i, NULL);
     }
 
-    if ((heap_listp = (char *)mem_sbrk(4 * WSIZE)) == (void *)-1)
+    if ((heap_listp = (char*)mem_sbrk(4 * WSIZE)) == (void*)-1)
         return -1;
     PUT(heap_listp, 0);
     PUT(heap_listp + (1 * WSIZE), PACK(DSIZE, 1));
@@ -84,10 +84,10 @@ int my_init() {
     return 0;
 }
 
-void *my_malloc(size_t size) {
+void* my_malloc(size_t size) {
     size_t asize;
     size_t extendsize;
-    char *bp;
+    char* bp;
     if (heap_listp == 0) {
         my_init();
     }
@@ -99,18 +99,18 @@ void *my_malloc(size_t size) {
     } else {
         asize = ALIGN(DSIZE + size);
     }
-    if ((bp = (char *)find_fit_segregated(asize)) != NULL) {
+    if ((bp = (char*)find_fit_segregated(asize)) != NULL) {
         place(bp, asize);
         return bp;
     }
     extendsize = MAX(asize, CHUNKSIZE);
-    if ((bp = (char *)extend_heap(extendsize / WSIZE)) == NULL)
+    if ((bp = (char*)extend_heap(extendsize / WSIZE)) == NULL)
         return NULL;
     place(bp, asize);
     return bp;
 }
 
-void my_free(void *ptr) {
+void my_free(void* ptr) {
     if (ptr == 0)
         return;
     size_t size = GET_SIZE(HDRP(ptr));
@@ -122,9 +122,9 @@ void my_free(void *ptr) {
     ptr = add_free_list_lifo(ptr);
 }
 
-void *my_realloc(void *ptr, size_t size) {
+void* my_realloc(void* ptr, size_t size) {
     size_t oldsize;
-    void *newptr;
+    void* newptr;
 
     if (size == 0) {
         my_free(ptr);
@@ -145,7 +145,7 @@ void *my_realloc(void *ptr, size_t size) {
     return newptr;
 }
 
-static inline void *coalesce_block(void *bp) {
+static inline void* coalesce_block(void* bp) {
     size_t prev_alloc = GET_ALLOC(FTRP(PREV_BLKP(bp)));
     size_t next_alloc = GET_ALLOC(HDRP(NEXT_BLKP(bp)));
     size_t size = GET_SIZE(HDRP(bp));
@@ -176,22 +176,22 @@ static inline void *coalesce_block(void *bp) {
     return bp;
 }
 
-static inline void *extend_heap(size_t words) {
-    char *bp;
+static inline void* extend_heap(size_t words) {
+    char* bp;
     size_t size;
 
     size = (words % 2) ? (words + 1) * WSIZE : words * WSIZE;
-    if ((long)(bp = (char *)mem_sbrk(size)) == -1)
+    if ((long)(bp = (char*)mem_sbrk(size)) == -1)
         return NULL;
 
     PUT(HDRP(bp), PACK(size, 0));
     PUT(FTRP(bp), PACK(size, 0));
     PUT(HDRP(NEXT_BLKP(bp)), PACK(0, 1));
-    bp = (char *)add_free_list_lifo(bp);
+    bp = (char*)add_free_list_lifo(bp);
     return bp;
 }
 
-static inline void place(void *bp, size_t asize) {
+static inline void place(void* bp, size_t asize) {
     size_t csize = GET_SIZE(HDRP(bp));
     int prev_alloc = 0, next_alloc = 0;
     delete_free_list(bp);
@@ -210,8 +210,8 @@ static inline void place(void *bp, size_t asize) {
     }
 }
 
-static inline void *find_fit_segregated(size_t asize) {
-    void *bp = 0;
+static inline void* find_fit_segregated(size_t asize) {
+    void* bp = 0;
     unsigned int list_no = get_list_no(asize);
 
     for (int i = list_no; i < NO_OF_LISTS; i++) {
@@ -225,7 +225,7 @@ static inline void *find_fit_segregated(size_t asize) {
     return NULL;
 }
 
-static void *add_free_list_lifo(void *bp) {
+static void* add_free_list_lifo(void* bp) {
     int list_no;
 
     bp = coalesce_block(bp);
@@ -245,11 +245,11 @@ static void *add_free_list_lifo(void *bp) {
     return bp;
 }
 
-static inline void delete_free_list(void *bp) {
+static inline void delete_free_list(void* bp) {
     int list_no = get_list_no(GET_SIZE(HDRP(bp)));
     temp++;
-    void *next = GET_NEXTP(bp);
-    void *prev = GET_PREVP(bp);
+    void* next = GET_NEXTP(bp);
+    void* prev = GET_PREVP(bp);
     if (bp == GET_SEGI(seg_list, list_no)) {
         SET_SEGI(seg_list, list_no, next);
     }

@@ -17,7 +17,7 @@ void data_error() {
     exit(0);
 }
 
-bool strequ(const char *s, const char *t) {
+bool strequ(const char* s, const char* t) {
     if (strlen(s) != strlen(t))
         return 0;
     for (int i = 0; s[i]; ++i)
@@ -26,7 +26,7 @@ bool strequ(const char *s, const char *t) {
     return 1;
 }
 
-int value_type(const char *s) {
+int value_type(const char* s) {
     if (s[1] == 'X') {
         if (s[1] == 'X' && s[0] >= 'A' && s[0] <= 'D' && s[2] == 0)
             return 2;
@@ -63,7 +63,7 @@ void data_checker() {
             if (value_type(str[now + 1]) == 0)
                 data_error();
             if (value_type(str[now + 2]) == 1 && value_type(str[now + 1]) == 1)
-                data_error(); // <-
+                data_error();  // <-
         } else if (strequ(str[now], "INC")) {
             ins_len = 2;
             if (value_type(str[now + 1]) == 0)
@@ -73,11 +73,11 @@ void data_checker() {
             if (value_type(str[now + 1]) == 0)
                 data_error();
             if (value_type(str[now + 2]) == 1 && value_type(str[now + 1]) == 1)
-                data_error(); // <-
+                data_error();  // <-
         } else if (strequ(str[now], "CMP")) {
             ins_len = 3;
             if (value_type(str[now + 2]) == 1 && value_type(str[now + 1]) == 1)
-                data_error(); // <-
+                data_error();  // <-
         } else {
             if (strequ(str[now], "JMP") || strequ(str[now], "JG") ||
                 strequ(str[now], "JL") || strequ(str[now], "JE") ||
@@ -97,7 +97,7 @@ void data_checker() {
         data_error();
 }
 
-void decode(char *s) {
+void decode(char* s) {
     int total = 0;
     while (sscanf(s + total, "%s", str[strtot]) == 1) {
         total += strlen(str[strtot]);
@@ -149,14 +149,14 @@ int inv_chr(char c) {
     else
         return c - 'A' + 10;
 }
-int read_4_digit(const char *s) {
+int read_4_digit(const char* s) {
     int ret = 0;
     for (int i = 0; i < 4; ++i)
         ret = ret << 4 | inv_chr(s[i]);
     return ret;
 }
 
-int get_val(const char *s) {
+int get_val(const char* s) {
     if (s[0] == 'T') {
         int pos = get_val(s + 1);
         if (pos + 1 >= MemR || pos < MemL)
@@ -171,7 +171,7 @@ int get_val(const char *s) {
     }
 }
 
-void write(const char *s, int val) {
+void write(const char* s, int val) {
     if (s[0] == 'T') {
         int pos = get_val(s + 1);
         if (pos + 1 >= MemR || pos < MemL)

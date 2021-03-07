@@ -1,7 +1,7 @@
 #include "main.h"
 
 class Solution {
-  public:
+   public:
     vector<string> permutation(string s) {
         if (s.empty())
             return {};
@@ -10,8 +10,8 @@ class Solution {
         return res;
     }
 
-  private:
-    void backtrack(string s, int step, vector<string> &res) {
+   private:
+    void backtrack(string s, int step, vector<string>& res) {
         if (step == s.length() - 1) {
             res.push_back(s);
             return;

@@ -32,9 +32,9 @@ int main() {
     scanf("%d%d%d%d%d", &a, &b, &c, &y1, &y2);
     for (int y = y1; y <= y2; y++) {
         int day = 1;
-        int wd = whatday(y, a, day); //计算y年a月1日是星期几
+        int wd = whatday(y, a, day);  //计算y年a月1日是星期几
         if (wd <= c)
-            day += c - wd; // day为y年a月第一个星期c的日期
+            day += c - wd;  // day为y年a月第一个星期c的日期
         else
             day += c + 7 - wd;
         if (a == 2 && is_run(y) == 1)

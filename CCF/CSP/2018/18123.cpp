@@ -13,7 +13,7 @@ struct IP {
 int n;
 IP ip[MAXN];
 
-bool cmp(const IP &ip1, const IP &ip2) {
+bool cmp(const IP& ip1, const IP& ip2) {
     for (int i = 0; i < 5; i++) {
         if (ip1.a[i] != ip2.a[i])
             return ip1.a[i] < ip2.a[i];
@@ -21,7 +21,7 @@ bool cmp(const IP &ip1, const IP &ip2) {
     return false;
 }
 
-void deal_str(int no, char *str) {
+void deal_str(int no, char* str) {
     int pn = 0, xn = 0;
     for (int i = 0; i < strlen(str); i++) {
         if (str[i] == '.')
@@ -67,7 +67,7 @@ void countVal(int no) {
     }
 }
 
-void range(IP &ip, UI &l, UI &r) {
+void range(IP& ip, UI& l, UI& r) {
     l = ip.val >> (32 - ip.a[4]) << (32 - ip.a[4]);
     r = ip.val | ((1ull << (32 - ip.a[4])) - 1);
 }
@@ -84,7 +84,7 @@ void union1() {
     n = p + 1;
 }
 
-bool judge_union(IP &ip1, IP &ip2, IP &res) {
+bool judge_union(IP& ip1, IP& ip2, IP& res) {
     if (ip1.a[4] != ip2.a[4])
         return false;
     res = ip1;

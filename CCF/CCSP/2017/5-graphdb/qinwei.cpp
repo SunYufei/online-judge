@@ -3,8 +3,8 @@ using namespace std;
 
 const int M = 1000000;
 
-FILE *f1;
-FILE *f2;
+FILE* f1;
+FILE* f2;
 
 int vertex_num = 0;
 int edge_num = 0;
@@ -19,25 +19,25 @@ int a, b, c, x, y, src, dist;
 int max_q2_rst = -1;
 
 // BFS
-int *currentQueue;       // act as a queue read
-int *nextQueue;          // modify
-int currentEnd, nextEnd; // pointer of two queue modify
-char *visited;           // modify
+int* currentQueue;        // act as a queue read
+int* nextQueue;           // modify
+int currentEnd, nextEnd;  // pointer of two queue modify
+char* visited;            // modify
 
 // linklist
 struct MyVertex {
     int pv;
     int outdegree;
-    int *outvertex;
-    int *outvertexPE;
+    int* outvertex;
+    int* outvertexPE;
 };
-MyVertex *vertex;
+MyVertex* vertex;
 
 // linklist
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     for (int i = 0; i < argc; i++) {
-        ; // printf("argv[%d] : %s\n", i, argv[i]);
+        ;  // printf("argv[%d] : %s\n", i, argv[i]);
     }
 
     // in.graph
@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
     // vertex_num
     fscanf(f1, "%d", &vertex_num);
     // printf("vertex_num : %d\n", vertex_num);
-    vertex = (MyVertex *)malloc(sizeof(MyVertex) * vertex_num);
+    vertex = (MyVertex*)malloc(sizeof(MyVertex) * vertex_num);
 
     // PV
     for (int i = 0; i < vertex_num; i++) {
@@ -67,9 +67,8 @@ int main(int argc, char **argv) {
     for (int i = 0; i < vertex_num; i++) {
         fscanf(f1, "%d", &od);
         vertex[i].outdegree = od;
-        vertex[i].outvertex = (int *)malloc(sizeof(int) * vertex[i].outdegree);
-        vertex[i].outvertexPE =
-            (int *)malloc(sizeof(int) * vertex[i].outdegree);
+        vertex[i].outvertex = (int*)malloc(sizeof(int) * vertex[i].outdegree);
+        vertex[i].outvertexPE = (int*)malloc(sizeof(int) * vertex[i].outdegree);
         for (int j = 0; j < od; j++) {
             fscanf(f1, "%d%d", &v, &pe);
             vertex[i].outvertex[j] = v;
@@ -97,9 +96,9 @@ int main(int argc, char **argv) {
     // printf("graph read in finished\n");
 
     currentQueue =
-        (int *)malloc(sizeof(int) * vertex_num);         // act as a queue read
-    nextQueue = (int *)malloc(sizeof(int) * vertex_num); // modify
-    visited = (char *)malloc(sizeof(char) * vertex_num); // modify
+        (int*)malloc(sizeof(int) * vertex_num);          // act as a queue read
+    nextQueue = (int*)malloc(sizeof(int) * vertex_num);  // modify
+    visited = (char*)malloc(sizeof(char) * vertex_num);  // modify
     memset(currentQueue, 0, sizeof(int) * vertex_num);
     memset(nextQueue, 0, sizeof(int) * vertex_num);
     memset(visited, 0, sizeof(char) * vertex_num);
@@ -137,9 +136,9 @@ int main(int argc, char **argv) {
 
         // cout << s[0] << s[1] << " : " <<handel_model << '\t';
 
-        const char *ss = s.c_str();
+        const char* ss = s.c_str();
 
-        if (handel_model == 1) { // u1 a b
+        if (handel_model == 1) {  // u1 a b
             sscanf(ss + 2, "%d%d", &a, &b);
             // cout << a << ' ' << b;
             for (int i = 0; i < vertex_num; i++) {
@@ -149,11 +148,11 @@ int main(int argc, char **argv) {
                         vertex[i].pv -= M;
                 }
             }
-        } else if (handel_model == 2) { // u2 a b
+        } else if (handel_model == 2) {  // u2 a b
             sscanf(ss + 2, "%d%d", &a, &b);
             // cout << a << ' ' << b;
             for (int i = 0; i < vertex_num; i++) {
-                int src_outdegree = vertex[i].outdegree; // src_outdegree
+                int src_outdegree = vertex[i].outdegree;  // src_outdegree
                 for (int j = 0; j < src_outdegree; j++) {
                     if (vertex[i].outvertexPE[j] % a == 0) {
                         vertex[i].outvertexPE[j] += b;
@@ -162,12 +161,12 @@ int main(int argc, char **argv) {
                     }
                 }
             }
-        } else if (handel_model == 3) { // u3 a b c
+        } else if (handel_model == 3) {  // u3 a b c
             sscanf(ss + 2, "%d%d%d", &a, &b, &c);
             // cout << a << ' ' << b << ' ' << c;
             for (int i = 0; i < vertex_num; i++) {
                 if (vertex[i].pv % a == 0) {
-                    int src_outdegree = vertex[i].outdegree; // src_outdegree
+                    int src_outdegree = vertex[i].outdegree;  // src_outdegree
                     for (int j = 0; j < src_outdegree; j++)
                         if (vertex[i].outvertexPE[j] % b == 0) {
                             vertex[i].outvertexPE[j] += c;
@@ -176,16 +175,16 @@ int main(int argc, char **argv) {
                         }
                 }
             }
-        } else if (handel_model == 4) { // q1 u v x y
+        } else if (handel_model == 4) {  // q1 u v x y
             sscanf(ss + 2, "%d%d%d%d", &u, &v, &x, &y);
             // cout << u << ' ' << v << ' ' << x << ' ' << y;
 
             int rst = 0;
 
             for (int i = u; i <= v; i++) {
-                int src_vertex = i; // src_vertex
+                int src_vertex = i;  // src_vertex
                 int src_outdegree =
-                    vertex[src_vertex].outdegree; // src_outdegree
+                    vertex[src_vertex].outdegree;  // src_outdegree
                 for (int j = 0; j < src_outdegree; j++) {
                     if (vertex[src_vertex].outvertexPE[j] >= x &&
                         vertex[src_vertex].outvertexPE[j] <= y) {
@@ -204,7 +203,7 @@ int main(int argc, char **argv) {
             }
             */
             cout << rst << endl;
-        } else if (handel_model == 5) { // q2 s d u v x y
+        } else if (handel_model == 5) {  // q2 s d u v x y
             sscanf(ss + 2, "%d%d%d%d%d%d", &src, &dist, &u, &v, &x, &y);
             // cout << src << ' ' << dist << ' ' << u << ' ' << v << ' ' << x <<
             // ' ' << y;
@@ -226,9 +225,9 @@ int main(int argc, char **argv) {
             while ((now_dist < dist) && (currentEnd > 0)) {
                 now_dist++;
                 for (int i = 0; i < currentEnd; i++) {
-                    int src_vertex = currentQueue[i]; // src_vertex
+                    int src_vertex = currentQueue[i];  // src_vertex
                     int src_outdegree =
-                        vertex[src_vertex].outdegree; // src_outdegree
+                        vertex[src_vertex].outdegree;  // src_outdegree
                     for (int j = 0; j < src_outdegree; j++) {
                         int dst_vertex = vertex[src_vertex].outvertex[j];
                         if (visited[dst_vertex] == 0)
@@ -243,7 +242,7 @@ int main(int argc, char **argv) {
                     }
                 }
 
-                int *temp_q = currentQueue;
+                int* temp_q = currentQueue;
                 currentQueue = nextQueue;
                 nextQueue = temp_q;
                 currentEnd = nextEnd;

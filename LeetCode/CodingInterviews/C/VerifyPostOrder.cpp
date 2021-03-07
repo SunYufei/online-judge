@@ -1,15 +1,15 @@
 #include "main.h"
 
 class Solution {
-  public:
-    bool verifyPostorder(vector<int> &postorder) {
+   public:
+    bool verifyPostorder(vector<int>& postorder) {
         if (postorder.empty())
             return false;
         return check(postorder, 0, postorder.size() - 1);
     }
 
-  private:
-    bool check(vector<int> &post, int left, int right) {
+   private:
+    bool check(vector<int>& post, int left, int right) {
         if (left >= right)
             return true;
         int root = post[right];

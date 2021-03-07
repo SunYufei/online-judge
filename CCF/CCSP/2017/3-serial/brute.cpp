@@ -22,9 +22,9 @@ struct BitSet {
 
     unsigned data[N];
 
-    unsigned &operator[](int a) { return data[a]; }
+    unsigned& operator[](int a) { return data[a]; }
 
-    const unsigned &operator[](int a) const { return data[a]; }
+    const unsigned& operator[](int a) const { return data[a]; }
 
     bool get(int a) { return (data[a >> 5] >> (a & 31)) & 1; }
 
@@ -32,7 +32,7 @@ struct BitSet {
 
     void unset(int a) { data[a >> 5] &= ~(1 << (a & 31)); }
 
-    BitSet &operator|=(const BitSet &a) {
+    BitSet& operator|=(const BitSet& a) {
         for (int i = 0; i < N; ++i)
             data[i] |= a[i];
         return *this;

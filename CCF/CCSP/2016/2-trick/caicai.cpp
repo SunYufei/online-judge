@@ -190,7 +190,7 @@ unsigned short aa, bb;
 int nnow = 0;
 
 // 读取操作数op中的值，存入data
-bool read_data(oper op, unsigned short &data) {
+bool read_data(oper op, unsigned short& data) {
     if (op.kind == 1) {
         data = op.value;
         return true;

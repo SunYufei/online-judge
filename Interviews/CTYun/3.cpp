@@ -2,7 +2,7 @@
 using namespace std;
 
 class MinStack {
-  public:
+   public:
     MinStack() {}
 
     void push(int x) {}

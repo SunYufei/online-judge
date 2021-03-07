@@ -6,13 +6,13 @@ using namespace std;
 struct Edge {
     int v, u;
     int t;
-    bool operator<(const Edge &e) const { return t > e.t; }
+    bool operator<(const Edge& e) const { return t > e.t; }
 };
 
-vector<Edge> adj[MAXN];  // agj[v]：与v相连的边
-priority_queue<Edge> pq; // 优先队列，存放横切边
-vector<Edge> mst;        // 最小生成树
-bool vis[MAXN];          // 访问标志
+vector<Edge> adj[MAXN];   // agj[v]：与v相连的边
+priority_queue<Edge> pq;  // 优先队列，存放横切边
+vector<Edge> mst;         // 最小生成树
+bool vis[MAXN];           // 访问标志
 
 void prim() {
     // prim算法，计算最小生成树

@@ -1,7 +1,7 @@
 #include "../main.h"
 
 class Solution {
-  public:
+   public:
     int numSteps(string s) {
         int res = 0, idx = s.size() - 1;
         while (idx > 0) {

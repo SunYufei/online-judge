@@ -2,8 +2,8 @@
 using namespace std;
 
 class Solution {
-  public:
-    int breakfastNumber(vector<int> &staple, vector<int> &drinks, int x) {
+   public:
+    int breakfastNumber(vector<int>& staple, vector<int>& drinks, int x) {
         int mod = 1e9 + 7;
         vector<int> d(1e6 + 10);
         for (auto i : drinks) {

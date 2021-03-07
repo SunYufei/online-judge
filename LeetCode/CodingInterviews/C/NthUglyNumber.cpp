@@ -1,7 +1,7 @@
 #include "main.h"
 
 class Solution {
-  public:
+   public:
     int nthUglyNumber(int n) {
         if (n <= 0)
             return 0;

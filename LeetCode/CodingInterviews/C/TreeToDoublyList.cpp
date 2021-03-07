@@ -1,16 +1,16 @@
 class Node {
-  public:
+   public:
     int val;
     Node *left, *right;
     Node() {}
     Node(int _val) : val(_val), left(nullptr), right(nullptr) {}
-    Node(int _val, Node *_left, Node *_right)
+    Node(int _val, Node* _left, Node* _right)
         : val(_val), left(_left), right(_right) {}
 };
 
 class Solution {
-  public:
-    Node *treeToDoublyList(Node *root) {
+   public:
+    Node* treeToDoublyList(Node* root) {
         if (root == nullptr)
             return nullptr;
         dfs(root);
@@ -19,10 +19,10 @@ class Solution {
         return head;
     }
 
-  private:
+   private:
     Node *pre, *head;
 
-    void dfs(Node *cur) {
+    void dfs(Node* cur) {
         if (cur == nullptr)
             return;
         dfs(cur->left);

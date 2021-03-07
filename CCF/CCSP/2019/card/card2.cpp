@@ -62,7 +62,9 @@ void read_data() {
     }
 }
 
-void solve() { u = 0, v = 1; }
+void solve() {
+    u = 0, v = 1;
+}
 
 void output() {
     long long g = gcd(u, v);

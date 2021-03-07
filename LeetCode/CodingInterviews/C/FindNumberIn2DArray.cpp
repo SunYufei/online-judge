@@ -2,7 +2,7 @@
 
 // leetcode 240
 class Solution {
-    bool findNumberIn2DArray(vector<vector<int>> &matrix, int target) {
+    bool findNumberIn2DArray(vector<vector<int>>& matrix, int target) {
         if (matrix.size() == 0)
             return false;
         int m = matrix.size(), n = matrix[0].size();

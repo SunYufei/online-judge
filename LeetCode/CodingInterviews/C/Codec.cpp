@@ -1,12 +1,12 @@
 #include "main.h"
 
 class Codec {
-  public:
-    string serialize(TreeNode *root) {
+   public:
+    string serialize(TreeNode* root) {
         if (root == nullptr)
             return "";
         string res;
-        queue<TreeNode *> q;
+        queue<TreeNode*> q;
         q.push(root);
         while (!q.empty()) {
             auto t = q.front();
@@ -21,10 +21,10 @@ class Codec {
         return res;
     }
 
-    TreeNode *deserialize(string data) {
+    TreeNode* deserialize(string data) {
         if (data.empty())
             return nullptr;
-        vector<TreeNode *> nodes;
+        vector<TreeNode*> nodes;
         // split
         int start = 0;
         while (true) {

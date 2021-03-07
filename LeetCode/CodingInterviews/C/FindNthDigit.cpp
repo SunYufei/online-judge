@@ -1,5 +1,5 @@
 class Solution {
-  public:
+   public:
     int findNthDigit(int n) {
         long base = 9, digits = 1;
         while (n - base * digits > 0) {

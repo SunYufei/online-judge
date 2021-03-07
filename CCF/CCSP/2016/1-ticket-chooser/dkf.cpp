@@ -9,7 +9,7 @@ int sl[MAXN], sr[MAXN];
 int n, k, m[MAXN], center;
 
 class SegmentTree {
-  public:
+   public:
     int maxr;
     int node[MAXN];
     pair<int, int> c[MAXT];
@@ -83,7 +83,9 @@ ll calc_1(int r, int l) {
     return calc_0(r, 0, (l + 1) >> 1) + calc_0(r, 1, l >> 1);
 }
 
-pair<int, int> mpair(int r) { return make_pair(abs(center - r), r); }
+pair<int, int> mpair(int r) {
+    return make_pair(abs(center - r), r);
+}
 
 void solve() {
     memset(sl, 0, sizeof(sl));

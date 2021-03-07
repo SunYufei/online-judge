@@ -12,21 +12,21 @@ struct Edge {
 };
 
 struct AdjacencyList {
-    Edge *begin;
-    Edge *end;
+    Edge* begin;
+    Edge* end;
 };
 
 struct DBStorage {
     vertex_id_t vertex_num;
-    label_id_t *vertex_labels;
-    AdjacencyList *adj_lists;
+    label_id_t* vertex_labels;
+    AdjacencyList* adj_lists;
 };
 
 class Timer {
     chrono::time_point<chrono::system_clock> _start =
         chrono::system_clock::now();
 
-  public:
+   public:
     void start() { _start = std::chrono::system_clock::now(); }
     double cal() {
         std::chrono::duration<double> diff =
@@ -46,16 +46,16 @@ struct Query {
 };
 
 struct GraphDBEngine {
-    DBStorage *storage;
-    bool *vis;
-    void process_db_query(DBStorage *storage) {
+    DBStorage* storage;
+    bool* vis;
+    void process_db_query(DBStorage* storage) {
         this->storage = storage;
         vis = new bool[storage->vertex_num];
 
         int q_param_num[] = {2, 2, 3, 4, 6};
         int qnum;
         scanf("%d", &qnum);
-        Query *queries = new Query[qnum];
+        Query* queries = new Query[qnum];
         for (int q_i = 0; q_i < qnum; q_i++) {
             char s[5];
             scanf("%s", s);
@@ -73,23 +73,23 @@ struct GraphDBEngine {
         Timer timer;
         for (int q_i = 0; q_i < qnum; q_i++) {
             switch (queries[q_i].qtype) {
-            case 0:
-                process_q0(queries[q_i]);
-                break;
-            case 1:
-                process_q1(queries[q_i]);
-                break;
-            case 2:
-                process_q2(queries[q_i]);
-                break;
-            case 3:
-                process_q3(queries[q_i]);
-                break;
-            case 4:
-                process_q4(queries[q_i]);
-                break;
-            default:
-                assert(false);
+                case 0:
+                    process_q0(queries[q_i]);
+                    break;
+                case 1:
+                    process_q1(queries[q_i]);
+                    break;
+                case 2:
+                    process_q2(queries[q_i]);
+                    break;
+                case 3:
+                    process_q3(queries[q_i]);
+                    break;
+                case 4:
+                    process_q4(queries[q_i]);
+                    break;
+                default:
+                    assert(false);
             }
         }
         //        printf("%.3lf\n", timer.cal());
@@ -115,9 +115,9 @@ struct GraphDBEngine {
         uint32_t a = q.params[0];
         uint32_t b = q.params[1];
         for (uint32_t v_id = 0; v_id < storage->vertex_num; v_id++) {
-            Edge *begin = storage->adj_lists[v_id].begin;
-            Edge *end = storage->adj_lists[v_id].end;
-            for (Edge *e = begin; e != end; e++)
+            Edge* begin = storage->adj_lists[v_id].begin;
+            Edge* end = storage->adj_lists[v_id].end;
+            for (Edge* e = begin; e != end; e++)
                 if (e->label % a == 0) {
                     e->label += b;
                     if (e->label > M)
@@ -133,9 +133,9 @@ struct GraphDBEngine {
         for (uint32_t v_id = 0; v_id < storage->vertex_num; v_id++) {
             if (storage->vertex_labels[v_id] % a != 0)
                 continue;
-            Edge *begin = storage->adj_lists[v_id].begin;
-            Edge *end = storage->adj_lists[v_id].end;
-            for (Edge *e = begin; e != end; e++)
+            Edge* begin = storage->adj_lists[v_id].begin;
+            Edge* end = storage->adj_lists[v_id].end;
+            for (Edge* e = begin; e != end; e++)
                 if (e->label % b == 0) {
                     e->label += c;
                     if (e->label > M)
@@ -148,9 +148,9 @@ struct GraphDBEngine {
         uint32_t ans = 0;
         uint32_t low = q.params[2], high = q.params[3];
         for (uint32_t v_id = q.params[0]; v_id <= q.params[1]; v_id++) {
-            Edge *begin = storage->adj_lists[v_id].begin;
-            Edge *end = storage->adj_lists[v_id].end;
-            for (Edge *e = begin; e != end; e++)
+            Edge* begin = storage->adj_lists[v_id].begin;
+            Edge* end = storage->adj_lists[v_id].end;
+            for (Edge* e = begin; e != end; e++)
                 if (e->label >= low && e->label <= high)
                     ++ans;
         }
@@ -181,7 +181,7 @@ struct GraphDBEngine {
             auto v = qh.first;
             auto dis = qh.second;
             auto adj = storage->adj_lists[v];
-            for (Edge *e = adj.begin; e != adj.end; e++)
+            for (Edge* e = adj.begin; e != adj.end; e++)
                 if (e->label >= x && e->label <= y && !vis[e->dst] &&
                     storage->vertex_labels[e->dst] >= a &&
                     storage->vertex_labels[e->dst] <= b) {
@@ -197,15 +197,15 @@ struct GraphDBEngine {
 
 struct DBMemory {
     vertex_id_t vertex_num;
-    label_id_t *vertex_labels;
-    AdjacencyList *adj_lists;
+    label_id_t* vertex_labels;
+    AdjacencyList* adj_lists;
 
     edge_id_t edge_num;
-    Edge *edges;
+    Edge* edges;
 };
 
-void read_data(DBMemory *dbm, DBStorage *storage, const char *data_path) {
-    FILE *f = fopen(data_path, "r");
+void read_data(DBMemory* dbm, DBStorage* storage, const char* data_path) {
+    FILE* f = fopen(data_path, "r");
     assert(f != NULL);
     fscanf(f, "%u", &dbm->vertex_num);
     dbm->vertex_labels = new vertex_id_t[dbm->vertex_num];
@@ -216,14 +216,14 @@ void read_data(DBMemory *dbm, DBStorage *storage, const char *data_path) {
 
     fscanf(f, "%u", &dbm->edge_num);
     dbm->edges = new Edge[dbm->edge_num];
-    Edge *p = dbm->edges;
+    Edge* p = dbm->edges;
     for (vertex_id_t v_i = 0; v_i < dbm->vertex_num; v_i++) {
         edge_id_t adj_size;
         fscanf(f, "%u", &adj_size);
         dbm->adj_lists[v_i].begin = p;
         p += adj_size;
         dbm->adj_lists[v_i].end = p;
-        for (Edge *e = dbm->adj_lists[v_i].begin; e != dbm->adj_lists[v_i].end;
+        for (Edge* e = dbm->adj_lists[v_i].begin; e != dbm->adj_lists[v_i].end;
              e++)
             fscanf(f, "%u %u", &e->dst, &e->label);
     }
@@ -235,18 +235,18 @@ void read_data(DBMemory *dbm, DBStorage *storage, const char *data_path) {
     fclose(f);
 }
 
-void destroy_dbm(DBMemory *dbm) {
+void destroy_dbm(DBMemory* dbm) {
     delete[] dbm->vertex_labels;
     delete[] dbm->adj_lists;
     delete[] dbm->edges;
 }
 
-int main(int argc, char **argv) {
-    char *data_path = argv[1];
-    DBMemory *dbm = new DBMemory();
-    DBStorage *storage = new DBStorage();
+int main(int argc, char** argv) {
+    char* data_path = argv[1];
+    DBMemory* dbm = new DBMemory();
+    DBStorage* storage = new DBStorage();
     read_data(dbm, storage, data_path);
-    GraphDBEngine *engine = new GraphDBEngine();
+    GraphDBEngine* engine = new GraphDBEngine();
     engine->process_db_query(storage);
     destroy_dbm(dbm);
     return 0;

@@ -11,7 +11,7 @@ bool vist[MAXN][MAXN];
 
 int sx, sy, tx, ty;
 int dx[4] = {-1, 1, 0, 0};
-int dy[4] = {0, 0, -1, 1}; // up down left right
+int dy[4] = {0, 0, -1, 1};  // up down left right
 
 bool outofborder(int x, int y) {
     if (x >= 0 && x < row && y >= 0 && y < col)

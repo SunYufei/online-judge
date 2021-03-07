@@ -31,12 +31,12 @@ int main() {
         int cd;
         for (cd = 0; str[cd] == '.'; cd++)
             ;
-        sel[i].rank = cd / 2;          //计算层级
-        sel[i].label = str.substr(cd); //获取标签
+        sel[i].rank = cd / 2;           //计算层级
+        sel[i].label = str.substr(cd);  //获取标签
         transform(sel[i].label.begin(), sel[i].label.end(),
-                  sel[i].label.begin(), ::tolower); //转换小写
+                  sel[i].label.begin(), ::tolower);  //转换小写
 
-        while (ss >> str) { //获取id属性
+        while (ss >> str) {  //获取id属性
             if (str[0] == '#')
                 sel[i].id = str;
         }
@@ -47,7 +47,7 @@ int main() {
         istringstream ss(css);
         vector<string> query;
         string str;
-        while (ss >> str) { //存储查询条件
+        while (ss >> str) {  //存储查询条件
             if (str[0] != '#') {
                 transform(str.begin(), str.end(), str.begin(), ::tolower);
             }
@@ -56,9 +56,9 @@ int main() {
 
         //查询条件的最后一个标签或属性是关键字
 
-        int ans[MAXN]; //存储满足条件的行数
-        int cnt = 0;   //计数
-        int num;       //实际满足条件的个数
+        int ans[MAXN];  //存储满足条件的行数
+        int cnt = 0;    //计数
+        int num;        //实际满足条件的个数
         vector<string>::reverse_iterator it = query.rbegin();
         for (int j = 1; j <= n; j++) {
             if (sel[j].id == *it || sel[j].label == *it) {
@@ -67,7 +67,7 @@ int main() {
         }
         num = cnt;
 
-        for (int c = 0; c < cnt; c++) { //遍历每个关键字，判断是否满足条件
+        for (int c = 0; c < cnt; c++) {  //遍历每个关键字，判断是否满足条件
             it = query.rbegin() + 1;
             int mrank = sel[ans[c]].rank;
             for (int j = ans[c] - 1; it != query.rend() && j > 0; j--) {

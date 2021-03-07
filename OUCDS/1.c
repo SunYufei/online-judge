@@ -5,14 +5,14 @@
 typedef struct Node {
     int coef;
     int exp;
-    struct Node *next;
+    struct Node* next;
 } Node;
 
 // 链表定义
-typedef Node *List;
+typedef Node* List;
 
-Node *new_node() {
-    Node *res = (Node *)malloc(sizeof(Node));
+Node* new_node() {
+    Node* res = (Node*)malloc(sizeof(Node));
     res->next = NULL;
     return res;
 }
@@ -22,11 +22,11 @@ List read_list() {
     scanf("%d", &n);
     // 含头结点链表
     List res = new_node();
-    Node *p = res;
+    Node* p = res;
     // 读数据
     while (n--) {
         // 申请一个新的结点
-        Node *t = new_node();
+        Node* t = new_node();
         // 读数据
         scanf("%d %d", &(t->coef), &(t->exp));
         // 添加到链表中
@@ -43,10 +43,10 @@ List read_list() {
 List add_list(List l1, List l2) {
     // 含头结点链表
     List res = new_node();
-    Node *p = res;
+    Node* p = res;
     // 相加
     while (l1 != NULL && l2 != NULL) {
-        Node *t = new_node();
+        Node* t = new_node();
         if (l1->exp == l2->exp) {
             // l1, l2 系数相同
             t->coef = l1->coef + l2->coef;
@@ -74,9 +74,9 @@ List add_list(List l1, List l2) {
         }
     }
     // 剩余，遍历尾插结点
-    Node *r = l1 != NULL ? l1 : l2;
+    Node* r = l1 != NULL ? l1 : l2;
     while (r != NULL) {
-        Node *t = new_node();
+        Node* t = new_node();
         t->coef = r->coef;
         t->exp = r->exp;
         p->next = t;
@@ -99,7 +99,7 @@ List mul_list(List l1, List l2) {
     // 使用 l1 第一项与 l2 相乘构造初始链表
     p1 = l1, p2 = l2;
     while (p2 != NULL) {
-        Node *t = new_node();
+        Node* t = new_node();
         t->coef = p1->coef * p2->coef;
         t->exp = p1->exp + p2->exp;
         p->next = t;
@@ -123,12 +123,12 @@ List mul_list(List l1, List l2) {
                 if (p->next->coef + c != 0) {
                     p->next->coef += c;
                 } else {
-                    Node *t = p->next;
+                    Node* t = p->next;
                     p->next = t->next;
                     free(t);
                 }
             } else {
-                Node *t = new_node();
+                Node* t = new_node();
                 t->coef = c;
                 t->exp = e;
                 t->next = p->next;

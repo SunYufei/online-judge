@@ -1,7 +1,7 @@
-#include <algorithm>
-#include <queue>
 #include <stdio.h>
 #include <string.h>
+#include <algorithm>
+#include <queue>
 #include <vector>
 #define INF 0x3f3f3f3f
 #define MAXN 100005
@@ -14,7 +14,7 @@ struct Edge {
 
 struct HeapNode {
     int d, u;
-    bool operator<(const HeapNode &rhs) const { return d > rhs.d; }
+    bool operator<(const HeapNode& rhs) const { return d > rhs.d; }
 };
 
 vector<Edge> edges;
@@ -43,7 +43,7 @@ void dijkstra(int s) {
             continue;
         done[u] = true;
         for (int i = 0; i < G[u].size(); i++) {
-            Edge &e = edges[G[u][i]];
+            Edge& e = edges[G[u][i]];
             if (d[e.to] > max(d[u], e.dist)) {
                 d[e.to] = max(d[u], e.dist);
                 Q.push((HeapNode){d[e.to], e.to});

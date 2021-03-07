@@ -10,17 +10,17 @@
 #define ALIGNMENT 8
 #define ALIGN(size) (((size) + (ALIGNMENT - 1)) & ~0x7)
 #define SIZE_T_SIZE (ALIGN(sizeof(size_t)))
-#define SIZE_PTR(p) ((size_t *)(((char *)(p)) - SIZE_T_SIZE))
+#define SIZE_PTR(p) ((size_t*)(((char*)(p)) - SIZE_T_SIZE))
 
 int my_init() {
     // you code here
     return 0;
 }
 
-void *my_malloc(size_t size) {
+void* my_malloc(size_t size) {
     // your code here,you can remove all the code below if you need.
     int newsize = ALIGN(size + SIZE_T_SIZE);
-    unsigned char *p = (unsigned char *)mem_sbrk(newsize);
+    unsigned char* p = (unsigned char*)mem_sbrk(newsize);
 
     if ((long)p < 0)
         return NULL;
@@ -31,14 +31,14 @@ void *my_malloc(size_t size) {
     }
 }
 
-void my_free(void *ptr) {
+void my_free(void* ptr) {
     // your code here
 }
 
-void *my_realloc(void *ptr, size_t size) {
+void* my_realloc(void* ptr, size_t size) {
     // your code here,you can remove all the code below if you need.
     size_t oldsize;
-    void *newptr;
+    void* newptr;
 
     if (size == 0) {
         my_free(ptr);
@@ -55,7 +55,8 @@ void *my_realloc(void *ptr, size_t size) {
     }
 
     oldsize = *SIZE_PTR(ptr);
-    if (size < oldsize) oldsize = size;
+    if (size < oldsize)
+        oldsize = size;
     memcpy(newptr, ptr, oldsize);
 
     my_free(ptr);

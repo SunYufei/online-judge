@@ -1,5 +1,5 @@
 class Solution {
-  public:
+   public:
     int add(int a, int b) {
         while (b != 0) {
             int plus = (a ^ b);

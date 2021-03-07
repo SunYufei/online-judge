@@ -115,7 +115,7 @@ int h_out() {
     return r;
 }
 
-void dfs_in(node &u) {
+void dfs_in(node& u) {
     u.vis = vis_cur;
     if (u.N_I_SZ == 0)
         u.h_in = h_in() % (K * 32);
@@ -124,7 +124,7 @@ void dfs_in(node &u) {
             u.L_in[i] = 0;
 
         for (int i = 0; i < u.N_I_SZ; ++i) {
-            node &v = nodes[u.N_I[i]];
+            node& v = nodes[u.N_I[i]];
 
             if (v.vis != vis_cur)
                 dfs_in(v);
@@ -142,7 +142,7 @@ void dfs_in(node &u) {
     }
 }
 
-void dfs_out(node &u) {
+void dfs_out(node& u) {
     u.vis = vis_cur;
 
     u.L_interval.first = cur++;
@@ -154,7 +154,7 @@ void dfs_out(node &u) {
             u.L_out[i] = 0;
 
         for (int i = 0; i < u.N_O_SZ; i++) {
-            node &v = nodes[u.N_O[i]];
+            node& v = nodes[u.N_O[i]];
             if (v.vis != vis_cur)
                 dfs_out(v);
 
@@ -197,7 +197,7 @@ void index_construction() {
     }
 }
 
-bool reach(node &u, node &v) {
+bool reach(node& u, node& v) {
     if (u.L_interval.second < v.L_interval.second)
         return false;
     else if (u.L_interval.first <= v.L_interval.first)

@@ -1,8 +1,8 @@
 #include "main.h"
 
 class Solution {
-  public:
-    int findRepeatNumber(vector<int> &nums) {
+   public:
+    int findRepeatNumber(vector<int>& nums) {
         unordered_set<int> s;
         for (auto num : nums)
             if (s.insert(num).second == false)
@@ -10,7 +10,7 @@ class Solution {
         return nums[0];
     }
 
-    int findRepeatNumber(vector<int> &nums) {
+    int findRepeatNumber(vector<int>& nums) {
         for (int i = 0; i < nums.size(); i++)
             while (nums[i] != i) {
                 int t = nums[i];

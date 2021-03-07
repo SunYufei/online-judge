@@ -8,16 +8,16 @@ using namespace std;
 char rule[MAXN][MAXN];
 char name[MAXN][MAXN];
 int n, m;
-vector<string> value; //参数值
+vector<string> value;  //参数值
 
-bool deal_str(char *str, char *rule) {
+bool deal_str(char* str, char* rule) {
     value.clear();
     int i = 0, j = 0;
     while (i < strlen(str) && j < strlen(rule)) {
         if (rule[j] == '<') {
             string tmp;
             if (rule[j + 1] == 'i') {
-                int flag = 0; //判断前导0的标志
+                int flag = 0;  //判断前导0的标志
                 while (str[i] != '\0' && str[i] != '/') {
                     if (str[i] < '0' || str[i] > '9')
                         return false;

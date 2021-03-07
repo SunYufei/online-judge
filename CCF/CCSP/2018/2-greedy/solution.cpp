@@ -22,13 +22,13 @@ struct node_info {
     node_info(int nid = 0, int ndegree = 0, int nnxt2 = 0)
         : id(nid), degree(ndegree), nxt2(nnxt2) {}
 
-    void operator=(const node_info &n) {
+    void operator=(const node_info& n) {
         id = n.id;
         degree = n.degree;
         nxt2 = n.nxt2;
     }
 
-    bool operator<(const node_info &n) {
+    bool operator<(const node_info& n) {
         // id < nxt2 < degree
         if (degree == n.degree) {
             if (nxt2 == n.nxt2)
@@ -41,16 +41,17 @@ struct node_info {
     }
 };
 
-template <typename T> struct segtree {
+template <typename T>
+struct segtree {
     int n;
     vector<T> a;
 
-    segtree(int num, const vector<T> &b) : n(num) {
+    segtree(int num, const vector<T>& b) : n(num) {
         a.resize(num * 4);
         build(b, 1, 0, n - 1);
     }
 
-    void build(const vector<T> &b, int p, int l, int r) {
+    void build(const vector<T>& b, int p, int l, int r) {
         if (l == r) {
             a[p] = b[l];
             return;
@@ -66,9 +67,9 @@ template <typename T> struct segtree {
 
     T maxv() { return a[1]; }
 
-    void change(int tp, const T &tmp) { change(tp, tmp, 1, 0, n - 1); }
+    void change(int tp, const T& tmp) { change(tp, tmp, 1, 0, n - 1); }
 
-    void change(int tp, const T &tmp, int p, int l, int r) {
+    void change(int tp, const T& tmp, int p, int l, int r) {
         // b[tp] = tmp
         if (l == r) {
             a[p] = tmp;
@@ -124,10 +125,12 @@ void read_data() {
     }
 }
 
-void bdone_del(int u, vector<node_info> &b, vector<bool> &del,
-               priority_queue<int, vector<int>, greater<int>> &que0,
-               priority_queue<int, vector<int>, greater<int>> &que1,
-               segtree<node_info> &tree) {
+void bdone_del(int u,
+               vector<node_info>& b,
+               vector<bool>& del,
+               priority_queue<int, vector<int>, greater<int>>& que0,
+               priority_queue<int, vector<int>, greater<int>>& que1,
+               segtree<node_info>& tree) {
     del[u] = true;
     tree.del(u);
     int j = g[u].head;

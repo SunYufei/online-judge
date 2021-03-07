@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void print(set<int> &s) {
+void print(set<int>& s) {
     printf("{");
     if (!s.empty()) {
         printf("%d", *(s.begin()));

@@ -67,4 +67,6 @@ long gcd_E(long m, long n) {
 }
 
 // 最小公倍数
-int lcm(int m, int n) { return m * n / gcd(m, n); }
+int lcm(int m, int n) {
+    return m * n / gcd(m, n);
+}

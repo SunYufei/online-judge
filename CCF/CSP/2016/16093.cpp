@@ -5,21 +5,23 @@
 struct Role {
     int health;
     int attack;
-    Role *next;
+    Role* next;
 };
 
-int n;                        //操作数
-char op[10];                  //操作类型
-int position, attack, health; //位置编号1-7，攻击力，生命值
-int attacker, defender;       //攻击者编号1-7，防守者编号0-7
+int n;                         //操作数
+char op[10];                   //操作类型
+int position, attack, health;  //位置编号1-7，攻击力，生命值
+int attacker, defender;        //攻击者编号1-7，防守者编号0-7
 
-Role *A, *B; //游戏双方
-Role *role;
+Role *A, *B;  //游戏双方
+Role* role;
 
-void insert(Role *&r, int p, int a,
-            int h) { //在选手r的战场p位置插入攻击力为a、生命值为h的角色
-    Role *l = r;
-    role = (Role *)malloc(sizeof(Role));
+void insert(Role*& r,
+            int p,
+            int a,
+            int h) {  //在选手r的战场p位置插入攻击力为a、生命值为h的角色
+    Role* l = r;
+    role = (Role*)malloc(sizeof(Role));
     role->attack = a;
     role->health = h;
     role->next = NULL;
@@ -35,7 +37,7 @@ void insert(Role *&r, int p, int a,
     l->next = role;
 }
 
-void update(int p1, int p2) { //更新角色生命值
+void update(int p1, int p2) {  //更新角色生命值
     Role *l1 = A, *l2 = B;
     Role *pre1 = A, *pre2 = B;
 
@@ -51,13 +53,13 @@ void update(int p1, int p2) { //更新角色生命值
     l2->health -= l1->attack;
 
     if (l1->health <= 0 && l1 != A)
-        pre1->next = l1->next; //删除随从。注意英雄不会从战场消失
+        pre1->next = l1->next;  //删除随从。注意英雄不会从战场消失
     if (l2->health <= 0 && l2 != B)
         pre2->next = l2->next;
 }
 
-int size(Role *r) { //返回选手的r角色数
-    Role *l = r;
+int size(Role* r) {  //返回选手的r角色数
+    Role* l = r;
     int cnt = 0;
     while (l != NULL) {
         l = l->next;
@@ -66,8 +68,8 @@ int size(Role *r) { //返回选手的r角色数
     return cnt;
 }
 
-void output(Role *r) { //输出选手r的每个随从的生命值
-    Role *l = r->next;
+void output(Role* r) {  //输出选手r的每个随从的生命值
+    Role* l = r->next;
     while (l != NULL) {
         printf("%d ", l->health);
         l = l->next;
@@ -80,7 +82,7 @@ int main() {
     insert(A, 0, 0, 30);
     insert(B, 0, 0, 30);
 
-    bool first = true; //先手标志
+    bool first = true;  //先手标志
     scanf("%d", &n);
     while (n--) {
         scanf("%s", op);
