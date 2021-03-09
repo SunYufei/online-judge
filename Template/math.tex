@@ -23,7 +23,7 @@
 
 求解最大公约数常用欧几里得算法，即若$a,b$均为整数$\gcd(a,b)=\gcd(b,a\%b)$。
 
-\begin{lstlisting}
+\begin{lstlisting}[language=c++]
 int gcd(int a, int b) {
 	if (b == 0)
 		return a;
@@ -32,7 +32,7 @@ int gcd(int a, int b) {
 }
 \end{lstlisting}
 
-最小公倍数$\displaystyle{\textrm{lcm}(a,b)=\frac{ab}{\gcd(a,b)}}$，在实际计算中$ab$有可能溢出，因此更恰当的写法是$\displaystyle{\textrm{lcm}(a,b)=\frac{a}{\gcd(a,b)}*b}$。
+最小公倍数$\textrm{lcm}(a,b)=\dfrac{ab}{\gcd(a,b)}$，在实际计算中$ab$有可能溢出，因此更恰当的写法是$\textrm{lcm}(a,b)=\dfrac{a}{\gcd(a,b)}*b}$。
 
 \subsection{素数}
 

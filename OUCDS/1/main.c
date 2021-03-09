@@ -97,21 +97,16 @@ List mul_list(List l1, List l2) {
     List res = new_node();
     Node *p = res, *p1, *p2;
     // 使用 l1 第一项与 l2 相乘构造初始链表
-    p1 = l1, p2 = l2;
-    while (p2 != NULL) {
+    for (p1 = l1, p2 = l2; p2 != NULL; p2 = p2->next) {
         Node* t = new_node();
         t->coef = p1->coef * p2->coef;
         t->exp = p1->exp + p2->exp;
         p->next = t;
         p = p->next;
-        p2 = p2->next;
     }
     // l1 剩余项与 l2 相乘并与 res 相加
-    p1 = p1->next;
-    while (p1 != NULL) {
-        p2 = l2;
-        p = res;
-        while (p2 != NULL) {
+    for (p1 = p1->next; p1 != NULL; p1 = p1->next) {
+        for (p2 = l2, p = res; p2 != NULL; p2 = p2->next) {
             int c = p1->coef * p2->coef;
             int e = p1->exp + p2->exp;
             // 定位到合适的点
@@ -135,10 +130,9 @@ List mul_list(List l1, List l2) {
                 p->next = t;
                 p = p->next;
             }
-            p2 = p2->next;
         }
-        p1 = p1->next;
     }
+
     // 删除头结点
     p = res;
     res = res->next;
