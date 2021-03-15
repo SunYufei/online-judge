@@ -8,7 +8,7 @@ struct PolyNode {
     Polynomial link;
 };
 
-void Attach(int c, int e, Polynomial *pRear) {
+void Attach(int c, int e, Polynomial* pRear) {
     // 申请一个新结点
     Polynomial P;
     P = (Polynomial)malloc(sizeof(struct PolyNode));
