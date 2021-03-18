@@ -11,6 +11,7 @@ bool StackEmpty(Stack s) {
 
 void Push(Stack s, ElemType e) {
     Node* t = (Node*)malloc(sizeof(Node));
+    t->data = e;
     t->next = s->next;
     s->next = t;
 }
