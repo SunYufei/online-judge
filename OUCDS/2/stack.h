@@ -3,7 +3,16 @@
 
 #include <stdlib.h>
 
-typedef int ElemType;
+typedef struct {
+    int x;
+    int y;
+} PosType;
+
+typedef struct {
+    int ord;
+    PosType seat;
+    int dir;
+} ElemType;
 
 typedef struct Node {
     ElemType data;
@@ -12,16 +21,16 @@ typedef struct Node {
 
 typedef Node* Stack;
 
-void InitStack(Stack&);
+void InitStack(Stack* s);
 
-bool StackEmpty(Stack);
+bool StackEmpty(Stack s);
 
-void Push(Stack, ElemType);
+void Push(Stack s, ElemType e);
 
-bool Pop(Stack, ElemType&);
+bool Pop(Stack s, ElemType* e);
 
-bool Top(Stack, ElemType&);
+bool Top(Stack s, ElemType* e);
 
-void DeleteStack(Stack);
+void DeleteStack(Stack s);
 
 #endif

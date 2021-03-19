@@ -1,8 +1,8 @@
 #include "stack.h"
 
-void InitStack(Stack& s) {
-    s = (Node*)malloc(sizeof(Node));
-    s->next = NULL;
+void InitStack(Stack* s) {
+    *s = (Node*)malloc(sizeof(Node));
+    (*s)->next = NULL;
 }
 
 bool StackEmpty(Stack s) {
@@ -16,20 +16,20 @@ void Push(Stack s, ElemType e) {
     s->next = t;
 }
 
-bool Pop(Stack s, ElemType& top) {
+bool Pop(Stack s, ElemType* top) {
     if (StackEmpty(s) == true)
         return false;
+    Top(s, top);
     Node* t = s->next;
-    top = t->data;
-    s->next = t->next;
+    s = s->next;
     free(t);
     return true;
 }
 
-bool Top(Stack s, ElemType& top) {
+bool Top(Stack s, ElemType* top) {
     if (StackEmpty(s))
         return false;
-    top = s->next->data;
+    *top = s->next->data;
     return true;
 }
 
