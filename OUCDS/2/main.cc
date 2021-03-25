@@ -1,45 +1,68 @@
 #include <stdio.h>
-#include "stack.h"
+#include "stack.hpp"
 
-const int M = 10, N = 10;
+#define M 10
+#define N 10
+// 通行
+#define PASS 0
+// 不可通行
+#define DENY -1
 
-int dir[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+int dirs[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
-char maze[M][N + 1] = {"1111111111", "1001000101", "1001000101", "1000011001",
-                       "1011100001", "1000100001", "1010001001", "1011101101",
-                       "1100000001", "1111111111"};
-
-bool mark[M][N] = {false};
+int maze[M + 2][N + 2] = {0};
 
 bool Pass(PosType pos) {
-    int x = pos.x;
-    int y = pos.y;
-    return x >= 0 && x < 10 && y >= 0 && y < 10 && maze[x][y] == '0' &&
-           mark[x][y] == false;
+    return maze[pos.x][pos.y] == PASS;
 }
 
-PosType NextPos(PosType cur, int step) {}
+void FootPrint(PosType pos) {
+    maze[pos.x][pos.y] = 2;
+}
+
+PosType NextPos(PosType cur, int step) {
+    PosType res;
+    res.x = cur.x + dirs[step][0];
+    res.y = cur.y + dirs[step][1];
+    return res;
+}
 
 bool MazePath(Stack s, PosType start, PosType end) {
+    // 设置入口位置
     PosType curpos = start;
+    // 当前步数
     int curstep = 1;
     do {
+        // 当前位置可通
         if (Pass(curpos)) {
-            mark[curpos.x][curpos.y] = true;
+            // 留下足迹
+            maze[curpos.x][curpos.y] = 2;
             ElemType e = {curstep, curpos, 1};
             Push(s, e);
+            // 到达终点，退出
             if (curpos.x == end.x && curpos.y == end.y)
                 return true;
+            // 记录当前路径
+            maze[curpos.x][curpos.y] = curstep;
+            // 获取下一步位置
             curpos = NextPos(curpos, 1);
+            // 探索下一步
             curstep++;
         } else {
+            // 当前位置不能通过
             if (StackEmpty(s) == false) {
+                // 取出栈顶元素
                 ElemType e;
                 Pop(s, &e);
+
                 while (e.dir == 4 && StackEmpty(s) == false) {
-                    mark[curpos.x][curpos.y] = true;
+                    curstep--;
+                    // 标记当前位置不可走
+                    maze[e.seat.x][e.seat.y] = DENY;
+                    // 回退一步
                     Pop(s, &e);
                 }
+                // 其他方向没有探索
                 if (e.dir < 4) {
                     e.dir++;
                     Push(s, e);

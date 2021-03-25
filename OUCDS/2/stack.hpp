@@ -1,4 +1,25 @@
-#include "stack.h"
+#ifndef STACK_H_
+#define STACK_H_
+
+#include <stdlib.h>
+
+typedef struct {
+    int x;
+    int y;
+} PosType;
+
+typedef struct {
+    int ord;
+    PosType seat;
+    int dir;
+} ElemType;
+
+typedef struct Node {
+    ElemType data;
+    struct Node* next;
+} Node;
+
+typedef Node* Stack;
 
 void InitStack(Stack* s) {
     *s = (Node*)malloc(sizeof(Node));
@@ -17,7 +38,7 @@ void Push(Stack s, ElemType e) {
 }
 
 bool Pop(Stack s, ElemType* top) {
-    if (StackEmpty(s) == true)
+    if (StackEmpty(s))
         return false;
     Top(s, top);
     Node* t = s->next;
@@ -39,3 +60,5 @@ void DeleteStack(Stack s) {
         free(s);
     }
 }
+
+#endif
