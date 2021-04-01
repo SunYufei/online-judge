@@ -15,4 +15,5 @@ _minted-main/
 *.bbl
 *.blg
 *.mp4
+*.gch
 test.*

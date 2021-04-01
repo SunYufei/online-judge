@@ -37,6 +37,13 @@ void Push(Stack s, ElemType e) {
     s->next = t;
 }
 
+bool Top(Stack s, ElemType* top) {
+    if (StackEmpty(s))
+        return false;
+    *top = s->next->data;
+    return true;
+}
+
 bool Pop(Stack s, ElemType* top) {
     if (StackEmpty(s))
         return false;
@@ -44,13 +51,6 @@ bool Pop(Stack s, ElemType* top) {
     Node* t = s->next;
     s = s->next;
     free(t);
-    return true;
-}
-
-bool Top(Stack s, ElemType* top) {
-    if (StackEmpty(s))
-        return false;
-    *top = s->next->data;
     return true;
 }
 

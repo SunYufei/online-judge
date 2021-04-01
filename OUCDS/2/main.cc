@@ -75,21 +75,29 @@ bool MazePath(Stack s, PosType start, PosType end) {
 }
 
 void PrintPath(Stack s) {
-    if (StackEmpty(s))
+    if (s == NULL)
         return;
-    PrintPath(s->next->next);
-    printf("->");
-    ElemType data = s->next->data;
-    printf("(%d, %d)", data.seat.x, data.seat.y);
+    PrintPath(s->next);
+    ElemType data = s->data;
+    printf("(%d, %d) ", data.seat.x, data.seat.y);
 }
 
 int main() {
-    PosType start, end;
-    start.x = 1, start.y = 1;
-    end.x = 8, end.y = 8;
+    // PosType start, end;
+    // start.x = 1, start.y = 1;
+    // end.x = 8, end.y = 8;
+    // Stack s;
+    // InitStack(&s);
+    // if (MazePath(s, start, end))
+    //     PrintPath(s);
     Stack s;
     InitStack(&s);
-    if (MazePath(s, start, end))
-        PrintPath(s);
+    for (int i = 0; i < 8; i++) {
+        ElemType e;
+        e.seat.x = i;
+        e.seat.y = i;
+        Push(s, e);
+    }
+    PrintPath(s->next);
     return 0;
 }
