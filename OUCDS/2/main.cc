@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include "stack.hpp"
+#include <stdio.h>
 
 #define M 10
 #define N 10
@@ -12,13 +12,9 @@ int dirs[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
 int maze[M + 2][N + 2] = {0};
 
-bool Pass(PosType pos) {
-    return maze[pos.x][pos.y] == PASS;
-}
+bool Pass(PosType pos) { return maze[pos.x][pos.y] == PASS; }
 
-void FootPrint(PosType pos) {
-    maze[pos.x][pos.y] = 2;
-}
+void FootPrint(PosType pos) { maze[pos.x][pos.y] = 2; }
 
 PosType NextPos(PosType cur, int step) {
     PosType res;
@@ -83,21 +79,12 @@ void PrintPath(Stack s) {
 }
 
 int main() {
-    // PosType start, end;
-    // start.x = 1, start.y = 1;
-    // end.x = 8, end.y = 8;
-    // Stack s;
-    // InitStack(&s);
-    // if (MazePath(s, start, end))
-    //     PrintPath(s);
+    PosType start, end;
+    start.x = 1, start.y = 1;
+    end.x = 8, end.y = 8;
     Stack s;
     InitStack(&s);
-    for (int i = 0; i < 8; i++) {
-        ElemType e;
-        e.seat.x = i;
-        e.seat.y = i;
-        Push(s, e);
-    }
-    PrintPath(s->next);
+    if (MazePath(s, start, end))
+        PrintPath(s);
     return 0;
 }
