@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct {
     char letter;
@@ -23,7 +24,7 @@ void InputAndSave(const char *filename) {
     fclose(fp);
 }
 
-void CreateHuffmanTree(const char *filename) {
+Tree CreateHuffmanTree(const char *filename) {
     // 从文件中逐个读取字符并计数
     FILE *fp = fopen(filename, "r");
     int count[128] = {0};
@@ -39,6 +40,9 @@ void CreateHuffmanTree(const char *filename) {
     fclose(fp);
 
     // 构建
+    Tree ht = (Tree)malloc(sizeof(Node));
+
+    return ht;
 }
 
 bool Compare(const char *first, const char *second) {
@@ -75,7 +79,7 @@ int main() {
     // 输入英文文章并保存到 a.txt 中
     InputAndSave("a.txt");
     // 构造 Huffman 树
-    CreateHuffmanTree("a.txt");
+    Tree HT = CreateHuffmanTree("a.txt");
     // 获取 Huffman 编码
 
     // 短文编码
