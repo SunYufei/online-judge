@@ -38,9 +38,19 @@ Huffman 树定义
 
 ```c
 typedef struct {
+    // 字符
+    char letter;
+    // 权重
     unsigned int weight;
+    // 父节点、左孩子、右孩子下标
     unsigned int parent, left, right;
 } Node, *Tree;
+```
+
+Huffman 编码定义
+
+```c
+typedef char *Code;
 ```
 
 #### 4.2.2 主程序流程
@@ -49,13 +59,13 @@ typedef struct {
 graph TD
 
 st(开始)
-input[/输入英文短文/]
+input[输入英文短文]
 stat[统计字符个数并计算权重]
 build[构造 Huffman 树]
 get[获取字符 Huffman 编码]
-en[短文编码并输出]
-de[译码并输出]
-cmp[文章比较]
+en[短文编码并写入文件中]
+de[译码并写入文件中]
+cmp[原文与解码后短文比较]
 stop(结束)
 
 st-->input-->stat-->build-->get-->en-->de-->cmp-->stop
@@ -67,11 +77,19 @@ st-->input-->stat-->build-->get-->en-->de-->cmp-->stop
 graph LR
 main
 in[InputAndSave]
-
-cmp[Compare]
+crt[CreateHuffmanTree]
+crc[CreateHuffmanCode]
+Select
+Encode
+Decode
+Compare
 
 main-->in
-main-->cmp
+main-->crt-->Select
+main-->crc
+main-->Encode
+main-->Decode
+main-->Compare
 ```
 
 ### 4.3 详细设计
@@ -79,7 +97,33 @@ main-->cmp
 #### 4.3.1 主程序入口
 
 ```cpp
+int main() {
+    // 输入英文文章并保存到 a.txt 中
+    InputAndSave("a.txt");
 
+    // 构造 Huffman 树
+    Tree ht;
+    int n;
+    CreateHuffmanTree("a.txt", ht, n);
+
+    // 获取 Huffman 编码
+    Code hc[128];
+    CreateHuffmanCode(hc, ht, n);
+
+    // 短文编码
+    Encode("a.txt", "b.txt", hc);
+
+    // 短文解码
+    Decode("b.txt", "c.txt", ht, n);
+
+    // 原文与解码后短文比较
+    printf("a.txt is %s to c.txt",
+           Compare("a.txt", "c.txt") ? "equal" : "not equal");
+
+    // 释放空间
+    free(ht);
+    return 0;
+}
 ```
 
 #### 4.3.2 文章读入
@@ -105,38 +149,176 @@ void InputAndSave(const char *filename) {
 
 #### 4.3.3 构造 Huffman 树
 
-字符统计，以 `Hello, World!` 为例
+以 `Hello, World!` 为例
 
-|H|e|l|o|,|空格|W|r|d|!|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|1|1|3|2|1|1|1|1|1|1|
-
-Huffman 树构造原则
-
-1. 权值大的结点作为右孩子
-2. 权值小的作为左孩子
-3. 权值相等，深度小的作为左孩子
+|index|letter|weight|parent|left|right|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|1|空格|1|11|0|0|
+|2|!|1|11|0|0|
+|3|,|1|12|0|0|
+|4|H|1|12|0|0|
+|5|W|1|13|0|0|
+|6|d|1|13|0|0|
+|7|e|1|14|0|0|
+|8|l|3|17|0|0|
+|9|o|2|15|0|0|
+|10|r|1|14|0|0|
+|11||2|15|2|1|
+|12||2|16|4|3|
+|13||2|16|6|5|
+|14||2|17|10|7|
+|15||4|18|11|9|
+|16||4|18|13|12|
+|17||5|19|14|8|
+|18||8|19|16|15|
+|19||13|0|17|18|
 
 ```c
+void CreateHuffmanTree(const char *filename, Tree &ht, int &n) {
+    // 从文件中逐个读取字符并计数
+    FILE *fp = fopen(filename, "r");
+    int count[128] = {0};
+    n = 0;
+    while (true) {
+        char ch = fgetc(fp);
+        if (ch == EOF)
+            break;
+        if (count[ch] == 0)
+            n += 1;
+        count[ch] += 1;
+    }
+    fclose(fp);
 
+    // 申请 Huffman 树空间
+    ht = (Tree)malloc(2 * n * sizeof(Node));
+
+    // 不使用 0 号单元
+    // 将字符及权重存入树中
+    // 置 parent, left, right 为 0
+    Tree p = ht + 1;
+    for (int i = 0; i < 128; i++) {
+        if (count[i] != 0) {
+            p->letter = i;
+            p->weight = count[i];
+            p->parent = 0;
+            p->left = 0;
+            p->right = 0;
+            p += 1;
+        }
+    }
+
+    // 构建 Huffman 树
+    for (int i = n + 1; i < 2 * n; i++) {
+        // 在 ht[1..i-1] 中选择 parent=0 且 weight 最小的两个结点
+        int s1, s2;
+        Select(ht, i - 1, s1, s2);
+
+        ht[s1].parent = i;
+        ht[s2].parent = i;
+        ht[i].letter = ' ';
+        ht[i].weight = ht[s1].weight + ht[s2].weight;
+        ht[i].parent = 0;
+        ht[i].left = s1;
+        ht[i].right = s2;
+    }
+}
+
+void Select(Tree ht, int n, int &s1, int &s2) {
+    int w1 = 0x3f3f3f3e, w2 = 0x3f3f3f3f;
+    for (int i = 1; i <= n; i++) {
+        if (ht[i].parent == 0) {
+            if (ht[i].weight <= w1 && ht[i].weight < w2) {
+                w2 = w1;
+                w1 = ht[i].weight;
+                s2 = s1;
+                s1 = i;
+            }
+            if (ht[i].weight > w1 && ht[i].weight < w2) {
+                w2 = ht[i].weight;
+                s2 = i;
+            }
+        }
+    }
+}
 ```
 
 #### 4.3.4 获取 Huffman 编码
 
 ```c
-
+void CreateHuffmanCode(Code hc[], Tree ht, int n) {
+    // 编码临时存储空间
+    char *cd = (char *)malloc(n * sizeof(char));
+    cd[n - 1] = '\0';
+    // 从叶子节点逆向求编码
+    int start, c, f;
+    for (int i = 1; i <= n; i++) {
+        // 编码结束位置
+        start = n - 1;
+        for (c = i, f = ht[i].parent; f != 0; c = f, f = ht[f].parent) {
+            if (ht[f].left == c)
+                cd[--start] = '0';
+            else
+                cd[--start] = '1';
+        }
+        // 将编码存到指定位置
+        char letter = ht[i].letter;
+        hc[letter] = (char *)malloc((n - start) * sizeof(char));
+        strcpy(hc[letter], &cd[start]);
+    }
+    // 释放临时存储空间
+    free(cd);
+}
 ```
 
 #### 4.3.5 短文编码
 
 ```c
+void Encode(const char *src, const char *dst, Code hc[]) {
+    FILE *fsrc = fopen(src, "r");
+    FILE *fdst = fopen(dst, "w");
 
+    // 从 src 中读字符
+    // 查询编码后写入 dst
+    while (true) {
+        char ch = fgetc(fsrc);
+        if (ch == EOF)
+            break;
+        fputs(hc[ch], fdst);
+    }
+
+    fclose(fsrc);
+    fclose(fdst);
+}
 ```
 
 #### 4.3.6 短文解码
 
 ```c
+void Decode(const char *src, const char *dst, Tree ht, int n) {
+    FILE *fsrc = fopen(src, "r");
+    FILE *fdst = fopen(dst, "w");
 
+    int i = 2 * n - 1;
+    while (true) {
+        char ch = fgetc(fsrc);
+        if (ch == EOF)
+            break;
+        // 寻找叶子节点
+        if (ch == '0')
+            i = ht[i].left;
+        else
+            i = ht[i].right;
+        // 到达叶子节点
+        // 将对应字符写入文件
+        if (ht[i].left == 0 && ht[i].right == 0) {
+            fputc(ht[i].letter, fdst);
+            i = 2 * n - 1;
+        }
+    }
+
+    fclose(fsrc);
+    fclose(fdst);
+}
 ```
 
 #### 4.3.7 原文与解码后短文比较
@@ -180,9 +362,8 @@ bool Compare(const char *first, const char *second) {
 
 |时间复杂度|函数名|
 |:---:|:---|
-|$O(1)$||
-|$O(n)$|InputAndSave()<br>Compare()|
-|$O(n^2)$||
+|$O(n)$|InputAndSave()<br>Select()<br>Encode()<br>Decode()<br>Compare()|
+|$O(n^2)$|CreateHuffmanTree()<br>CreateHuffmanCode()|
 
 ## 5 实验用测试数据和相关结果分析
 
