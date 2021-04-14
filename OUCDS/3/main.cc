@@ -169,19 +169,16 @@ bool Compare(const char *first, const char *second) {
     int res = true;
 
     // 逐字符比较两个文件
-    char c1, c2;
     while (!feof(f1) && !feof(f2)) {
-        c1 = fgetc(f1);
-        c2 = fgetc(f2);
+        char c1 = fgetc(f1);
+        char c2 = fgetc(f2);
         // 字符不相同，跳出循环
-        if (c1 != c2) {
-            res = false;
+        if (c1 != c2)
             break;
-        }
     }
 
-    // 两个文件长度不相同
-    if (c1 != EOF || c2 != EOF)
+    // 两个文件未同时到达末尾
+    if (!feof(f1) || !feof(f2))
         res = false;
 
     // 关闭文件
@@ -212,7 +209,7 @@ int main() {
 
     // a.txt 与 c.txt 比较
     printf("a.txt is %s to c.txt",
-           Compare("a.txt", "c.txt") ? "equal" : "not equal");
+           Compare("a.txt", "c.txt") ? "equal" : "NOT equal");
 
     // 释放空间
     free(ht);

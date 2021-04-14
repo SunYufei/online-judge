@@ -60,7 +60,6 @@ graph TD
 
 st(开始)
 input[输入英文短文]
-stat[统计字符个数并计算权重]
 build[构造 Huffman 树]
 get[获取字符 Huffman 编码]
 en[短文编码并写入文件中]
@@ -68,7 +67,9 @@ de[译码并写入文件中]
 cmp[原文与解码后短文比较]
 stop(结束)
 
-st-->input-->stat-->build-->get-->en-->de-->cmp-->stop
+st-->input-->build--HuffmanTree-->get--HuffmanCode-->en-->de-->cmp-->stop
+
+build--HuffmanTree-->de
 ```
 
 #### 4.2.3 各程序模块之间的调用关系
@@ -325,32 +326,25 @@ void Decode(const char *src, const char *dst, Tree ht, int n) {
 
 ```cpp
 bool Compare(const char *first, const char *second) {
-    // 打开文件
     FILE *f1 = fopen(first, "r");
     FILE *f2 = fopen(second, "r");
 
-    int res = true;
-
     // 逐字符比较两个文件
-    char c1, c2;
     while (!feof(f1) && !feof(f2)) {
-        c1 = fgetc(f1);
-        c2 = fgetc(f2);
+        char c1 = fgetc(f1);
+        char c2 = fgetc(f2);
         // 字符不相同，跳出循环
-        if (c1 != c2) {
-            res = false;
+        if (c1 != c2)
             break;
-        }
     }
 
-    // 两个文件长度不相同
-    if (c1 != EOF || c2 != EOF)
+    // 两个文件未同时到达末尾
+    int res = true;
+    if (!feof(f1) || !feof(f2))
         res = false;
 
-    // 关闭文件
     fclose(f1);
     fclose(f2);
-
     return res;
 }
 ```
