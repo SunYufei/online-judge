@@ -17,3 +17,7 @@ _minted-main/
 *.mp4
 *.gch
 test.*
+# IDEA leetcode-editor
+out/
+all.json
+translation.json
