@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.CodingInterviews.Java;
 
 // leetcode 191
 class Solution {

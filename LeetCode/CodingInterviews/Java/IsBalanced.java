@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.CodingInterviews.Java;
 
 class Solution {
     public boolean isBalanced(TreeNode root) {

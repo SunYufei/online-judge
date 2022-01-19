@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.CodingInterviews.Java;
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
