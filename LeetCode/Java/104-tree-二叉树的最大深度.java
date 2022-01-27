@@ -1,6 +1,5 @@
-package LeetCode.Java.p104;
+package LeetCode.Java;
 
-import LeetCode.Java.node.TreeNode;
 /*
  * @lc app=leetcode.cn id=104 lang=java
  *

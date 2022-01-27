@@ -1,8 +1,7 @@
-package LeetCode.Java.p144;
+package LeetCode.Java;
 
-import java.util.ArrayList;
-import java.util.List;
-import LeetCode.Java.node.TreeNode;
+import java.util.*;
+
 /*
  * @lc app=leetcode.cn id=144 lang=java
  *

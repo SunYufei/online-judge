@@ -1,8 +1,7 @@
-package LeetCode.Java.p142;
+package LeetCode.Java;
 
-import java.util.HashSet;
-import java.util.Set;
-import LeetCode.Java.node.ListNode;
+import java.util.*;
+
 /*
  * @lc app=leetcode.cn id=142 lang=java
  *
@@ -10,7 +9,7 @@ import LeetCode.Java.node.ListNode;
  */
 
 // @lc code=start
-public class Solution {
+class Solution {
     public ListNode detectCycle(ListNode head) {
         Set<ListNode> set = new HashSet<>();
         ListNode p = head;

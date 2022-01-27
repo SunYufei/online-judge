@@ -1,6 +1,5 @@
-package LeetCode.Java.p2;
+package LeetCode.Java;
 
-import LeetCode.Java.node.ListNode;
 /*
  * @lc app=leetcode.cn id=2 lang=java
  *

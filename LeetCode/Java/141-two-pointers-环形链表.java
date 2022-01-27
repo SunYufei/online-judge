@@ -1,6 +1,5 @@
-package LeetCode.Java.p141;
+package LeetCode.Java;
 
-import LeetCode.Java.node.ListNode;
 /*
  * @lc app=leetcode.cn id=141 lang=java
  *
@@ -8,7 +7,7 @@ import LeetCode.Java.node.ListNode;
  */
 
 // @lc code=start
-public class Solution {
+class Solution {
     public boolean hasCycle(ListNode head) {
         if (head == null || head.next == null)
             return false;

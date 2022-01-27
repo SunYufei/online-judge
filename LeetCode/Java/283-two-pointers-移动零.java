@@ -1,4 +1,4 @@
-package LeetCode.Java.p283;
+package LeetCode.Java;
 
 /*
  * @lc app=leetcode.cn id=283 lang=java

@@ -1,7 +1,10 @@
-package LeetCode.Java.node;
+package LeetCode.Java;
 
 import java.util.List;
 
+/**
+ * @author LeetCode
+ */
 public class Node {
    public int val;
    public List<Node> children;

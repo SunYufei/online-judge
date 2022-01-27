@@ -1,6 +1,5 @@
-package LeetCode.Java.p19;
+package LeetCode.Java;
 
-import LeetCode.Java.node.ListNode;
 /*
  * @lc app=leetcode.cn id=19 lang=java
  *
@@ -10,8 +9,8 @@ import LeetCode.Java.node.ListNode;
 // @lc code=start
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode start = new ListNode();
-        ListNode slow = start, fast = start;
+        ListNode res = new ListNode();
+        ListNode slow = res, fast = res;
         slow.next = head;
 
         for (int i = 0; i <= n; i++) {
@@ -22,7 +21,7 @@ class Solution {
             fast = fast.next;
         }
         slow.next = slow.next.next;
-        return start.next;
+        return res.next;
     }
 }
 // @lc code=end

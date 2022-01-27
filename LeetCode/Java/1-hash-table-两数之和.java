@@ -1,6 +1,7 @@
-package LeetCode.Java.p1;
+package LeetCode.Java;
 
 import java.util.*;
+
 /*
  * @lc app=leetcode.cn id=1 lang=java
  *
