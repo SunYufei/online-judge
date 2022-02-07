@@ -1,5 +1,3 @@
-package LeetCode.Java;
-
 import java.util.List;
 
 /**

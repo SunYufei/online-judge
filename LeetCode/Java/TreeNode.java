@@ -1,5 +1,3 @@
-package LeetCode.Java;
-
 /**
  * @author LeetCode
  */
