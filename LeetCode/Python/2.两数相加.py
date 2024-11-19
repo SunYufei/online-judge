@@ -79,7 +79,7 @@ class Solution:
                 carry += l2.val
                 l2 = l2.next
             node = ListNode(carry % 10)
-            carry = carry // 10
+            carry //= 10
             p.next = node
             p = p.next
         if carry != 0:
