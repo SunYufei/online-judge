@@ -8,9 +8,10 @@
 # @lc code=start
 class Solution:
     def mySqrt(self, x: int) -> int:
-        l, r, ans = 0, x, -1
+        l, r = 0, x
+        ans = -1
         while l <= r:
-            m = (l + r) // 2
+            m = (l + r) >> 1
             if m * m <= x:
                 ans = m
                 l = m + 1

@@ -3,8 +3,8 @@
 #
 # [94] 二叉树的中序遍历
 #
-from node import TreeNode
 from typing import Optional, List
+from node import TreeNode
 
 
 # @lc code=start

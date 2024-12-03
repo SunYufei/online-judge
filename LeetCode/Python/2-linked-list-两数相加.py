@@ -3,8 +3,8 @@
 #
 # [2] 两数相加
 #
-from node import ListNode
 from typing import Optional
+from node import ListNode
 
 
 # @lc code=start
@@ -20,7 +20,7 @@ class Solution:
         dummy = ListNode()
         p = dummy
         carry = 0
-        while l1 is not None or l2 is not None:
+        while l1 is not None or l2 is not None or carry > 0:
             if l1 is not None:
                 carry += l1.val
                 l1 = l1.next
@@ -31,8 +31,6 @@ class Solution:
             carry //= 10
             p.next = node
             p = p.next
-        if carry != 0:
-            p.next = ListNode(carry)
         return dummy.next
 
 
